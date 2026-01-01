@@ -2,8 +2,118 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Dauber Services - Boutique</title>
+    <title>CRG Services - Boutique</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* CONTENU PRINCIPAL CENTRÉ */
+        .main-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: center;
+            min-height: 100vh;
+            padding: 140px 20px 40px;
+            color: #ffffff;
+        }
+
+        h1, h2, p {
+            color: #ffffff;
+        }
+
+        /* CARDS PRODUITS */
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .product-card {
+            background-color: rgba(255,255,255,0.1);
+            border: 2px solid #ffffff;
+            border-radius: 15px;
+            padding: 20px;
+            width: 250px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            background-color: rgba(0, 188, 212, 0.2);
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .product-card img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .product-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .product-card p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .product-card span {
+            font-weight: bold;
+            color: #00bcd4;
+        }
+
+        /* FORMULAIRE ADMIN */
+        .admin-form {
+            margin-top: 50px;
+            background-color: rgba(0,0,0,0.5);
+            padding: 20px;
+            border-radius: 15px;
+            width: 300px;
+        }
+
+        .admin-form input, .admin-form textarea, .admin-form select, .admin-form button {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .admin-form button {
+            background-color: #00bcd4;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .admin-form button:hover {
+            background-color: #0097a7;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .products {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .product-card {
+                width: 80%;
+            }
+
+            .admin-form {
+                width: 90%;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -19,9 +129,67 @@
     </nav>
 
     <section class="main-content">
-        <h1>Boutique</h1>
-        <p>Découvrez nos produits et services disponibles. La boutique propose des solutions adaptées à vos besoins, avec des options gratuites et premium.</p>
+        <h1>Boutique CRG Services</h1>
+        <p>Découvrez les services et produits disponibles :</p>
+
+        <div class="products" id="productsContainer">
+            <!-- Les produits ajoutés via le formulaire apparaîtront ici -->
+        </div>
+
+        <!-- FORMULAIRE ADMIN -->
+        <div class="admin-form" id="adminForm">
+            <h2>Ajouter un produit</h2>
+            <input type="text" id="productName" placeholder="Nom du produit">
+            <textarea id="productDesc" placeholder="Description du produit"></textarea>
+            <input type="text" id="productPrice" placeholder="Prix">
+            <input type="text" id="productImg" placeholder="URL de l'image">
+            <button onclick="addProduct()">Ajouter à la boutique</button>
+        </div>
     </section>
+
+    <script>
+        // Récupère les produits depuis le localStorage
+        let products = JSON.parse(localStorage.getItem('products')) || [];
+
+        const productsContainer = document.getElementById('productsContainer');
+
+        function displayProducts() {
+            productsContainer.innerHTML = '';
+            products.forEach((p, index) => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${p.img}" alt="${p.name}">
+                    <h3>${p.name}</h3>
+                    <p>${p.desc}</p>
+                    <span>${p.price}</span>
+                `;
+                productsContainer.appendChild(card);
+            });
+        }
+
+        function addProduct() {
+            const name = document.getElementById('productName').value;
+            const desc = document.getElementById('productDesc').value;
+            const price = document.getElementById('productPrice').value;
+            const img = document.getElementById('productImg').value;
+
+            if(name && desc && price && img) {
+                products.push({name, desc, price, img});
+                localStorage.setItem('products', JSON.stringify(products));
+                displayProducts();
+                document.getElementById('productName').value = '';
+                document.getElementById('productDesc').value = '';
+                document.getElementById('productPrice').value = '';
+                document.getElementById('productImg').value = '';
+            } else {
+                alert('Veuillez remplir tous les champs !');
+            }
+        }
+
+        // Affiche les produits au chargement
+        displayProducts();
+    </script>
 
 </body>
 </html>
