@@ -6,10 +6,11 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body, html {
+html, body {
     height: 100%;
 }
 
+/* FOND + OVERLAY */
 body {
     background: url('https://images.freecreatives.com/wp-content/uploads/2016/04/Website-Backgrounds-For-Desktop.jpg') no-repeat center center fixed;
     background-size: cover;
@@ -29,7 +30,7 @@ body::before {
     z-index: 0;
 }
 
-/* MENU FIXE */
+/* MENU FIXE CENTRÉ */
 .navbar {
     position: fixed;
     top: 0;
@@ -42,12 +43,15 @@ body::before {
 .navbar ul {
     list-style: none;
     display: flex;
-    justify-content: center;
-    padding: 12px 0;
+    justify-content: center; /* centre horizontalement */
+    align-items: center;     /* centre verticalement */
+    height: 60px;            /* fixe la hauteur */
+    padding: 0;
+    margin: 0;
 }
 
 .navbar ul li {
-    margin: 0 20px;
+    margin: 0 25px;          /* espace entre les éléments */
 }
 
 .navbar ul li a {
@@ -56,8 +60,8 @@ body::before {
     font-weight: bold;
     font-size: 1.1rem;
     padding: 8px 15px;
-    transition: all 0.3s ease;
     border-radius: 5px;
+    transition: all 0.3s ease;
 }
 
 .navbar ul li a:hover {
@@ -68,14 +72,14 @@ body::before {
 /* CONTENU PRINCIPAL CENTRÉ */
 .main-content {
     position: relative;
-    z-index: 1;
+    z-index: 1; /* au-dessus de l'overlay */
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    min-height: 90vh;
-    padding: 120px 20px 20px;
+    align-items: center;      /* centre horizontalement */
+    justify-content: center;  /* centre verticalement */
+    text-align: center;       /* centre le texte */
+    min-height: 100vh;        /* prend toute la hauteur de l'écran */
+    padding: 0 20px;
     animation: fadeIn 2s ease-out;
 }
 
@@ -100,7 +104,7 @@ body::before {
     font-size: 1.2rem;
     max-width: 700px;
     line-height: 1.6;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     animation: fadeIn 2s ease forwards;
 }
 
