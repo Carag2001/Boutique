@@ -4,6 +4,220 @@
     <meta charset="UTF-8">
     <title>Dauber Services - Présentation</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* RESET */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        /* FOND + OVERLAY */
+        body {
+            background: url('https://images.unsplash.com/photo-1605902711622-cfb43c4430a1?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 0;
+        }
+
+        /* MENU FIXE CENTRÉ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(0,0,0,0.7);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar ul li {
+            margin: 0 25px;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            background-color: rgba(255,255,255,0.2);
+            transform: scale(1.1);
+        }
+
+        /* CONTENU PRINCIPAL CENTRÉ */
+        .main-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 100vh;
+            padding: 140px 20px 20px;
+        }
+
+        /* LOGO */
+        .logo {
+            width: 150px;
+            margin-bottom: 20px;
+            animation: fadeDown 1.5s ease forwards;
+        }
+
+        /* TITRES ET PARAGRAPHES */
+        .main-content h1 {
+            font-size: 3rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            animation: slideDown 1s ease forwards;
+        }
+
+        .main-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #0D47A1; /* bleu foncé */
+            animation: fadeIn 2s ease forwards;
+        }
+
+        /* COMPETENCES / SERVICES */
+        .services {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .service-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-item img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
+        }
+
+        .service-item:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(13, 71, 161, 0.7);
+        }
+
+        .service-item p {
+            color: #0D47A1;
+            font-weight: bold;
+        }
+
+        /* CONTACT DISCORD */
+        .contact-discord {
+            margin-top: 40px;
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+            0% {opacity: 0;}
+            100% {opacity: 1;}
+        }
+
+        @keyframes slideDown {
+            0% {opacity: 0; transform: translateY(-50px);}
+            100% {opacity: 1; transform: translateY(0);}
+        }
+
+        @keyframes fadeDown {
+            0% {opacity: 0; transform: translateY(-30px);}
+            100% {opacity: 1; transform: translateY(0);}
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .main-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .main-content p {
+                font-size: 1rem;
+            }
+
+            .services {
+                gap: 25px;
+            }
+
+            .service-item img {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar ul {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .navbar ul li {
+                margin: 10px 0;
+            }
+
+            .main-content {
+                padding-top: 100px;
+            }
+
+            .main-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .main-content p {
+                font-size: 0.9rem;
+            }
+
+            .service-item img {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -19,8 +233,39 @@
     </nav>
 
     <section class="main-content">
-        <h1>Présentation</h1>
-        <p>Nous présentons ici nos services, nos objectifs et nos projets en cours. Chaque projet est développé avec passion et est ouvert à la collaboration.</p>
+        <!-- LOGO -->
+        <img src="https://cdn.discordapp.com/attachments/1456307286606872587/1456367360301863064/Blue_Modern_Artificial_Intelligence_Logo_1.png" alt="Logo CRG" class="logo">
+
+        <!-- TITRE -->
+        <h1>CRG</h1>
+
+        <!-- TEXTE INTRO -->
+        <p>Salut, je me nomme Maholo. Je suis un des fondateurs de plusieurs projets, comme des jeux vidéo, la création de sites, et encore bien d’autres choses.</p>
+
+        <!-- COMPETENCES / SERVICES -->
+        <div class="services">
+            <div class="service-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/FiveM_logo.png" alt="FiveM">
+                <p>Serveurs FiveM</p>
+            </div>
+            <div class="service-item">
+                <img src="https://cdn.worldvectorlogo.com/logos/discord-6.svg" alt="Discord">
+                <p>Serveurs Discord</p>
+            </div>
+            <div class="service-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png" alt="Sites Web">
+                <p>Création de sites</p>
+            </div>
+            <div class="service-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/685/685352.png" alt="Design">
+                <p>Design / Graphisme</p>
+            </div>
+        </div>
+
+        <!-- CONTACT -->
+        <div class="contact-discord">
+            Contactez-moi sur Discord : <strong>woody_2009</strong>
+        </div>
     </section>
 
 </body>
