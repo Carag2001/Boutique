@@ -1,222 +1,302 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Dauber Services - Offre</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .main-content {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            text-align: center;
-            min-height: 100vh;
-            padding: 140px 20px 40px;
-            color: #ffffff;
-        }
+<meta charset="UTF-8">
+<title>Dauber Services - Offres</title>
 
-        h1, p { color: #ffffff; }
+<style>
+/* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-        .offers {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
-        }
+html, body {
+    height: 100%;
+}
 
-        .offer-card {
-            background-color: rgba(255,255,255,0.1);
-            border: 2px solid #ffffff;
-            border-radius: 15px;
-            padding: 20px;
-            width: 250px;
-            text-align: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-            transition: all 0.3s ease;
-            position: relative;
-        }
+/* ================= FOND ================= */
+body {
+    background: url('https://img.freepik.com/photos-premium/harmonie-hexagonale-abstrait-arriere-plan-hexagonal_957479-67404.jpg')
+        no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    position: relative;
+}
 
-        .offer-card:hover {
-            background-color: rgba(0, 188, 212, 0.2);
-            transform: translateY(-5px) scale(1.05);
-        }
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 0;
+}
 
-        .offer-card h3 { margin-bottom: 10px; font-size: 1.5rem; }
-        .offer-card p { font-size: 1rem; margin-bottom: 10px; }
-        .offer-card span { font-weight: bold; color: #00bcd4; }
+/* ================= NAVBAR ================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+}
 
-        .delete-btn {
-            display: none;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #ff4444;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 8px;
-            color: #fff;
-            cursor: pointer;
-            font-weight: bold;
-        }
+.navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 65px;
+}
 
-        #adminButton {
-            display: block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            background-color: #00bcd4;
-            color: #fff;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+.navbar li {
+    margin: 0 18px;
+}
 
-        #adminButton:hover { background-color: #0097a7; }
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+}
 
-        .admin-form {
-            display: none;
-            margin-top: 20px;
-            background-color: rgba(0,0,0,0.5);
-            padding: 20px;
-            border-radius: 15px;
-            width: 300px;
-        }
+.navbar a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: 0.3s;
+}
 
-        .admin-form input, .admin-form textarea, .admin-form button {
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 8px;
-            border-radius: 5px;
-            border: none;
-        }
+.navbar a:hover::after {
+    width: 100%;
+}
 
-        .admin-form button {
-            background-color: #00bcd4;
-            color: #fff;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+/* ================= CONTENU ================= */
+.main-content {
+    position: relative;
+    z-index: 1;
+    padding: 140px 20px 60px;
+    text-align: center;
+}
 
-        .admin-form button:hover { background-color: #0097a7; }
+h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
 
-        @media (max-width: 768px) {
-            .offers { flex-direction: column; gap: 20px; }
-            .offer-card { width: 80%; }
-            .admin-form { width: 90%; }
-        }
-    </style>
+p {
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+/* ================= OFFRES ================= */
+.offers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.offer-card {
+    width: 260px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 22px;
+    border: 1px solid rgba(255,255,255,0.4);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    transition: 0.35s;
+    position: relative;
+}
+
+.offer-card:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 0 30px rgba(255,255,255,0.35);
+}
+
+.offer-card h3 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.offer-card p {
+    font-size: 1rem;
+    margin-bottom: 12px;
+}
+
+.offer-card span {
+    color: #00e5ff;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* ================= BOUTONS ================= */
+.admin-btn {
+    margin-top: 35px;
+    padding: 12px 32px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    color: #fff;
+    background: linear-gradient(135deg, #00e5ff, #0066ff);
+    box-shadow: 0 0 15px rgba(0,229,255,0.6);
+    transition: 0.35s;
+}
+
+.admin-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(0,229,255,1);
+}
+
+/* ================= SUPPRIMER ================= */
+.delete-btn {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff3b3b;
+    border: none;
+    color: #fff;
+    padding: 5px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* ================= FORM ADMIN ================= */
+.admin-form {
+    display: none;
+    margin: 30px auto;
+    max-width: 320px;
+    background: rgba(0,0,0,0.6);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.admin-form input,
+.admin-form textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+}
+
+.admin-form button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    background: #00e5ff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.admin-form button:hover {
+    background: #00bcd4;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:768px) {
+    .offer-card {
+        width: 85%;
+    }
+}
+</style>
 </head>
+
 <body>
 
-    <nav class="navbar">
-        <ul>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="presentation.html">Présentation</a></li>
-            <li><a href="boutique.html">Boutique</a></li>
-            <li><a href="offre.html">Offre</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="apropos.html">À propos</a></li>
-        </ul>
-    </nav>
+<nav class="navbar">
+    <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="presentation.html">Présentation</a></li>
+        <li><a href="boutique.html">Boutique</a></li>
+        <li><a href="offre.html">Offre</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="apropos.html">À propos</a></li>
+    </ul>
+</nav>
 
-    <section class="main-content">
-        <h1>Nos Offres</h1>
-        <p>Découvrez nos différentes offres gratuites ou premium, conçues pour répondre à vos besoins.</p>
+<section class="main-content">
+    <h1>Nos Offres</h1>
+    <p>Des offres gratuites et premium adaptées à vos besoins</p>
 
-        <div class="offers" id="offersContainer"></div>
+    <div class="offers" id="offers"></div>
 
-        <!-- BOUTON ADMIN -->
-        <button id="adminButton" onclick="promptAdmin()">Ajouter une offre</button>
+    <button class="admin-btn" onclick="askPassword()">Ajouter une offre</button>
 
-        <!-- FORMULAIRE ADMIN -->
-        <div class="admin-form" id="adminForm">
-            <input type="text" id="offerName" placeholder="Nom de l'offre">
-            <textarea id="offerDesc" placeholder="Description"></textarea>
-            <input type="text" id="offerPrice" placeholder="Prix (gratuit ou €)">
-            <button onclick="addOffer()">Ajouter</button>
-            <button onclick="hideAdminForm()">Annuler</button>
-        </div>
-    </section>
+    <div class="admin-form" id="adminForm">
+        <input id="name" placeholder="Nom de l'offre">
+        <textarea id="desc" placeholder="Description"></textarea>
+        <input id="price" placeholder="Prix (gratuit / €)">
+        <button onclick="addOffer()">Ajouter</button>
+    </div>
+</section>
 
-    <script>
-        const adminPassword = "monMotDePasse123"; // change-le
-        let isAdmin = false;
+<script>
+const PASSWORD = "admin123"; // CHANGE ICI
+let isAdmin = false;
+let offers = JSON.parse(localStorage.getItem("offers")) || [];
+const container = document.getElementById("offers");
 
-        const container = document.getElementById('offersContainer');
-        let offers = JSON.parse(localStorage.getItem('offers')) || [];
+function render() {
+    container.innerHTML = "";
+    offers.forEach((o,i)=>{
+        const div = document.createElement("div");
+        div.className = "offer-card";
+        div.innerHTML = `
+            <button class="delete-btn" onclick="removeOffer(${i})">✖</button>
+            <h3>${o.name}</h3>
+            <p>${o.desc}</p>
+            <span>${o.price}</span>
+        `;
+        if(isAdmin) div.querySelector(".delete-btn").style.display="block";
+        container.appendChild(div);
+    });
+}
 
-        function displayOffers() {
-            container.innerHTML = '';
-            offers.forEach((o, index) => {
-                const card = document.createElement('div');
-                card.className = 'offer-card';
-                card.innerHTML = `
-                    <h3>${o.name}</h3>
-                    <p>${o.desc}</p>
-                    <span>${o.price}</span>
-                    <button class="delete-btn" onclick="deleteOffer(${index})">Supprimer</button>
-                `;
-                if(isAdmin){
-                    card.querySelector('.delete-btn').style.display = 'block';
-                }
-                container.appendChild(card);
-            });
-        }
+function askPassword(){
+    const pass = prompt("Mot de passe admin :");
+    if(pass === PASSWORD){
+        isAdmin = true;
+        document.getElementById("adminForm").style.display = "block";
+        render();
+    } else {
+        alert("Mot de passe incorrect");
+    }
+}
 
-        function promptAdmin(){
-            const pass = prompt("Mot de passe administrateur :");
-            if(pass === adminPassword){
-                isAdmin = true;
-                document.getElementById('adminForm').style.display = 'block';
-                displayOffers();
-            } else {
-                alert("Mot de passe incorrect !");
-            }
-        }
+function addOffer(){
+    const o = {
+        name: name.value,
+        desc: desc.value,
+        price: price.value
+    };
+    if(!o.name || !o.desc || !o.price) return alert("Tout remplir");
+    offers.push(o);
+    localStorage.setItem("offers", JSON.stringify(offers));
+    render();
+}
 
-        function hideAdminForm(){
-            document.getElementById('adminForm').style.display = 'none';
-            document.getElementById('offerName').value = '';
-            document.getElementById('offerDesc').value = '';
-            document.getElementById('offerPrice').value = '';
-        }
+function removeOffer(i){
+    if(confirm("Supprimer cette offre ?")){
+        offers.splice(i,1);
+        localStorage.setItem("offers", JSON.stringify(offers));
+        render();
+    }
+}
 
-        function addOffer(){
-            const name = document.getElementById('offerName').value;
-            const desc = document.getElementById('offerDesc').value;
-            const price = document.getElementById('offerPrice').value;
-
-            if(!name || !desc || !price){
-                alert("Remplissez tous les champs !");
-                return;
-            }
-
-            offers.push({name, desc, price});
-            localStorage.setItem('offers', JSON.stringify(offers));
-            displayOffers();
-            hideAdminForm();
-        }
-
-        function deleteOffer(index){
-            if(!isAdmin) {
-                alert("Mot de passe requis pour supprimer !");
-                return;
-            }
-            if(confirm("Supprimer cette offre ?")){
-                offers.splice(index, 1);
-                localStorage.setItem('offers', JSON.stringify(offers));
-                displayOffers();
-            }
-        }
-
-        displayOffers();
-    </script>
+render();
+</script>
 
 </body>
 </html>
