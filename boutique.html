@@ -37,6 +37,7 @@
             text-align: center;
             box-shadow: 0 8px 20px rgba(0,0,0,0.4);
             transition: all 0.3s ease;
+            position: relative;
         }
 
         .product-card:hover {
@@ -53,6 +54,20 @@
         .product-card h3 { margin-bottom: 5px; font-size: 1.5rem; }
         .product-card p { font-size: 1rem; margin-bottom: 5px; }
         .product-card span { font-weight: bold; color: #00bcd4; }
+
+        .delete-btn {
+            display: none; /* visible uniquement après mot de passe */
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff4444;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 8px;
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+        }
 
         #adminButton {
             display: block;
@@ -137,13 +152,15 @@
     </section>
 
     <script>
-        const adminPassword = "Maholo.20"; // Change-le
+        const adminPassword = "monMotDePasse123"; // change-le
+        let isAdmin = false;
+
         const container = document.getElementById('productsContainer');
         let products = JSON.parse(localStorage.getItem('products')) || [];
 
         function displayProducts() {
             container.innerHTML = '';
-            products.forEach(p => {
+            products.forEach((p, index) => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 card.innerHTML = `
@@ -151,15 +168,21 @@
                     <h3>${p.name}</h3>
                     <p>${p.desc}</p>
                     <span>${p.price}</span>
+                    <button class="delete-btn" onclick="deleteProduct(${index})">Supprimer</button>
                 `;
+                if(isAdmin){
+                    card.querySelector('.delete-btn').style.display = 'block';
+                }
                 container.appendChild(card);
             });
         }
 
-        function promptAdmin() {
+        function promptAdmin(){
             const pass = prompt("Mot de passe administrateur :");
             if(pass === adminPassword){
+                isAdmin = true;
                 document.getElementById('adminForm').style.display = 'block';
+                displayProducts(); // montre les boutons supprimer
             } else {
                 alert("Mot de passe incorrect !");
             }
@@ -188,6 +211,18 @@
             localStorage.setItem('products', JSON.stringify(products));
             displayProducts();
             hideAdminForm();
+        }
+
+        function deleteProduct(index){
+            if(!isAdmin) {
+                alert("Mot de passe requis pour supprimer !");
+                return;
+            }
+            if(confirm("Supprimer cet article ?")){
+                products.splice(index, 1);
+                localStorage.setItem('products', JSON.stringify(products));
+                displayProducts();
+            }
         }
 
         displayProducts();
