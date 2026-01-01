@@ -17,11 +17,11 @@
             height: 100%;
         }
 
-        /* FOND + OVERLAY identique aux autres pages */
+        /* FOND + OVERLAY */
         body {
             background: url('https://img.freepik.com/photos-premium/harmonie-hexagonale-abstrait-arriere-plan-hexagonal_957479-67404.jpg') no-repeat center center fixed;
             background-size: cover;
-            color: #ffffff;
+            color: #ffffff; /* tout le texte en blanc */
             overflow-x: hidden;
             position: relative;
         }
@@ -89,13 +89,6 @@
             padding: 140px 20px 40px;
         }
 
-        /* LOGO */
-        .logo {
-            width: 150px;
-            margin-bottom: 20px;
-            animation: fadeDown 1.5s ease forwards;
-        }
-
         /* TITRES ET PARAGRAPHES */
         .main-content h1 {
             font-size: 3rem;
@@ -110,18 +103,50 @@
             max-width: 800px;
             line-height: 1.8;
             margin-bottom: 20px;
-            color: #0D47A1; /* bleu foncé */
+            color: #ffffff; /* texte blanc */
             animation: fadeIn 2s ease forwards;
         }
 
-        .highlight {
+        /* SERVICES EN CARDS */
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .service-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 2px solid #ffffff;
+            border-radius: 15px;
+            padding: 30px 20px;
+            width: 250px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            text-align: center;
+        }
+
+        .service-card:hover {
+            background-color: rgba(0, 188, 212, 0.2);
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
             color: #ffffff;
-            font-weight: bold;
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #ffffff;
         }
 
         /* CONTACT DISCORD */
         .contact-discord {
-            margin-top: 40px;
+            margin-top: 50px;
             font-size: 1.2rem;
             color: #ffffff;
         }
@@ -137,11 +162,6 @@
             100% {opacity: 1; transform: translateY(0);}
         }
 
-        @keyframes fadeDown {
-            0% {opacity: 0; transform: translateY(-30px);}
-            100% {opacity: 1; transform: translateY(0);}
-        }
-
         /* RESPONSIVE */
         @media (max-width: 768px) {
             .main-content h1 {
@@ -150,6 +170,15 @@
 
             .main-content p {
                 font-size: 1rem;
+            }
+
+            .services {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .service-card {
+                width: 80%;
             }
         }
 
@@ -172,7 +201,12 @@
             }
 
             .main-content p {
-                font-size: 0.9rem;
+                font-size: 0.95rem;
+            }
+
+            .service-card {
+                width: 90%;
+                padding: 25px 15px;
             }
         }
     </style>
@@ -191,24 +225,29 @@
     </nav>
 
     <section class="main-content">
-        <!-- LOGO -->
-        <img src="https://cdn.discordapp.com/attachments/1456307286606872587/1456367360301863064/Blue_Modern_Artificial_Intelligence_Logo_1.png" alt="Logo CRG" class="logo">
+        <h1>Présentation de Maholo</h1>
+        <p>Salut ! Je suis <strong>Maholo</strong>, fondateur de plusieurs projets dans le domaine des jeux vidéo, de la création de sites web et du design graphique. Mon objectif est d’aider les autres en offrant mes services avec passion et professionnalisme.</p>
 
-        <!-- TITRE -->
-        <h1>CRG</h1>
+        <h2>Mes Services</h2>
+        <div class="services">
+            <div class="service-card">
+                <h3>Serveurs FiveM</h3>
+                <p>Je crée et administre des serveurs FiveM personnalisés selon vos besoins pour une expérience de jeu unique.</p>
+            </div>
+            <div class="service-card">
+                <h3>Serveurs Discord</h3>
+                <p>Je configure et gère des serveurs Discord pour communautés, projets ou entreprises avec des rôles et bots adaptés.</p>
+            </div>
+            <div class="service-card">
+                <h3>Création de Sites Web</h3>
+                <p>Je développe des sites web modernes, réactifs et esthétiques pour présenter vos projets ou services.</p>
+            </div>
+            <div class="service-card">
+                <h3>Design & Graphisme</h3>
+                <p>Je réalise des designs, logos et visuels pour vos projets afin de les rendre professionnels et attractifs.</p>
+            </div>
+        </div>
 
-        <!-- TEXTE INTRO -->
-        <p>Salut, je me nomme <span class="highlight">Maholo</span>. Je suis un des fondateurs de plusieurs projets, comme des jeux vidéo, la création de sites, et encore bien d’autres choses.</p>
-
-        <p>Mon objectif est simple : <span class="highlight">offrir mes services aux autres</span> et <span class="highlight">les aider dans leurs projets</span>. Je suis passionné par le développement et la créativité, et j'aime collaborer avec ceux qui partagent cette passion.</p>
-
-        <p>Voici ce que je sais faire :</p>
-        <p>- Développement de <span class="highlight">serveurs FiveM</span></p>
-        <p>- Création et gestion de <span class="highlight">serveurs Discord</span></p>
-        <p>- <span class="highlight">Création de sites web</span></p>
-        <p>- <span class="highlight">Design et graphisme</span></p>
-
-        <!-- CONTACT -->
         <div class="contact-discord">
             Pour me contacter : <strong>Discord : woody_2009</strong>
         </div>
