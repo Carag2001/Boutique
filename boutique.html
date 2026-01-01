@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>CRG Services - Offres</title>
+    <title>CRG Services - Boutique</title>
     <link rel="stylesheet" href="style.css">
     <style>
         .main-content {
@@ -18,11 +18,9 @@
             color: #ffffff;
         }
 
-        h1, p {
-            color: #ffffff;
-        }
+        h1, p { color: #ffffff; }
 
-        .services {
+        .products {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -30,7 +28,7 @@
             margin-top: 20px;
         }
 
-        .service-card {
+        .product-card {
             background-color: rgba(255,255,255,0.1);
             border: 2px solid #ffffff;
             border-radius: 15px;
@@ -41,34 +39,23 @@
             transition: all 0.3s ease;
         }
 
-        .service-card:hover {
+        .product-card:hover {
             background-color: rgba(0, 188, 212, 0.2);
             transform: translateY(-5px) scale(1.05);
         }
 
-        .service-card img {
+        .product-card img {
             max-width: 100%;
             border-radius: 10px;
             margin-bottom: 10px;
         }
 
-        .service-card h3 {
-            margin-bottom: 5px;
-            font-size: 1.5rem;
-        }
-
-        .service-card p {
-            font-size: 1rem;
-            margin-bottom: 5px;
-        }
-
-        .service-card span {
-            font-weight: bold;
-            color: #00bcd4;
-        }
+        .product-card h3 { margin-bottom: 5px; font-size: 1.5rem; }
+        .product-card p { font-size: 1rem; margin-bottom: 5px; }
+        .product-card span { font-weight: bold; color: #00bcd4; }
 
         #adminButton {
-            display: none; 
+            display: block;
             margin-top: 20px;
             padding: 10px 20px;
             font-weight: bold;
@@ -80,12 +67,10 @@
             transition: all 0.3s ease;
         }
 
-        #adminButton:hover {
-            background-color: #0097a7;
-        }
+        #adminButton:hover { background-color: #0097a7; }
 
         .admin-form {
-            display: none; 
+            display: none;
             margin-top: 20px;
             background-color: rgba(0,0,0,0.5);
             padding: 20px;
@@ -109,23 +94,12 @@
             transition: all 0.3s ease;
         }
 
-        .admin-form button:hover {
-            background-color: #0097a7;
-        }
+        .admin-form button:hover { background-color: #0097a7; }
 
         @media (max-width: 768px) {
-            .services {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .service-card {
-                width: 80%;
-            }
-
-            .admin-form {
-                width: 90%;
-            }
+            .products { flex-direction: column; gap: 20px; }
+            .product-card { width: 80%; }
+            .admin-form { width: 90%; }
         }
     </style>
 </head>
@@ -143,85 +117,80 @@
     </nav>
 
     <section class="main-content">
-        <h1>Nos Offres</h1>
-        <p>Découvrez les services que nous proposons :</p>
+        <h1>Boutique CRG Services</h1>
+        <p>Découvrez nos produits et services :</p>
 
-        <div class="services" id="servicesContainer"></div>
+        <div class="products" id="productsContainer"></div>
 
-        <!-- BOUTON ADMIN -->
-        <button id="adminButton" onclick="showAdminForm()">Ajouter un service</button>
+        <!-- BOUTON ADMIN VISIBLE POUR TOUS -->
+        <button id="adminButton" onclick="promptAdmin()">Ajouter un produit</button>
 
         <!-- FORMULAIRE ADMIN -->
         <div class="admin-form" id="adminForm">
-            <input type="text" id="serviceName" placeholder="Nom du service">
-            <textarea id="serviceDesc" placeholder="Description"></textarea>
-            <input type="text" id="servicePrice" placeholder="Prix ou gratuit">
-            <input type="text" id="serviceImg" placeholder="URL image">
-            <button onclick="addService()">Ajouter</button>
+            <input type="text" id="productName" placeholder="Nom du produit">
+            <textarea id="productDesc" placeholder="Description"></textarea>
+            <input type="text" id="productPrice" placeholder="Prix">
+            <input type="text" id="productImg" placeholder="URL image">
+            <button onclick="addProduct()">Ajouter</button>
             <button onclick="hideAdminForm()">Annuler</button>
         </div>
     </section>
 
     <script>
-        // ADMIN PASSWORD pour toi seul
         const adminPassword = "monMotDePasse123"; // Change-le
-        let isAdmin = false;
+        const container = document.getElementById('productsContainer');
+        let products = JSON.parse(localStorage.getItem('products')) || [];
 
-        if(prompt("Mot de passe administrateur :") === adminPassword){
-            isAdmin = true;
-            document.getElementById('adminButton').style.display = "block";
-        }
-
-        // SERVICES
-        let services = JSON.parse(localStorage.getItem('services')) || [];
-        const container = document.getElementById('servicesContainer');
-
-        function displayServices(){
+        function displayProducts() {
             container.innerHTML = '';
-            services.forEach(s => {
+            products.forEach(p => {
                 const card = document.createElement('div');
-                card.className = 'service-card';
+                card.className = 'product-card';
                 card.innerHTML = `
-                    <img src="${s.img}" alt="${s.name}">
-                    <h3>${s.name}</h3>
-                    <p>${s.desc}</p>
-                    <span>${s.price}</span>
+                    <img src="${p.img}" alt="${p.name}">
+                    <h3>${p.name}</h3>
+                    <p>${p.desc}</p>
+                    <span>${p.price}</span>
                 `;
                 container.appendChild(card);
             });
         }
 
-        function showAdminForm(){
-            document.getElementById('adminForm').style.display = "block";
+        function promptAdmin() {
+            const pass = prompt("Mot de passe administrateur :");
+            if(pass === adminPassword){
+                document.getElementById('adminForm').style.display = 'block';
+            } else {
+                alert("Mot de passe incorrect !");
+            }
         }
 
         function hideAdminForm(){
-            document.getElementById('adminForm').style.display = "none";
-            document.getElementById('serviceName').value = '';
-            document.getElementById('serviceDesc').value = '';
-            document.getElementById('servicePrice').value = '';
-            document.getElementById('serviceImg').value = '';
+            document.getElementById('adminForm').style.display = 'none';
+            document.getElementById('productName').value = '';
+            document.getElementById('productDesc').value = '';
+            document.getElementById('productPrice').value = '';
+            document.getElementById('productImg').value = '';
         }
 
-        function addService(){
-            const name = document.getElementById('serviceName').value;
-            const desc = document.getElementById('serviceDesc').value;
-            const price = document.getElementById('servicePrice').value;
-            const img = document.getElementById('serviceImg').value;
+        function addProduct(){
+            const name = document.getElementById('productName').value;
+            const desc = document.getElementById('productDesc').value;
+            const price = document.getElementById('productPrice').value;
+            const img = document.getElementById('productImg').value;
 
             if(!name || !desc || !price || !img){
                 alert("Remplissez tous les champs !");
                 return;
             }
 
-            services.push({name, desc, price, img});
-            localStorage.setItem('services', JSON.stringify(services));
-            displayServices();
+            products.push({name, desc, price, img});
+            localStorage.setItem('products', JSON.stringify(products));
+            displayProducts();
             hideAdminForm();
         }
 
-        // Afficher les services au chargement
-        displayServices();
+        displayProducts();
     </script>
 
 </body>
