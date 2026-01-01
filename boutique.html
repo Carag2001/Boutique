@@ -23,13 +23,22 @@
             color: #ffffff;
         }
 
+        /* FILTRE CATEGORIES */
+        #categoryFilter {
+            margin: 20px 0;
+            padding: 8px;
+            border-radius: 8px;
+            border: none;
+            font-weight: bold;
+        }
+
         /* CARDS PRODUITS */
         .products {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 30px;
-            margin-top: 30px;
+            margin-top: 20px;
         }
 
         .product-card {
@@ -41,6 +50,7 @@
             text-align: center;
             box-shadow: 0 8px 20px rgba(0,0,0,0.4);
             transition: all 0.3s ease;
+            position: relative;
         }
 
         .product-card:hover {
@@ -55,13 +65,13 @@
         }
 
         .product-card h3 {
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             font-size: 1.5rem;
         }
 
         .product-card p {
             font-size: 1rem;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .product-card span {
@@ -69,9 +79,28 @@
             color: #00bcd4;
         }
 
+        /* BOUTON ADMIN */
+        #adminButton {
+            display: none; /* caché par défaut */
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            background-color: #00bcd4;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #adminButton:hover {
+            background-color: #0097a7;
+        }
+
         /* FORMULAIRE ADMIN */
         .admin-form {
-            margin-top: 50px;
+            display: none; /* caché par défaut */
+            margin-top: 20px;
             background-color: rgba(0,0,0,0.5);
             padding: 20px;
             border-radius: 15px;
@@ -96,6 +125,21 @@
 
         .admin-form button:hover {
             background-color: #0097a7;
+        }
+
+        .admin-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .admin-actions button {
+            width: 48%;
+            background-color: #ff5252;
+        }
+
+        .admin-actions button:hover {
+            background-color: #e53935;
         }
 
         /* RESPONSIVE */
@@ -130,32 +174,53 @@
 
     <section class="main-content">
         <h1>Boutique CRG Services</h1>
-        <p>Découvrez les services et produits disponibles :</p>
+        <p>Découvrez nos produits et services :</p>
 
-        <div class="products" id="productsContainer">
-            <!-- Les produits ajoutés via le formulaire apparaîtront ici -->
-        </div>
+        <!-- FILTRE CATEGORIES -->
+        <select id="categoryFilter" onchange="filterProducts()">
+            <option value="all">Toutes les catégories</option>
+        </select>
+
+        <div class="products" id="productsContainer"></div>
+
+        <!-- BOUTON ADMIN POUR TOI SEUL -->
+        <button id="adminButton" onclick="showAdminForm()">Ajouter un produit</button>
 
         <!-- FORMULAIRE ADMIN -->
         <div class="admin-form" id="adminForm">
-            <h2>Ajouter un produit</h2>
+            <h2>Ajouter/Modifier un produit</h2>
             <input type="text" id="productName" placeholder="Nom du produit">
             <textarea id="productDesc" placeholder="Description du produit"></textarea>
             <input type="text" id="productPrice" placeholder="Prix">
             <input type="text" id="productImg" placeholder="URL de l'image">
-            <button onclick="addProduct()">Ajouter à la boutique</button>
+            <input type="text" id="productCategory" placeholder="Catégorie">
+            <button onclick="addOrUpdateProduct()">Ajouter/Modifier</button>
+            <button onclick="hideAdminForm()">Annuler</button>
         </div>
     </section>
 
     <script>
-        // Récupère les produits depuis le localStorage
+        // ======= SÉCURITÉ ADMIN =======
+        const adminPassword = "monMotDePasse123"; // Change ce mot de passe
+        let isAdmin = false;
+
+        if(prompt("Mot de passe administrateur :") === adminPassword) {
+            isAdmin = true;
+            document.getElementById('adminButton').style.display = "block";
+        }
+
+        // ======= PRODUITS =======
         let products = JSON.parse(localStorage.getItem('products')) || [];
-
         const productsContainer = document.getElementById('productsContainer');
+        const categoryFilter = document.getElementById('categoryFilter');
+        let editIndex = -1; // Pour modifier un produit
 
-        function displayProducts() {
+        function displayProducts(filteredCategory = "all") {
             productsContainer.innerHTML = '';
-            products.forEach((p, index) => {
+
+            const filtered = filteredCategory === "all" ? products : products.filter(p => p.category === filteredCategory);
+
+            filtered.forEach((p, index) => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 card.innerHTML = `
@@ -164,30 +229,100 @@
                     <p>${p.desc}</p>
                     <span>${p.price}</span>
                 `;
+
+                if(isAdmin) {
+                    const actions = document.createElement('div');
+                    actions.className = 'admin-actions';
+                    actions.innerHTML = `
+                        <button onclick="editProduct(${index})">Modifier</button>
+                        <button onclick="deleteProduct(${index})">Supprimer</button>
+                    `;
+                    card.appendChild(actions);
+                }
+
                 productsContainer.appendChild(card);
+            });
+
+            updateCategoryFilter();
+        }
+
+        function updateCategoryFilter() {
+            const categories = [...new Set(products.map(p => p.category))];
+            categoryFilter.innerHTML = '<option value="all">Toutes les catégories</option>';
+            categories.forEach(cat => {
+                const option = document.createElement('option');
+                option.value = cat;
+                option.textContent = cat;
+                categoryFilter.appendChild(option);
             });
         }
 
-        function addProduct() {
+        function filterProducts() {
+            displayProducts(categoryFilter.value);
+        }
+
+        function showAdminForm() {
+            document.getElementById('adminForm').style.display = "block";
+        }
+
+        function hideAdminForm() {
+            document.getElementById('adminForm').style.display = "none";
+            editIndex = -1;
+            clearForm();
+        }
+
+        function clearForm() {
+            document.getElementById('productName').value = '';
+            document.getElementById('productDesc').value = '';
+            document.getElementById('productPrice').value = '';
+            document.getElementById('productImg').value = '';
+            document.getElementById('productCategory').value = '';
+        }
+
+        function addOrUpdateProduct() {
             const name = document.getElementById('productName').value;
             const desc = document.getElementById('productDesc').value;
             const price = document.getElementById('productPrice').value;
             const img = document.getElementById('productImg').value;
+            const category = document.getElementById('productCategory').value;
 
-            if(name && desc && price && img) {
-                products.push({name, desc, price, img});
-                localStorage.setItem('products', JSON.stringify(products));
-                displayProducts();
-                document.getElementById('productName').value = '';
-                document.getElementById('productDesc').value = '';
-                document.getElementById('productPrice').value = '';
-                document.getElementById('productImg').value = '';
+            if(!name || !desc || !price || !img || !category){
+                alert("Veuillez remplir tous les champs !");
+                return;
+            }
+
+            if(editIndex >= 0) {
+                products[editIndex] = {name, desc, price, img, category};
+                editIndex = -1;
             } else {
-                alert('Veuillez remplir tous les champs !');
+                products.push({name, desc, price, img, category});
+            }
+
+            localStorage.setItem('products', JSON.stringify(products));
+            displayProducts(categoryFilter.value);
+            hideAdminForm();
+        }
+
+        function editProduct(index) {
+            const p = products[index];
+            document.getElementById('productName').value = p.name;
+            document.getElementById('productDesc').value = p.desc;
+            document.getElementById('productPrice').value = p.price;
+            document.getElementById('productImg').value = p.img;
+            document.getElementById('productCategory').value = p.category;
+            editIndex = index;
+            showAdminForm();
+        }
+
+        function deleteProduct(index) {
+            if(confirm("Supprimer ce produit ?")) {
+                products.splice(index, 1);
+                localStorage.setItem('products', JSON.stringify(products));
+                displayProducts(categoryFilter.value);
             }
         }
 
-        // Affiche les produits au chargement
+        // Affichage initial
         displayProducts();
     </script>
 
