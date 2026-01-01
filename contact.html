@@ -1,153 +1,225 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Dauber Services - Contact</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>CRG Services - Contact</title>
+<style>
+/* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+html, body { height: 100%; }
 
-    <style>
-        /* CONTAINER DES CARTES */
-        .contact-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 40px;
-        }
+/* ================= FOND ================= */
+body {
+    background: url('https://img.freepik.com/photos-premium/harmonie-hexagonale-abstrait-arriere-plan-hexagonal_957479-67404.jpg')
+                no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    position: relative;
+}
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 0;
+}
 
-        /* CARTE CONTACT (STYLE ARTICLE) */
-        .contact-card {
-            background: rgba(255,255,255,0.1);
-            border: 2px solid rgba(255,255,255,0.4);
-            border-radius: 18px;
-            width: 260px;
-            padding: 25px 20px;
-            text-align: center;
-            color: #ffffff;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            transition: all 0.3s ease;
-        }
+/* ================= NAVBAR ================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+}
+.navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 65px;
+}
+.navbar li { margin: 0 18px; }
+.navbar a {
+    position: relative;
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 8px 6px;
+    transition: all 0.3s ease;
+}
+.navbar a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: width 0.3s ease;
+}
+.navbar a:hover::after { width: 100%; }
+.navbar a:hover { text-shadow: 0 0 10px rgba(255,255,255,0.8); transform: translateY(-2px); }
 
-        .contact-card:hover {
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 0 25px rgba(0,188,212,0.6);
-        }
+/* ================= CONTENU ================= */
+.main-content {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    padding: 140px 20px 60px;
+    text-align: center;
+}
+.main-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    animation: slideDown 1s ease;
+    text-shadow: 0 0 15px rgba(0,0,0,0.8);
+}
+.main-content p {
+    max-width: 900px;
+    margin: 0 auto 30px;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    animation: fadeIn 1.5s ease;
+}
 
-        /* LOGO */
-        .contact-card img {
-            width: 55px;
-            height: 55px;
-            margin-bottom: 15px;
-        }
+/* ================= CARDS CONTACT ================= */
+.contact-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+.contact-card {
+    width: 260px;
+    padding: 25px 20px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 18px;
+    backdrop-filter: blur(6px);
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+}
+.contact-card:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 0 25px rgba(0,188,212,0.6);
+}
+.contact-card img {
+    width: 55px;
+    height: 55px;
+    margin-bottom: 15px;
+}
+.contact-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+.contact-card p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+.contact-card a {
+    display: inline-block;
+    padding: 8px 15px;
+    border-radius: 8px;
+    background-color: rgba(0,188,212,0.8);
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+.contact-card a:hover {
+    background-color: #00e5ff;
+    transform: scale(1.05);
+}
 
-        /* TITRE */
-        .contact-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-        }
+/* ================= ANIMATIONS ================= */
+@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+@keyframes slideDown { from {opacity:0; transform:translateY(-40px);} to {opacity:1; transform:translateY(0);} }
 
-        /* TEXTE */
-        .contact-card p {
-            font-size: 1rem;
-            margin-bottom: 15px;
-        }
-
-        /* LIEN */
-        .contact-card a {
-            display: inline-block;
-            padding: 8px 15px;
-            border-radius: 8px;
-            background-color: rgba(0,188,212,0.8);
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .contact-card a:hover {
-            background-color: #00e5ff;
-            transform: scale(1.05);
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .contact-card {
-                width: 90%;
-            }
-        }
-    </style>
+/* ================= RESPONSIVE ================= */
+@media (max-width:768px) { .contact-card { width: 90%; } }
+@media (max-width:480px) {
+    .navbar ul { flex-direction: column; height:auto; padding:10px 0; }
+    .navbar ul li { margin:6px 0; }
+    .main-content { padding-top:160px; }
+    .main-content h1 { font-size:1.8rem; }
+}
+</style>
 </head>
 <body>
 
-    <!-- MENU -->
-    <nav class="navbar">
-        <ul>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="presentation.html">Présentation</a></li>
-            <li><a href="boutique.html">Boutique</a></li>
-            <li><a href="offre.html">Offre</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="apropos.html">À propos</a></li>
-        </ul>
-    </nav>
+<!-- NAVBAR -->
+<nav class="navbar">
+    <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="presentation.html">Présentation</a></li>
+        <li><a href="boutique.html">Boutique</a></li>
+        <li><a href="offre.html">Offre</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="apropos.html">À propos</a></li>
+    </ul>
+</nav>
 
-    <!-- CONTENU -->
-    <section class="main-content">
-        <h1>Contact</h1>
-        <p>Retrouve-moi facilement sur ces plateformes</p>
+<!-- CONTENU -->
+<section class="main-content">
+    <h1>Contact</h1>
+    <p>Retrouve-moi facilement sur ces plateformes</p>
 
-        <div class="contact-grid">
-
-            <!-- Serveur Direct -->
-            <div class="contact-card">
-                <img src="https://img.icons8.com/ios-filled/100/ffffff/discord-logo.png">
-                <h3>Serveur Discord</h3>
-                <p>Contact Direct</p>
-                <a href="https://discord.gg/QXz2mZPtkR">Rejoindre le serveur Discord</a>
-            </div>
-
-            <!-- DISCORD -->
-            <div class="contact-card">
-                <img src="https://img.icons8.com/ios-filled/100/ffffff/discord-logo.png">
-                <h3>Discord Privé</h3>
-                <p>woody_2009</p>
-                <a href="https://discord.com/users/woody_2009" target="_blank">Me contacter</a>
-            </div>
-
-            <!-- INSTAGRAM -->
-            <div class="contact-card">
-                <img src="https://img.icons8.com/ios-filled/100/ffffff/instagram-new.png">
-                <h3>Instagram</h3>
-                <p>@daubermaholo20</p>
-                <a href="https://instagram.com/daubermaholo20" target="_blank">Voir le profil</a>
-            </div>
-
-            <!-- TIKTOK -->
-            <div class="contact-card">
-                <img src="https://img.icons8.com/ios-filled/100/ffffff/tiktok.png">
-                <h3>TikTok</h3>
-                <p>@_0_woody_0_</p>
-                <a href="https://www.tiktok.com/@_0_woody_0_" target="_blank">Voir le profil</a>
-            </div>
-
-            <!-- SNAPCHAT -->
-            <div class="contact-card">
-                <img src="https://img.icons8.com/ios-filled/100/ffffff/snapchat.png">
-                <h3>Snapchat</h3>
-                <p>@kini-dauber</p>
-                <a href="https://www.snapchat.com/add/kini-dauber" target="_blank">Ajouter</a>
-            </div>
-
-            <!-- TWITCH -->
-            <div class="contact-card">
-                <img src="https://img.icons8.com/ios-filled/100/ffffff/twitch.png">
-                <h3>Twitch</h3>
-                <p>@carag_2009</p>
-                <a href="https://www.twitch.tv/carag_2009" target="_blank">Voir la chaîne</a>
-            </div>
-
+    <div class="contact-grid">
+        <div class="contact-card">
+            <img src="https://img.icons8.com/ios-filled/100/ffffff/discord-logo.png">
+            <h3>Serveur Discord</h3>
+            <p>Contact Direct</p>
+            <a href="https://discord.gg/QXz2mZPtkR">Rejoindre</a>
         </div>
-    </section>
+
+        <div class="contact-card">
+            <img src="https://img.icons8.com/ios-filled/100/ffffff/discord-logo.png">
+            <h3>Discord Privé</h3>
+            <p>woody_2009</p>
+            <a href="https://discord.com/users/woody_2009" target="_blank">Me contacter</a>
+        </div>
+
+        <div class="contact-card">
+            <img src="https://img.icons8.com/ios-filled/100/ffffff/instagram-new.png">
+            <h3>Instagram</h3>
+            <p>@daubermaholo20</p>
+            <a href="https://instagram.com/daubermaholo20" target="_blank">Voir le profil</a>
+        </div>
+
+        <div class="contact-card">
+            <img src="https://img.icons8.com/ios-filled/100/ffffff/tiktok.png">
+            <h3>TikTok</h3>
+            <p>@_0_woody_0_</p>
+            <a href="https://www.tiktok.com/@_0_woody_0_" target="_blank">Voir le profil</a>
+        </div>
+
+        <div class="contact-card">
+            <img src="https://img.icons8.com/ios-filled/100/ffffff/snapchat.png">
+            <h3>Snapchat</h3>
+            <p>@kini-dauber</p>
+            <a href="https://www.snapchat.com/add/kini-dauber" target="_blank">Ajouter</a>
+        </div>
+
+        <div class="contact-card">
+            <img src="https://img.icons8.com/ios-filled/100/ffffff/twitch.png">
+            <h3>Twitch</h3>
+            <p>@carag_2009</p>
+            <a href="https://www.twitch.tv/carag_2009" target="_blank">Voir la chaîne</a>
+        </div>
+    </div>
+</section>
 
 </body>
 </html>
