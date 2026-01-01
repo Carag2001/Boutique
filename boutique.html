@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>CRG Services - Boutique</title>
-
 <style>
 /* ================= RESET ================= */
 * {
@@ -13,14 +12,11 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-html, body {
-    height: 100%;
-}
+html, body { height: 100%; }
 
 /* ================= FOND ================= */
 body {
-    background: url('https://tse2.mm.bing.net/th/id/OIP.RDStdOWibsHTs0f08IQdUAHaEo?rs=1&pid=ImgDetMain&o=7&rm=3')
-        no-repeat center center fixed;
+    background: url('https://tse2.mm.bing.net/th/id/OIP.RDStdOWibsHTs0f08IQdUAHaEo?rs=1&pid=ImgDetMain&o=7&rm=3') no-repeat center center fixed;
     background-size: cover;
     color: #fff;
     position: relative;
@@ -52,9 +48,7 @@ body::before {
     height: 65px;
 }
 
-.navbar li {
-    margin: 0 18px;
-}
+.navbar li { margin: 0 18px; }
 
 .navbar a {
     color: #fff;
@@ -74,9 +68,7 @@ body::before {
     transition: 0.3s;
 }
 
-.navbar a:hover::after {
-    width: 100%;
-}
+.navbar a:hover::after { width: 100%; }
 
 /* ================= CONTENU ================= */
 .main-content {
@@ -86,15 +78,8 @@ body::before {
     text-align: center;
 }
 
-h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
-}
-
-p {
-    margin-bottom: 25px;
-    opacity: 0.9;
-}
+h1 { font-size: 3rem; margin-bottom: 10px; }
+p { margin-bottom: 25px; opacity: 0.9; }
 
 /* ================= PRODUITS ================= */
 .products {
@@ -102,6 +87,7 @@ p {
     flex-wrap: wrap;
     justify-content: center;
     gap: 30px;
+    margin-top: 20px;
 }
 
 .product-card {
@@ -118,7 +104,7 @@ p {
 
 .product-card:hover {
     transform: translateY(-8px) scale(1.05);
-    box-shadow: 0 0 30px rgba(255,255,255,0.35);
+    box-shadow: 0 0 30px rgba(0,229,255,0.4);
 }
 
 .product-card img {
@@ -127,14 +113,8 @@ p {
     margin-bottom: 10px;
 }
 
-.product-card h3 {
-    margin-bottom: 5px;
-}
-
-.product-card span {
-    color: #00e5ff;
-    font-weight: bold;
-}
+.product-card h3 { margin-bottom: 5px; }
+.product-card span { color: #00e5ff; font-weight: bold; }
 
 /* ================= BOUTONS ================= */
 .admin-btn {
@@ -174,16 +154,23 @@ p {
 .admin-form {
     display: none;
     margin: 30px auto;
-    max-width: 320px;
-    background: rgba(0,0,0,0.6);
+    max-width: 350px;
+    background: rgba(0,0,0,0.7);
     padding: 20px;
     border-radius: 15px;
+    text-align: left;
+}
+
+.admin-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .admin-form input,
 .admin-form textarea {
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     padding: 8px;
     border-radius: 6px;
     border: none;
@@ -191,27 +178,25 @@ p {
 
 .admin-form button {
     width: 100%;
-    padding: 10px;
-    border-radius: 20px;
+    padding: 12px;
+    border-radius: 25px;
     border: none;
-    background: #00e5ff;
+    background: linear-gradient(135deg, #00e5ff, #0066ff);
     font-weight: bold;
+    color: #fff;
     cursor: pointer;
+    transition: 0.35s;
 }
 
-.admin-form button:hover {
-    background: #00bcd4;
-}
+.admin-form button:hover { background: linear-gradient(135deg, #0066ff, #00e5ff); }
 
 /* ================= RESPONSIVE ================= */
 @media(max-width:768px) {
-    .product-card {
-        width: 85%;
-    }
+    .product-card { width: 85%; }
+    .admin-form { width: 90%; }
 }
 </style>
 </head>
-
 <body>
 
 <nav class="navbar">
@@ -234,61 +219,84 @@ p {
     <button class="admin-btn" onclick="askPassword()">Ajouter un article</button>
 
     <div class="admin-form" id="adminForm">
-        <input id="name" placeholder="Nom">
+        <label for="name">Nom du produit</label>
+        <input id="name" placeholder="Nom du produit">
+
+        <label for="desc">Description</label>
         <textarea id="desc" placeholder="Description"></textarea>
+
+        <label for="price">Prix</label>
         <input id="price" placeholder="Prix">
-        <input id="img" placeholder="URL image">
+
+        <label for="img">URL de l'image</label>
+        <input id="img" placeholder="https://exemple.com/image.jpg">
+
         <button onclick="addProduct()">Ajouter</button>
     </div>
 </section>
 
 <script>
-const PASSWORD = "Maholo_56100"; // CHANGE ICI
+const PASSWORD = "Maholo_56100";
 let isAdmin = false;
 let products = JSON.parse(localStorage.getItem("products")) || [];
 const container = document.getElementById("products");
 
+// Affiche les produits
 function render() {
     container.innerHTML = "";
-    products.forEach((p,i)=>{
+    products.forEach((p, i) => {
         const div = document.createElement("div");
         div.className = "product-card";
         div.innerHTML = `
             <button class="delete-btn" onclick="removeProduct(${i})">✖</button>
-            <img src="${p.img}">
+            <img src="${p.img}" alt="${p.name}">
             <h3>${p.name}</h3>
             <p>${p.desc}</p>
             <span>${p.price}</span>
         `;
-        if(isAdmin) div.querySelector(".delete-btn").style.display="block";
+        if(isAdmin) div.querySelector(".delete-btn").style.display = "block";
         container.appendChild(div);
     });
 }
 
-function askPassword(){
+// Demander mot de passe admin
+function askPassword() {
     const pass = prompt("Mot de passe admin :");
-    if(pass === PASSWORD){
+    if(pass === PASSWORD) {
         isAdmin = true;
         document.getElementById("adminForm").style.display = "block";
         render();
-    } else {
-        alert("Mot de passe incorrect");
-    }
+    } else alert("Mot de passe incorrect !");
 }
 
-function addProduct(){
+// Ajouter un produit
+function addProduct() {
+    const nameInput = document.getElementById("name");
+    const descInput = document.getElementById("desc");
+    const priceInput = document.getElementById("price");
+    const imgInput = document.getElementById("img");
+
     const p = {
-        name: name.value,
-        desc: desc.value,
-        price: price.value,
-        img: img.value
+        name: nameInput.value.trim(),
+        desc: descInput.value.trim(),
+        price: priceInput.value.trim(),
+        img: imgInput.value.trim()
     };
-    if(!p.name || !p.desc || !p.price || !p.img) return alert("Tout remplir");
+
+    if(!p.name || !p.desc || !p.price || !p.img) return alert("Veuillez remplir tous les champs !");
+
     products.push(p);
     localStorage.setItem("products", JSON.stringify(products));
     render();
+
+    // Reset form
+    nameInput.value = "";
+    descInput.value = "";
+    priceInput.value = "";
+    imgInput.value = "";
 }
 
+// Supprimer produit
 function removeProduct(i){
     if(confirm("Supprimer cet article ?")){
         products.splice(i,1);
@@ -297,6 +305,7 @@ function removeProduct(i){
     }
 }
 
+// Initial render
 render();
 </script>
 
