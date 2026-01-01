@@ -5,7 +5,25 @@
     <title>Dauber Services - Contact</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Styles spécifiques pour les logos */
+        /* Contenu principal centré */
+        .main-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: center;
+            min-height: 100vh;
+            padding: 140px 20px 40px;
+            color: #ffffff;
+        }
+
+        .main-content h1, .main-content p {
+            color: #ffffff;
+        }
+
+        /* Styles pour les logos */
         .contact-item {
             display: flex;
             align-items: center;
@@ -15,9 +33,9 @@
         }
 
         .contact-item img {
-            width: 32px;
-            height: 32px;
-            margin-right: 10px;
+            width: 36px;
+            height: 36px;
+            margin-right: 12px;
             transition: transform 0.3s ease;
         }
 
@@ -26,13 +44,40 @@
         }
 
         .contact-item a {
-            color: #fff;
+            color: #ffffff;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .contact-item a:hover {
             color: #00e5ff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 120px 15px 20px;
+            }
+            .contact-item {
+                font-size: 1rem;
+            }
+            .contact-item img {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 100px 10px 20px;
+            }
+            .contact-item {
+                font-size: 0.9rem;
+                flex-direction: column;
+            }
+            .contact-item img {
+                margin: 0 0 8px 0;
+            }
         }
     </style>
 </head>
@@ -50,10 +95,10 @@
         </ul>
     </nav>
 
-    <!-- CONTENU PRINCIPAL CENTRÉ -->
+    <!-- CONTENU PRINCIPAL -->
     <section class="main-content">
         <h1>Contact</h1>
-        <p>Vous pouvez me contacter facilement :</p>
+        <p>Vous pouvez me contacter facilement via ces plateformes :</p>
 
         <div class="contact-item">
             <img src="https://img.icons8.com/ios-filled/50/ffffff/new-post.png" alt="Email">
