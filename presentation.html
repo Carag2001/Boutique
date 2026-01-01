@@ -17,9 +17,9 @@
             height: 100%;
         }
 
-        /* FOND + OVERLAY */
+        /* FOND + OVERLAY identique aux autres pages */
         body {
-            background: url('https://images.unsplash.com/photo-1605902711622-cfb43c4430a1?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+            background: url('https://img.freepik.com/photos-premium/harmonie-hexagonale-abstrait-arriere-plan-hexagonal_957479-67404.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
             overflow-x: hidden;
@@ -33,7 +33,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(0,0,0,0.4);
             z-index: 0;
         }
 
@@ -83,10 +83,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             text-align: center;
             min-height: 100vh;
-            padding: 140px 20px 20px;
+            padding: 140px 20px 40px;
         }
 
         /* LOGO */
@@ -107,43 +107,15 @@
 
         .main-content p {
             font-size: 1.2rem;
-            max-width: 700px;
-            line-height: 1.6;
-            margin-bottom: 30px;
+            max-width: 800px;
+            line-height: 1.8;
+            margin-bottom: 20px;
             color: #0D47A1; /* bleu foncé */
             animation: fadeIn 2s ease forwards;
         }
 
-        /* COMPETENCES / SERVICES */
-        .services {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 40px;
-            margin-top: 30px;
-        }
-
-        .service-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .service-item img {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 10px;
-        }
-
-        .service-item:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(13, 71, 161, 0.7);
-        }
-
-        .service-item p {
-            color: #0D47A1;
+        .highlight {
+            color: #ffffff;
             font-weight: bold;
         }
 
@@ -179,15 +151,6 @@
             .main-content p {
                 font-size: 1rem;
             }
-
-            .services {
-                gap: 25px;
-            }
-
-            .service-item img {
-                width: 60px;
-                height: 60px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -210,11 +173,6 @@
 
             .main-content p {
                 font-size: 0.9rem;
-            }
-
-            .service-item img {
-                width: 50px;
-                height: 50px;
             }
         }
     </style>
@@ -240,31 +198,19 @@
         <h1>CRG</h1>
 
         <!-- TEXTE INTRO -->
-        <p>Salut, je me nomme Maholo. Je suis un des fondateurs de plusieurs projets, comme des jeux vidéo, la création de sites, et encore bien d’autres choses.</p>
+        <p>Salut, je me nomme <span class="highlight">Maholo</span>. Je suis un des fondateurs de plusieurs projets, comme des jeux vidéo, la création de sites, et encore bien d’autres choses.</p>
 
-        <!-- COMPETENCES / SERVICES -->
-        <div class="services">
-            <div class="service-item">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/FiveM_logo.png" alt="FiveM">
-                <p>Serveurs FiveM</p>
-            </div>
-            <div class="service-item">
-                <img src="https://cdn.worldvectorlogo.com/logos/discord-6.svg" alt="Discord">
-                <p>Serveurs Discord</p>
-            </div>
-            <div class="service-item">
-                <img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png" alt="Sites Web">
-                <p>Création de sites</p>
-            </div>
-            <div class="service-item">
-                <img src="https://cdn-icons-png.flaticon.com/512/685/685352.png" alt="Design">
-                <p>Design / Graphisme</p>
-            </div>
-        </div>
+        <p>Mon objectif est simple : <span class="highlight">offrir mes services aux autres</span> et <span class="highlight">les aider dans leurs projets</span>. Je suis passionné par le développement et la créativité, et j'aime collaborer avec ceux qui partagent cette passion.</p>
+
+        <p>Voici ce que je sais faire :</p>
+        <p>- Développement de <span class="highlight">serveurs FiveM</span></p>
+        <p>- Création et gestion de <span class="highlight">serveurs Discord</span></p>
+        <p>- <span class="highlight">Création de sites web</span></p>
+        <p>- <span class="highlight">Design et graphisme</span></p>
 
         <!-- CONTACT -->
         <div class="contact-discord">
-            Contactez-moi sur Discord : <strong>woody_2009</strong>
+            Pour me contacter : <strong>Discord : woody_2009</strong>
         </div>
     </section>
 
