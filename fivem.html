@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>CRG Services - FiveM</title>
+<style>
+/* ===== RESET ===== */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+html, body { height:100%; }
+
+/* ===== FOND ===== */
+body {
+    background: url('https://tse2.mm.bing.net/th/id/OIP.RDStdOWibsHTs0f08IQdUAHaEo?rs=1&pid=ImgDetMain&o=7&rm=3') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    position: relative;
+}
+body::before {
+    content:'';
+    position: fixed; inset:0;
+    background: rgba(0,0,0,0.5);
+    z-index:0;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    position: fixed; top:0; width:100%; z-index:1000;
+    background: rgba(0,0,0,0.75); backdrop-filter: blur(6px);
+}
+.navbar ul {
+    display:flex; justify-content:center; align-items:center; height:65px;
+}
+.navbar li { margin:0 18px; }
+.navbar a { color:#fff; text-decoration:none; font-weight:600; position:relative; }
+.navbar a::after {
+    content:''; position:absolute; bottom:-5px; left:0; width:0; height:2px; background:#fff; transition:0.3s;
+}
+.navbar a:hover::after { width:100%; }
+
+/* ===== CONTENU ===== */
+.main-content { position:relative; z-index:1; padding:140px 20px 60px; text-align:center; }
+h1 { font-size:3rem; margin-bottom:10px; }
+p { margin-bottom:25px; opacity:0.9; }
+
+/* ===== CATEGORIES ===== */
+.category {
+    margin: 30px 0 20px;
+}
+.category h2 {
+    font-size:2rem; margin-bottom:15px; cursor:pointer; text-decoration:underline;
+}
+.subcategory {
+    display:none; flex-direction:column; gap:15px; margin-bottom:20px;
+}
+.subcategory h3 { cursor:pointer; text-decoration:underline; }
+.items { display:none; flex-direction:column; gap:12px; margin-left:20px; }
+
+/* ===== ITEM CARD ===== */
+.item-card {
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px; padding:12px 15px;
+    border:1px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(4px);
+    display:flex; justify-content:space-between; align-items:center;
+    transition:0.3s;
+}
+.item-card:hover { transform:scale(1.02); box-shadow:0 0 15px rgba(0,229,255,0.6); }
+.item-info { text-align:left; }
+.item-info h4 { margin-bottom:3px; }
+.item-info span { font-weight:bold; color:#00e5ff; }
+.item-actions button {
+    margin-left:10px;
+    padding:5px 10px;
+    border:none; border-radius:6px; cursor:pointer;
+    font-weight:bold; color:#fff;
+    background: linear-gradient(135deg,#00e5ff,#0066ff);
+    transition:0.3s;
+}
+.item-actions button:hover { transform:scale(1.05); }
+
+/* ===== ADMIN FORM ===== */
+.admin-form {
+    display:none; margin:20px auto; max-width:350px;
+    background: rgba(0,0,0,0.6); padding:20px; border-radius:15px;
+}
+.admin-form input, .admin-form select { width:100%; margin-bottom:10px; padding:8px; border-radius:6px; border:none; }
+.admin-form button { width:100%; padding:10px; border-radius:20px; border:none; background:#00e5ff; font-weight:bold; cursor:pointer; margin-bottom:5px; }
+.admin-form button:hover { background:#00bcd4; }
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px) { .item-card { flex-direction:column; align-items:flex-start; } }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+    <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="presentation.html">Présentation</a></li>
+        <li><a href="boutique.html">Boutique</a></li>
+        <li><a href="offre.html">Offre</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="apropos.html">À propos</a></li>
+        <li><a href="fivem.html">FiveM</a></li>
+    </ul>
+</nav>
+
+<section class="main-content">
+    <h1>FiveM - Catégories</h1>
+    <p>Explore les scripts, mappings et véhicules pour FiveM. Les articles gratuits peuvent être téléchargés directement.</p>
+
+    <!-- ADMIN BUTTON -->
+    <button onclick="askAdminPassword()" style="margin-bottom:20px;padding:10px 20px;border:none;border-radius:10px;font-weight:bold;cursor:pointer;background:#00e5ff;color:#fff;">Ajouter un article</button>
+
+    <!-- ADMIN FORM -->
+    <div class="admin-form" id="adminForm">
+        <input id="itemName" placeholder="Nom de l'article">
+        <input id="itemCategory" placeholder="Catégorie (Scripts, Mappings, Voitures)">
+        <input id="itemSubCategory" placeholder="Sous-catégorie (Police, Urgence...)">
+        <input id="itemType" placeholder="Type (Gratuit ou Payant)">
+        <input id="itemPrice" placeholder="Prix (€)">
+        <input id="itemLink" placeholder="Lien téléchargement si gratuit">
+        <button onclick="addItem()">Ajouter</button>
+        <button onclick="hideAdminForm()">Annuler</button>
+    </div>
+
+    <div id="categoriesContainer"></div>
+</section>
+
+<script>
+const ADMIN_PASSWORD = "Maholo_56100";
+let isAdmin = false;
+let items = JSON.parse(localStorage.getItem("fivemItems")) || [];
+
+function saveItems(){ localStorage.setItem("fivemItems", JSON.stringify(items)); }
+
+function render(){
+    const container = document.getElementById("categoriesContainer");
+    container.innerHTML = "";
+
+    // Group by category and subcategory
+    const grouped = {};
+    items.forEach(it=>{
+        if(!grouped[it.category]) grouped[it.category] = {};
+        if(!grouped[it.category][it.subCategory]) grouped[it.category][it.subCategory] = [];
+        grouped[it.category][it.subCategory].push(it);
+    });
+
+    for(const cat in grouped){
+        const catDiv = document.createElement("div");
+        catDiv.className="category";
+        const catTitle = document.createElement("h2");
+        catTitle.textContent = cat;
+        catDiv.appendChild(catTitle);
+
+        const subContainer = document.createElement("div");
+        subContainer.className="subcategory";
+
+        catTitle.onclick = ()=>{ subContainer.style.display = subContainer.style.display==="flex"?"none":"flex"; };
+
+        for(const sub in grouped[cat]){
+            const subDiv = document.createElement("div");
+            subDiv.className="subcategory-block";
+            const subTitle = document.createElement("h3");
+            subTitle.textContent = sub;
+            subDiv.appendChild(subTitle);
+
+            const itemsDiv = document.createElement("div");
+            itemsDiv.className="items";
+            subTitle.onclick = ()=>{ itemsDiv.style.display = itemsDiv.style.display==="flex"?"none":"flex"; };
+
+            grouped[cat][sub].forEach(it=>{
+                const itemCard = document.createElement("div");
+                itemCard.className="item-card";
+                itemCard.innerHTML = `
+                    <div class="item-info">
+                        <h4>${it.name}</h4>
+                        <span>${it.type==="Gratuit"?it.type+" - Téléchargable":it.type+" - "+it.price+"€"}</span>
+                    </div>
+                    <div class="item-actions">
+                        ${isAdmin?'<button onclick="removeItem('+items.indexOf(it)+')">Supprimer</button>':''}
+                        ${it.type==="Gratuit"?'<button onclick="window.open(\''+it.link+'\',\'_blank\')">Télécharger</button>':''}
+                    </div>
+                `;
+                itemsDiv.appendChild(itemCard);
+            });
+
+            subDiv.appendChild(itemsDiv);
+            subContainer.appendChild(subDiv);
+        }
+
+        catDiv.appendChild(subContainer);
+        container.appendChild(catDiv);
+    }
+}
+
+function askAdminPassword(){
+    const pass = prompt("Mot de passe admin :");
+    if(pass === ADMIN_PASSWORD){
+        isAdmin = true;
+        document.getElementById("adminForm").style.display="block";
+        render();
+    } else { alert("Mot de passe incorrect"); }
+}
+
+function hideAdminForm(){ document.getElementById("adminForm").style.display="none"; }
+
+function addItem(){
+    const name = document.getElementById("itemName").value;
+    const category = document.getElementById("itemCategory").value;
+    const subCategory = document.getElementById("itemSubCategory").value;
+    const type = document.getElementById("itemType").value;
+    const price = document.getElementById("itemPrice").value;
+    const link = document.getElementById("itemLink").value;
+
+    if(!name||!category||!subCategory||!type||(type==="Payant"&&!price)) return alert("Remplir tous les champs");
+
+    items.push({name,category,subCategory,type,price:price||"0",link});
+    saveItems();
+    render();
+    hideAdminForm();
+    document.getElementById("itemName").value="";
+    document.getElementById("itemCategory").value="";
+    document.getElementById("itemSubCategory").value="";
+    document.getElementById("itemType").value="";
+    document.getElementById("itemPrice").value="";
+    document.getElementById("itemLink").value="";
+}
+
+function removeItem(i){
+    if(confirm("Supprimer cet article ?")){
+        items.splice(i,1);
+        saveItems();
+        render();
+    }
+}
+
+render();
+</script>
+</body>
+</html>
