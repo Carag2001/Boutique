@@ -1,42 +1,84 @@
-/* HERO PLEIN ÉCRAN NET */
+/* RESET & BASE */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    background: url("https://i.pinimg.com/originals/7b/a8/bc/7ba8bce9ba9249a679d605bb964be6fa.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+}
+
+/* MENU FIXE */
+.navbar {
+    position: fixed;
+    top: 20px;
+    right: 40px;
+    z-index: 1000;
+}
+.navbar ul { list-style: none; display: flex; gap: 25px; }
+.navbar a {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    color: white;
+    transition: 0.3s;
+}
+.navbar a:hover { text-decoration: underline; }
+
+/* HERO */
 .hero {
-    position: relative;
-    width: 100vw;
     height: 100vh;
-
-    background-image: url("https://png.pngtree.com/thumb_back/fw800/background/20230411/pngtree-nature-forest-sun-ecology-image_2256183.jpg");
-    background-size: cover;        /* plein écran */
-    background-position: center;   /* centré */
-    background-repeat: no-repeat;
-
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
+    position: relative;
 }
-
-/* overlay sombre (PAS DE FLOU) */
 .hero::before {
     content: "";
     position: absolute;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.35);
 }
+.hero-content { position: relative; color: white; max-width: 800px; padding: 20px; }
+.hero h1 { font-size: 64px; margin-bottom: 15px; }
+.hero p { font-size: 22px; opacity: 0.95; }
 
-/* contenu au-dessus de l’image */
-.hero-content {
-    position: relative;
-    color: white;
-    text-align: center;
+/* SECTIONS INTERNES */
+section, .page {
+    padding: 150px 20px;
     max-width: 800px;
-    padding: 20px;
+    margin: auto;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
 }
+.page h1 { font-size: 40px; margin-bottom: 20px; }
+.page p { font-size: 18px; line-height: 1.8; }
 
-.hero h1 {
-    font-size: 64px;
-    margin-bottom: 15px;
-}
+/* SERVICES / OFFRES */
+.service-box { max-width: 500px; margin: 40px auto; }
+.offers { list-style: none; padding: 0; margin-top: 30px; }
+.offers li { margin: 10px 0; font-size: 18px; }
 
-.hero p {
-    font-size: 22px;
-    opacity: 0.95;
+/* CONTACT */
+.contact { color: white; }
+
+/* FOOTER */
+footer { padding: 30px; text-align: center; color: white; }
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+    .hero h1 { font-size: 42px; }
+    .hero p { font-size: 18px; }
+    .navbar ul {
+        flex-direction: column;
+        gap: 15px;
+        background-color: rgba(0,0,0,0.5);
+        padding: 15px 20px;
+        border-radius: 8px;
+    }
+    .navbar { top: 20px; right: 20px; }
+    section, .page { padding: 100px 15px; }
 }
