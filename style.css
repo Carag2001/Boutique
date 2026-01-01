@@ -14,7 +14,7 @@ html, body {
 body {
     background: url('https://img.freepik.com/photos-premium/harmonie-hexagonale-abstrait-arriere-plan-hexagonal_957479-67404.jpg') no-repeat center center fixed;
     background-size: cover;
-    color: ff0000;
+    color: #ffffff; /* texte principal blanc */
     overflow-x: hidden;
     position: relative;
 }
@@ -45,18 +45,18 @@ body::before {
     display: flex;
     justify-content: center; /* centre horizontalement */
     align-items: center;     /* centre verticalement */
-    height: 60px;            /* fixe la hauteur */
+    height: 60px;
     padding: 0;
     margin: 0;
 }
 
 .navbar ul li {
-    margin: 0 25px;          /* espace entre les éléments */
+    margin: 0 25px;
 }
 
 .navbar ul li a {
     text-decoration: none;
-    color: ff0000;
+    color: #ffffff; /* lien blanc */
     font-weight: bold;
     font-size: 1.1rem;
     padding: 8px 15px;
@@ -65,29 +65,34 @@ body::before {
 }
 
 .navbar ul li a:hover {
-    background-color: ff0000;
+    background-color: rgba(255,255,255,0.2); /* léger fond blanc au hover */
     transform: scale(1.1);
 }
 
 /* CONTENU PRINCIPAL CENTRÉ */
 .main-content {
     position: relative;
-    z-index: 1; /* au-dessus de l'overlay */
+    z-index: 1; 
     display: flex;
     flex-direction: column;
-    align-items: center;      /* centre horizontalement */
-    justify-content: center;  /* centre verticalement */
-    text-align: center;       /* centre le texte */
-    min-height: 100vh;        /* prend toute la hauteur de l'écran */
-    padding: 120px 20px 20px; /* padding haut pour laisser place au menu */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 100vh;
+    padding: 120px 20px 20px;
     animation: fadeIn 2s ease-out;
 }
 
-/* TITRES ET PARAGRAPHES */
+.main-content h1,
+.main-content h2,
+.main-content p {
+    color: #ffffff; /* tout le texte en blanc */
+}
+
+/* TITRES */
 .main-content h1 {
     font-size: 3rem;
     margin-bottom: 20px;
-    color: #ffffff;
     text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
     animation: slideDown 1s ease forwards;
 }
@@ -95,7 +100,6 @@ body::before {
 .main-content h2 {
     font-size: 2.5rem;
     margin-bottom: 20px;
-    color: #ffffff;
     text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
     animation: slideUp 1s ease forwards;
 }
@@ -132,15 +136,14 @@ body::before {
 }
 
 /* ==================== */
-/* VERSION TABLETTE / MOBILE */
-/* ==================== */
+/* RESPONSIVE TABLETTE / MOBILE */
 @media (max-width: 768px) {
     .navbar ul li {
-        margin: 0 10px;         /* moins d'espace entre les liens */
+        margin: 0 10px; 
     }
 
     .main-content {
-        padding: 80px 15px 20px; 
+        padding: 80px 15px 20px;
         min-height: calc(100vh - 60px);
     }
 
@@ -161,12 +164,12 @@ body::before {
 /* VERSION TÉLÉPHONE PETIT ÉCRAN */
 @media (max-width: 480px) {
     .navbar ul {
-        flex-direction: column; /* menu vertical */
+        flex-direction: column;
         height: auto;
     }
 
     .navbar ul li {
-        margin: 10px 0; /* espace vertical */
+        margin: 10px 0;
     }
 
     .main-content {
