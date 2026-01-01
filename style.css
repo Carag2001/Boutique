@@ -1,82 +1,149 @@
-/* Assurer que tout le site utilise l'image de fond */
-html, body {
+/* RESET */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body, html {
+    height: 100%;
+}
+
+body {
+    /* IMAGE DE FOND PAR DÉFAUT (modifiable par page) */
+    background: url('https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* OVERLAY POUR LECTURE DU TEXTE */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    font-family: Arial, sans-serif;
-background-image: url("https://i.pinimg.com/originals/7b/a8/bc/7ba8bce9ba9249a679d605bb964be6fa.jpg"); */
-    background-size: cover;       /* plein écran */
-    background-position: center;  /* centré */
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* reste en place même au scroll */
-    color: white;                 /* texte visible */
+    background-color: rgba(0,0,0,0.4);
+    z-index: 0;
 }
 
 /* MENU FIXE */
 .navbar {
-    position: fixed; /* reste en haut même en scroll */
-    top: 20px;
-    right: 40px;
-    z-index: 100;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(0,0,0,0.7);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
 
 .navbar ul {
     list-style: none;
     display: flex;
-    gap: 25px;
+    justify-content: center;
+    padding: 12px 0;
 }
 
-.navbar a {
-    color: white;
+.navbar ul li {
+    margin: 0 20px;
+}
+
+.navbar ul li a {
     text-decoration: none;
-    font-weight: 500;
-    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 8px 15px;
+    transition: all 0.3s ease;
+    border-radius: 5px;
 }
 
-.navbar a:hover {
-    text-decoration: underline;
+.navbar ul li a:hover {
+    background-color: #00bcd4;
+    transform: scale(1.1);
 }
 
-/* Hero : centrage du texte */
-.hero {
+/* CONTENU PRINCIPAL CENTRÉ */
+.main-content {
+    position: relative;
+    z-index: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh; /* plein écran */
     text-align: center;
+    min-height: 90vh;
+    padding: 120px 20px 20px;
+    animation: fadeIn 2s ease-out;
 }
 
-.hero-content {
-    position: relative;
-    z-index: 10;
-    max-width: 800px;
+/* TITRES ET PARAGRAPHES */
+.main-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #00e5ff;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    animation: slideDown 1s ease forwards;
 }
 
-.hero h1 {
-    font-size: 64px;
-    margin-bottom: 15px;
+.main-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #00bfa5;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+    animation: slideUp 1s ease forwards;
 }
 
-.hero p {
-    font-size: 22px;
-    opacity: 0.95;
+.main-content p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    animation: fadeIn 2s ease forwards;
 }
 
-.btn {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 15px 40px;
-    border: 1px solid white;
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 18px;
-    border-radius: 5px;
-    transition: 0.3s;
+/* ANIMATIONS */
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
 }
 
-.btn:hover {
-    background-color: white;
-    color: black;
+@keyframes slideDown {
+    0% {opacity: 0; transform: translateY(-50px);}
+    100% {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes slideUp {
+    0% {opacity: 0; transform: translateY(50px);}
+    100% {opacity: 1; transform: translateY(0);}
+}
+
+/* HOVER SUR LE TEXTE */
+.main-content p:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+    color: #00e5ff;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .navbar ul li {
+        margin: 0 10px;
+    }
+
+    .main-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .main-content h2 {
+        font-size: 2rem;
+    }
+
+    .main-content p {
+        font-size: 1rem;
+    }
 }
