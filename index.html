@@ -2,10 +2,10 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Accueil - Accueil</title>
-    <link rel="stylesheet" href="style.css">
+    <title>CRG Services - Accueil</title>
+
     <style>
-        /* RESET */
+        /* ================= RESET ================= */
         * {
             margin: 0;
             padding: 0;
@@ -17,9 +17,10 @@
             height: 100%;
         }
 
-        /* FOND + OVERLAY identique aux autres pages */
+        /* ================= FOND ================= */
         body {
-            background: url('https://img.freepik.com/photos-premium/harmonie-hexagonale-abstrait-arriere-plan-hexagonal_957479-67404.jpg') no-repeat center center fixed;
+            background: url('https://img.freepik.com/photos-premium/harmonie-hexagonale-abstrait-arriere-plan-hexagonal_957479-67404.jpg')
+                        no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
             overflow-x: hidden;
@@ -29,22 +30,20 @@
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.4);
+            inset: 0;
+            background: rgba(0,0,0,0.45);
             z-index: 0;
         }
 
-        /* MENU FIXE CENTRÉ */
+        /* ================= NAVBAR ================= */
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            background-color: rgba(0,0,0,0.7);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(6px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
         }
 
         .navbar ul {
@@ -52,138 +51,135 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 60px;
-            padding: 0;
-            margin: 0;
+            height: 65px;
         }
 
         .navbar ul li {
-            margin: 0 25px;
+            margin: 0 18px;
         }
 
         .navbar ul li a {
+            position: relative;
             text-decoration: none;
             color: #ffffff;
-            font-weight: bold;
-            font-size: 1.1rem;
-            padding: 8px 15px;
-            border-radius: 5px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            padding: 8px 6px;
             transition: all 0.3s ease;
         }
 
-        .navbar ul li a:hover {
-            background-color: rgba(255,255,255,0.2);
-            transform: scale(1.1);
+        /* Effet underline animé + glow */
+        .navbar ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: #ffffff;
+            transition: width 0.3s ease;
         }
 
-        /* CONTENU PRINCIPAL CENTRÉ */
+        .navbar ul li a:hover::after {
+            width: 100%;
+        }
+
+        .navbar ul li a:hover {
+            text-shadow: 0 0 10px rgba(255,255,255,0.8);
+            transform: translateY(-2px);
+        }
+
+        /* ================= CONTENU ================= */
         .main-content {
             position: relative;
             z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            text-align: center;
             min-height: 100vh;
-            padding: 140px 20px 40px;
+            padding: 140px 20px 60px;
+            text-align: center;
         }
 
-        /* TITRES ET PARAGRAPHES */
         .main-content h1 {
             font-size: 3rem;
-            color: #ffffff;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
-            animation: slideDown 1s ease forwards;
-        }
-
-        .main-content h2 {
-            font-size: 2rem;
-            color: #ffffff;
-            margin-top: 40px;
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+            animation: slideDown 1s ease;
+            text-shadow: 0 0 15px rgba(0,0,0,0.8);
         }
 
         .main-content p {
-            font-size: 1.2rem;
-            max-width: 800px;
+            max-width: 900px;
+            margin: 0 auto 30px;
+            font-size: 1.15rem;
             line-height: 1.8;
-            margin-bottom: 20px;
-            color: #ffffff;
-            animation: fadeIn 2s ease forwards;
+            animation: fadeIn 1.5s ease;
         }
 
-        /* CARDS POUR LES PROJETS OU MESSAGES */
+        .main-content h2 {
+            margin: 50px 0 30px;
+            font-size: 2.1rem;
+            text-shadow: 0 0 12px rgba(0,0,0,0.7);
+        }
+
+        /* ================= CARDS ================= */
         .cards {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 30px;
-            margin-top: 30px;
         }
 
         .card {
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 2px solid #ffffff;
-            border-radius: 15px;
-            padding: 30px 20px;
-            width: 250px;
-            text-align: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-            transition: all 0.3s ease;
+            width: 260px;
+            padding: 30px 22px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 18px;
+            backdrop-filter: blur(6px);
+            transition: all 0.35s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .card:hover {
-            background-color: rgba(0, 188, 212, 0.2);
-            transform: translateY(-5px) scale(1.05);
+            transform: translateY(-8px) scale(1.06);
+            box-shadow: 0 0 25px rgba(255,255,255,0.3);
         }
 
         .card h3 {
             margin-bottom: 15px;
-            font-size: 1.5rem;
-            color: #ffffff;
+            font-size: 1.4rem;
         }
 
         .card p {
             font-size: 1rem;
-            line-height: 1.5;
-            color: #ffffff;
+            line-height: 1.6;
         }
 
-        /* ANIMATIONS */
+        /* ================= ANIMATIONS ================= */
         @keyframes fadeIn {
-            0% {opacity: 0;}
-            100% {opacity: 1;}
+            from {opacity: 0;}
+            to {opacity: 1;}
         }
 
         @keyframes slideDown {
-            0% {opacity: 0; transform: translateY(-50px);}
-            100% {opacity: 1; transform: translateY(0);}
+            from {opacity: 0; transform: translateY(-40px);}
+            to {opacity: 1; transform: translateY(0);}
         }
 
-        /* RESPONSIVE */
+        /* ================= RESPONSIVE ================= */
         @media (max-width: 768px) {
             .main-content h1 {
                 font-size: 2.2rem;
             }
 
             .main-content h2 {
-                font-size: 1.8rem;
+                font-size: 1.7rem;
             }
 
             .main-content p {
                 font-size: 1rem;
             }
 
-            .cards {
-                flex-direction: column;
-                gap: 20px;
-            }
-
             .card {
-                width: 80%;
+                width: 85%;
             }
         }
 
@@ -191,37 +187,26 @@
             .navbar ul {
                 flex-direction: column;
                 height: auto;
+                padding: 10px 0;
             }
 
             .navbar ul li {
-                margin: 10px 0;
+                margin: 6px 0;
             }
 
             .main-content {
-                padding-top: 100px;
+                padding-top: 160px;
             }
 
             .main-content h1 {
                 font-size: 1.8rem;
-            }
-
-            .main-content h2 {
-                font-size: 1.5rem;
-            }
-
-            .main-content p {
-                font-size: 0.95rem;
-            }
-
-            .card {
-                width: 90%;
-                padding: 25px 15px;
             }
         }
     </style>
 </head>
 <body>
 
+    <!-- NAVBAR -->
     <nav class="navbar">
         <ul>
             <li><a href="index.html">Accueil</a></li>
@@ -233,31 +218,55 @@
         </ul>
     </nav>
 
+    <!-- CONTENU -->
     <section class="main-content">
-        <h1>Accueil</h1>
-        <p>Bienvenue ! Ici, vous pourrez découvrir tous mes services ainsi que mes projets en cours. Mon objectif est de vous aider et de vous offrir des solutions adaptées à vos besoins.</p>
+        <h1>CRG Services</h1>
 
-        <h2>Nos Projets et Services</h2>
+        <p>
+            Bienvenue sur CRG Services.  
+            Ici, je mets mes compétences au service des autres afin d’aider,
+            accompagner et créer des projets solides et modernes.
+        </p>
+
+        <h2>Projets & Services</h2>
+
         <div class="cards">
             <div class="card">
-                <h3>Projets en cours</h3>
-                <p>Nous travaillons actuellement sur plusieurs projets dans le domaine des jeux vidéo, de la création de sites web et du design graphique.</p>
+                <h3>Développement</h3>
+                <p>
+                    Création de serveurs FiveM, serveurs Discord et solutions
+                    techniques adaptées à vos projets.
+                </p>
             </div>
+
             <div class="card">
-                <h3>Services gratuits</h3>
-                <p>Nous proposons certains services gratuitement pour aider les personnes et les projets à se développer efficacement.</p>
+                <h3>Création de sites</h3>
+                <p>
+                    Sites modernes, responsives et optimisés,
+                    du design à la mise en ligne.
+                </p>
             </div>
+
             <div class="card">
-                <h3>Recrutement</h3>
-                <p>Des recrutements sont ouverts pour collaborer sur nos projets. Déposez votre candidature via l’onglet Contact.</p>
+                <h3>Design</h3>
+                <p>
+                    Identité visuelle, interfaces et éléments graphiques
+                    pensés pour se démarquer.
+                </p>
             </div>
+
             <div class="card">
-                <h3>Support & Conseils</h3>
-                <p>Nous offrons notre expertise pour vous conseiller dans vos projets, du développement au design, pour un résultat professionnel.</p>
+                <h3>Collaboration</h3>
+                <p>
+                    Ouvert aux collaborations et recrutements
+                    pour développer des projets ambitieux.
+                </p>
             </div>
         </div>
 
-        <p>Pour toute question ou candidature, n’hésitez pas à me contacter via Discord : <strong>woody_2009</strong>.</p>
+        <p style="margin-top: 40px;">
+            📩 Contact principal : <strong>Discord — woody_2009</strong>
+        </p>
     </section>
 
 </body>
