@@ -4,10 +4,224 @@
     <meta charset="UTF-8">
     <title>CRG Services - Accueil</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* RESET */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        /* FOND + OVERLAY identique aux autres pages */
+        body {
+            background: url('https://img.freepik.com/photos-premium/harmonie-hexagonale-abstrait-arriere-plan-hexagonal_957479-67404.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+            z-index: 0;
+        }
+
+        /* MENU FIXE CENTRÉ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(0,0,0,0.7);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar ul li {
+            margin: 0 25px;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            background-color: rgba(255,255,255,0.2);
+            transform: scale(1.1);
+        }
+
+        /* CONTENU PRINCIPAL CENTRÉ */
+        .main-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: center;
+            min-height: 100vh;
+            padding: 140px 20px 40px;
+        }
+
+        /* TITRES ET PARAGRAPHES */
+        .main-content h1 {
+            font-size: 3rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            animation: slideDown 1s ease forwards;
+        }
+
+        .main-content h2 {
+            font-size: 2rem;
+            color: #ffffff;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+        }
+
+        .main-content p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #ffffff;
+            animation: fadeIn 2s ease forwards;
+        }
+
+        /* CARDS POUR LES PROJETS OU MESSAGES */
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 2px solid #ffffff;
+            border-radius: 15px;
+            padding: 30px 20px;
+            width: 250px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            background-color: rgba(0, 188, 212, 0.2);
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: #ffffff;
+        }
+
+        .card p {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #ffffff;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+            0% {opacity: 0;}
+            100% {opacity: 1;}
+        }
+
+        @keyframes slideDown {
+            0% {opacity: 0; transform: translateY(-50px);}
+            100% {opacity: 1; transform: translateY(0);}
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .main-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .main-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .main-content p {
+                font-size: 1rem;
+            }
+
+            .cards {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .card {
+                width: 80%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar ul {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .navbar ul li {
+                margin: 10px 0;
+            }
+
+            .main-content {
+                padding-top: 100px;
+            }
+
+            .main-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .main-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .main-content p {
+                font-size: 0.95rem;
+            }
+
+            .card {
+                width: 90%;
+                padding: 25px 15px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- MENU FIXE -->
     <nav class="navbar">
         <ul>
             <li><a href="index.html">Accueil</a></li>
@@ -19,12 +233,31 @@
         </ul>
     </nav>
 
-    <!-- CONTENU PRINCIPAL CENTRÉ -->
     <section class="main-content">
         <h1>CRG Services</h1>
-        <p>Bienvenue, ici vous pourrez trouver tous mes services ainsi que mes projets en cours...</p>
-        <h2>CRG Projets</h2>
-        <p>Salut ! Le projet de ce site est actuellement de vous faire part de mes services gratuitement. Des recrutements pour créer et fonder ce projet avec moi sont ouverts. Déposez votre candidature via mon mail que vous trouverez dans l'onglet Contact.</p>
+        <p>Bienvenue ! Ici, vous pourrez découvrir tous mes services ainsi que mes projets en cours. Mon objectif est de vous aider et de vous offrir des solutions adaptées à vos besoins.</p>
+
+        <h2>Nos Projets et Services</h2>
+        <div class="cards">
+            <div class="card">
+                <h3>Projets en cours</h3>
+                <p>Nous travaillons actuellement sur plusieurs projets dans le domaine des jeux vidéo, de la création de sites web et du design graphique.</p>
+            </div>
+            <div class="card">
+                <h3>Services gratuits</h3>
+                <p>Nous proposons certains services gratuitement pour aider les personnes et les projets à se développer efficacement.</p>
+            </div>
+            <div class="card">
+                <h3>Recrutement</h3>
+                <p>Des recrutements sont ouverts pour collaborer sur nos projets. Déposez votre candidature via l’onglet Contact.</p>
+            </div>
+            <div class="card">
+                <h3>Support & Conseils</h3>
+                <p>Nous offrons notre expertise pour vous conseiller dans vos projets, du développement au design, pour un résultat professionnel.</p>
+            </div>
+        </div>
+
+        <p>Pour toute question ou candidature, n’hésitez pas à me contacter via Discord : <strong>woody_2009</strong>.</p>
     </section>
 
 </body>
