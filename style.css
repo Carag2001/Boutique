@@ -1,3 +1,4 @@
+/* ========================= */
 /* RESET */
 * {
     margin: 0;
@@ -10,11 +11,12 @@ html, body {
     height: 100%;
 }
 
+/* ========================= */
 /* FOND + OVERLAY */
 body {
     background: url('https://images5.alphacoders.com/569/569815.jpg') no-repeat center center fixed;
     background-size: cover;
-    color: #ffffff; /* texte principal blanc par défaut */
+    color: #ffffff;
     overflow-x: hidden;
     position: relative;
 }
@@ -26,18 +28,20 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0.45);
     z-index: 0;
 }
 
-/* MENU FIXE CENTRÉ */
+/* ========================= */
+/* MENU FIXE */
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
-    background-color: rgba(0,0,0,0.7);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
 }
 
 .navbar ul {
@@ -45,124 +49,164 @@ body::before {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 60px;
-    padding: 0;
+    height: 65px;
     margin: 0;
+    padding: 0;
 }
 
 .navbar ul li {
-    margin: 0 25px;
+    margin: 0 14px;
 }
 
+/* ========================= */
+/* BOUTONS MENU (NOUVEAU STYLE) */
 .navbar ul li a {
+    position: relative;
     text-decoration: none;
-    color: #ffffff; /* liens menu en blanc */
-    font-weight: bold;
-    font-size: 1.1rem;
-    padding: 8px 15px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 10px 22px;
+    border-radius: 30px;
+    background: linear-gradient(
+        135deg,
+        rgba(0,188,212,0.15),
+        rgba(0,188,212,0.05)
+    );
+    border: 1px solid rgba(0,188,212,0.4);
+    backdrop-filter: blur(6px);
+    transition: all 0.35s ease;
+    overflow: hidden;
 }
 
+/* HOVER */
 .navbar ul li a:hover {
-    background-color: rgba(255,255,255,0.2);
-    transform: scale(1.1);
+    background: linear-gradient(135deg, #00bcd4, #00e5ff);
+    color: #000000;
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 8px 25px rgba(0,188,212,0.6);
 }
 
-/* CONTENU PRINCIPAL CENTRÉ */
+/* EFFET LUMIÈRE */
+.navbar ul li a::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255,255,255,0.4);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+    z-index: -1;
+}
+
+.navbar ul li a:hover::after {
+    width: 220%;
+    height: 220%;
+}
+
+/* BOUTON ACTIF (PAGE ACTUELLE) */
+.navbar ul li a.active {
+    background: linear-gradient(135deg, #00e5ff, #00bcd4);
+    color: #000000;
+    box-shadow: 0 0 20px rgba(0,188,212,0.8);
+}
+
+/* ========================= */
+/* CONTENU PRINCIPAL */
 .main-content {
     position: relative;
     z-index: 1;
+    min-height: 100vh;
+    padding: 130px 20px 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    min-height: 100vh;
-    padding: 120px 20px 20px;
-    animation: fadeIn 2s ease-out;
+    animation: fadeIn 1.5s ease-out;
 }
 
 /* TITRES */
-.main-content h1,
-.main-content h2 {
-    color: #ffffff; /* titres blancs */
+.main-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
 }
 
-/* PARAGRAPHES / sous-texte */
+.main-content h2 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+
+/* TEXTE */
 .main-content p {
     font-size: 1.2rem;
-    max-width: 700px;
-    line-height: 1.6;
+    max-width: 800px;
+    line-height: 1.7;
     margin-bottom: 20px;
-    animation: fadeIn 2s ease forwards;
-    color: #ffffff; /* bleu ciel */
+    color: #ffffff;
+    transition: transform 0.3s ease;
 }
 
-/* ANIMATIONS */
-@keyframes fadeIn {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
-}
-
-@keyframes slideDown {
-    0% {opacity: 0; transform: translateY(-50px);}
-    100% {opacity: 1; transform: translateY(0);}
-}
-
-@keyframes slideUp {
-    0% {opacity: 0; transform: translateY(50px);}
-    100% {opacity: 1; transform: translateY(0);}
-}
-
-/* HOVER SUR LES PARAGRAPHES */
 .main-content p:hover {
     transform: scale(1.02);
-    transition: transform 0.3s ease;
-    color: #ffffff; /* devient blanc au hover */
 }
 
-/* ==================== */
-/* RESPONSIVE TABLETTE / MOBILE */
+/* ========================= */
+/* ANIMATIONS */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ========================= */
+/* RESPONSIVE TABLETTE */
 @media (max-width: 768px) {
     .navbar ul li {
-        margin: 0 10px;
+        margin: 0 6px;
+    }
+
+    .navbar ul li a {
+        font-size: 0.95rem;
+        padding: 8px 16px;
     }
 
     .main-content {
-        padding: 80px 15px 20px;
-        min-height: calc(100vh - 60px);
+        padding: 110px 15px 30px;
     }
 
     .main-content h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
 
     .main-content h2 {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
 
     .main-content p {
-        font-size: 0.95rem;
-        margin-bottom: 15px;
+        font-size: 1rem;
     }
 }
 
-/* VERSION TÉLÉPHONE PETIT ÉCRAN */
+/* ========================= */
+/* MOBILE */
 @media (max-width: 480px) {
     .navbar ul {
         flex-direction: column;
         height: auto;
+        padding: 10px 0;
     }
 
     .navbar ul li {
-        margin: 10px 0;
+        margin: 6px 0;
     }
 
     .main-content {
-        padding-top: 70px;
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-top: 90px;
     }
 
     .main-content h1 {
@@ -174,6 +218,6 @@ body::before {
     }
 
     .main-content p {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
     }
 }
