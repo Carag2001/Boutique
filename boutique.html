@@ -1,232 +1,304 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>CRG Services - Boutique</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .main-content {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            text-align: center;
-            min-height: 100vh;
-            padding: 140px 20px 40px;
-            color: #ffffff;
-        }
+<meta charset="UTF-8">
+<title>CRG Services - Boutique</title>
 
-        h1, p { color: #ffffff; }
+<style>
+/* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-        .products {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
-        }
+html, body {
+    height: 100%;
+}
 
-        .product-card {
-            background-color: rgba(255,255,255,0.1);
-            border: 2px solid #ffffff;
-            border-radius: 15px;
-            padding: 20px;
-            width: 250px;
-            text-align: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-            transition: all 0.3s ease;
-            position: relative;
-        }
+/* ================= FOND ================= */
+body {
+    background: url('https://img.freepik.com/photos-premium/harmonie-hexagonale-abstrait-arriere-plan-hexagonal_957479-67404.jpg')
+        no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    position: relative;
+}
 
-        .product-card:hover {
-            background-color: rgba(0, 188, 212, 0.2);
-            transform: translateY(-5px) scale(1.05);
-        }
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 0;
+}
 
-        .product-card img {
-            max-width: 100%;
-            border-radius: 10px;
-            margin-bottom: 10px;
-        }
+/* ================= NAVBAR ================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+}
 
-        .product-card h3 { margin-bottom: 5px; font-size: 1.5rem; }
-        .product-card p { font-size: 1rem; margin-bottom: 5px; }
-        .product-card span { font-weight: bold; color: #00bcd4; }
+.navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 65px;
+}
 
-        .delete-btn {
-            display: none; /* visible uniquement après mot de passe */
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #ff4444;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 8px;
-            color: #fff;
-            cursor: pointer;
-            font-weight: bold;
-        }
+.navbar li {
+    margin: 0 18px;
+}
 
-        #adminButton {
-            display: block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            background-color: #00bcd4;
-            color: #fff;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+}
 
-        #adminButton:hover { background-color: #0097a7; }
+.navbar a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: 0.3s;
+}
 
-        .admin-form {
-            display: none;
-            margin-top: 20px;
-            background-color: rgba(0,0,0,0.5);
-            padding: 20px;
-            border-radius: 15px;
-            width: 300px;
-        }
+.navbar a:hover::after {
+    width: 100%;
+}
 
-        .admin-form input, .admin-form textarea, .admin-form button {
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 8px;
-            border-radius: 5px;
-            border: none;
-        }
+/* ================= CONTENU ================= */
+.main-content {
+    position: relative;
+    z-index: 1;
+    padding: 140px 20px 60px;
+    text-align: center;
+}
 
-        .admin-form button {
-            background-color: #00bcd4;
-            color: #fff;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
 
-        .admin-form button:hover { background-color: #0097a7; }
+p {
+    margin-bottom: 25px;
+    opacity: 0.9;
+}
 
-        @media (max-width: 768px) {
-            .products { flex-direction: column; gap: 20px; }
-            .product-card { width: 80%; }
-            .admin-form { width: 90%; }
-        }
-    </style>
+/* ================= PRODUITS ================= */
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.product-card {
+    width: 260px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.4);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    transition: 0.35s;
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 0 30px rgba(255,255,255,0.35);
+}
+
+.product-card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.product-card h3 {
+    margin-bottom: 5px;
+}
+
+.product-card span {
+    color: #00e5ff;
+    font-weight: bold;
+}
+
+/* ================= BOUTONS ================= */
+.admin-btn {
+    margin-top: 35px;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    color: #fff;
+    background: linear-gradient(135deg, #00e5ff, #0066ff);
+    box-shadow: 0 0 15px rgba(0,229,255,0.6);
+    transition: 0.35s;
+}
+
+.admin-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(0,229,255,1);
+}
+
+/* ================= SUPPRIMER ================= */
+.delete-btn {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff3b3b;
+    border: none;
+    color: #fff;
+    padding: 5px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* ================= FORM ADMIN ================= */
+.admin-form {
+    display: none;
+    margin: 30px auto;
+    max-width: 320px;
+    background: rgba(0,0,0,0.6);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.admin-form input,
+.admin-form textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+}
+
+.admin-form button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    background: #00e5ff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.admin-form button:hover {
+    background: #00bcd4;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:768px) {
+    .product-card {
+        width: 85%;
+    }
+}
+</style>
 </head>
+
 <body>
 
-    <nav class="navbar">
-        <ul>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="presentation.html">Présentation</a></li>
-            <li><a href="boutique.html">Boutique</a></li>
-            <li><a href="offre.html">Offre</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="apropos.html">À propos</a></li>
-        </ul>
-    </nav>
+<nav class="navbar">
+    <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="presentation.html">Présentation</a></li>
+        <li><a href="boutique.html">Boutique</a></li>
+        <li><a href="offre.html">Offre</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="apropos.html">À propos</a></li>
+    </ul>
+</nav>
 
-    <section class="main-content">
-        <h1>Boutique CRG Services</h1>
-        <p>Découvrez nos produits et services :</p>
+<section class="main-content">
+    <h1>Boutique CRG Services</h1>
+    <p>Découvrez nos services et créations</p>
 
-        <div class="products" id="productsContainer"></div>
+    <div class="products" id="products"></div>
 
-        <!-- BOUTON ADMIN VISIBLE POUR TOUS -->
-        <button id="adminButton" onclick="promptAdmin()">Ajouter un produit</button>
+    <button class="admin-btn" onclick="askPassword()">Ajouter un article</button>
 
-        <!-- FORMULAIRE ADMIN -->
-        <div class="admin-form" id="adminForm">
-            <input type="text" id="productName" placeholder="Nom du produit">
-            <textarea id="productDesc" placeholder="Description"></textarea>
-            <input type="text" id="productPrice" placeholder="Prix">
-            <input type="text" id="productImg" placeholder="URL image">
-            <button onclick="addProduct()">Ajouter</button>
-            <button onclick="hideAdminForm()">Annuler</button>
-        </div>
-    </section>
+    <div class="admin-form" id="adminForm">
+        <input id="name" placeholder="Nom">
+        <textarea id="desc" placeholder="Description"></textarea>
+        <input id="price" placeholder="Prix">
+        <input id="img" placeholder="URL image">
+        <button onclick="addProduct()">Ajouter</button>
+    </div>
+</section>
 
-    <script>
-        const adminPassword = "monMotDePasse123"; // change-le
-        let isAdmin = false;
+<script>
+const PASSWORD = "admin123"; // CHANGE ICI
+let isAdmin = false;
+let products = JSON.parse(localStorage.getItem("products")) || [];
+const container = document.getElementById("products");
 
-        const container = document.getElementById('productsContainer');
-        let products = JSON.parse(localStorage.getItem('products')) || [];
+function render() {
+    container.innerHTML = "";
+    products.forEach((p,i)=>{
+        const div = document.createElement("div");
+        div.className = "product-card";
+        div.innerHTML = `
+            <button class="delete-btn" onclick="removeProduct(${i})">✖</button>
+            <img src="${p.img}">
+            <h3>${p.name}</h3>
+            <p>${p.desc}</p>
+            <span>${p.price}</span>
+        `;
+        if(isAdmin) div.querySelector(".delete-btn").style.display="block";
+        container.appendChild(div);
+    });
+}
 
-        function displayProducts() {
-            container.innerHTML = '';
-            products.forEach((p, index) => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.innerHTML = `
-                    <img src="${p.img}" alt="${p.name}">
-                    <h3>${p.name}</h3>
-                    <p>${p.desc}</p>
-                    <span>${p.price}</span>
-                    <button class="delete-btn" onclick="deleteProduct(${index})">Supprimer</button>
-                `;
-                if(isAdmin){
-                    card.querySelector('.delete-btn').style.display = 'block';
-                }
-                container.appendChild(card);
-            });
-        }
+function askPassword(){
+    const pass = prompt("Mot de passe admin :");
+    if(pass === PASSWORD){
+        isAdmin = true;
+        document.getElementById("adminForm").style.display = "block";
+        render();
+    } else {
+        alert("Mot de passe incorrect");
+    }
+}
 
-        function promptAdmin(){
-            const pass = prompt("Mot de passe administrateur :");
-            if(pass === adminPassword){
-                isAdmin = true;
-                document.getElementById('adminForm').style.display = 'block';
-                displayProducts(); // montre les boutons supprimer
-            } else {
-                alert("Mot de passe incorrect !");
-            }
-        }
+function addProduct(){
+    const p = {
+        name: name.value,
+        desc: desc.value,
+        price: price.value,
+        img: img.value
+    };
+    if(!p.name || !p.desc || !p.price || !p.img) return alert("Tout remplir");
+    products.push(p);
+    localStorage.setItem("products", JSON.stringify(products));
+    render();
+}
 
-        function hideAdminForm(){
-            document.getElementById('adminForm').style.display = 'none';
-            document.getElementById('productName').value = '';
-            document.getElementById('productDesc').value = '';
-            document.getElementById('productPrice').value = '';
-            document.getElementById('productImg').value = '';
-        }
+function removeProduct(i){
+    if(confirm("Supprimer cet article ?")){
+        products.splice(i,1);
+        localStorage.setItem("products", JSON.stringify(products));
+        render();
+    }
+}
 
-        function addProduct(){
-            const name = document.getElementById('productName').value;
-            const desc = document.getElementById('productDesc').value;
-            const price = document.getElementById('productPrice').value;
-            const img = document.getElementById('productImg').value;
-
-            if(!name || !desc || !price || !img){
-                alert("Remplissez tous les champs !");
-                return;
-            }
-
-            products.push({name, desc, price, img});
-            localStorage.setItem('products', JSON.stringify(products));
-            displayProducts();
-            hideAdminForm();
-        }
-
-        function deleteProduct(index){
-            if(!isAdmin) {
-                alert("Mot de passe requis pour supprimer !");
-                return;
-            }
-            if(confirm("Supprimer cet article ?")){
-                products.splice(index, 1);
-                localStorage.setItem('products', JSON.stringify(products));
-                displayProducts();
-            }
-        }
-
-        displayProducts();
-    </script>
+render();
+</script>
 
 </body>
 </html>
