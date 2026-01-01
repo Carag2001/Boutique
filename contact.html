@@ -4,6 +4,37 @@
     <meta charset="UTF-8">
     <title>Dauber Services - Contact</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Styles spécifiques pour les logos */
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+            font-size: 1.2rem;
+        }
+
+        .contact-item img {
+            width: 32px;
+            height: 32px;
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item img:hover {
+            transform: scale(1.2);
+        }
+
+        .contact-item a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: #00e5ff;
+        }
+    </style>
 </head>
 <body>
 
@@ -23,12 +54,37 @@
     <section class="main-content">
         <h1>Contact</h1>
         <p>Vous pouvez me contacter facilement :</p>
-        <p><strong>Email :</strong> maholo.contact@gmail.com</p>
-        <p><strong>Discord :</strong> woody_2009</p>
-        <p><strong>Instagram :</strong> daubermaholo20</p>
-        <p><strong>Tiktok :</strong> _0_woody_0_</p>
-        <p><strong>Snapchat :</strong> kini-dauber</p>
-        <p><strong>Twitch :</strong> carag_2009</p>
+
+        <div class="contact-item">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/new-post.png" alt="Email">
+            <a href="mailto:maholo.contact@gmail.com">maholo.contact@gmail.com</a>
+        </div>
+
+        <div class="contact-item">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/discord-logo.png" alt="Discord">
+            <a href="https://discord.com/users/woody_2009" target="_blank">woody_2009</a>
+        </div>
+
+        <div class="contact-item">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram">
+            <a href="https://instagram.com/daubermaholo20" target="_blank">@daubermaholo20</a>
+        </div>
+
+        <div class="contact-item">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/tiktok.png" alt="TikTok">
+            <a href="https://www.tiktok.com/@_0_woody_0_" target="_blank">@_0_woody_0_</a>
+        </div>
+
+        <div class="contact-item">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/snapchat.png" alt="Snapchat">
+            <a href="https://www.snapchat.com/add/kini-dauber" target="_blank">@kini-dauber</a>
+        </div>
+
+        <div class="contact-item">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/twitch.png" alt="Twitch">
+            <a href="https://www.twitch.tv/carag_2009" target="_blank">@carag_2009</a>
+        </div>
+
     </section>
 
 </body>
