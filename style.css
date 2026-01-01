@@ -14,7 +14,7 @@ html, body {
 body {
     background: url('https://img.freepik.com/photos-premium/harmonie-hexagonale-abstrait-arriere-plan-hexagonal_957479-67404.jpg') no-repeat center center fixed;
     background-size: cover;
-    color: #ffffff; /* texte principal blanc */
+    color: #ffffff; /* texte principal blanc par défaut */
     overflow-x: hidden;
     position: relative;
 }
@@ -43,8 +43,8 @@ body::before {
 .navbar ul {
     list-style: none;
     display: flex;
-    justify-content: center; /* centre horizontalement */
-    align-items: center;     /* centre verticalement */
+    justify-content: center;
+    align-items: center;
     height: 60px;
     padding: 0;
     margin: 0;
@@ -56,7 +56,7 @@ body::before {
 
 .navbar ul li a {
     text-decoration: none;
-    color: #ffffff; /* lien blanc */
+    color: #ffffff; /* liens menu en blanc */
     font-weight: bold;
     font-size: 1.1rem;
     padding: 8px 15px;
@@ -65,14 +65,14 @@ body::before {
 }
 
 .navbar ul li a:hover {
-    background-color: rgba(255,255,255,0.2); /* léger fond blanc au hover */
+    background-color: rgba(255,255,255,0.2);
     transform: scale(1.1);
 }
 
 /* CONTENU PRINCIPAL CENTRÉ */
 .main-content {
     position: relative;
-    z-index: 1; 
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -83,33 +83,20 @@ body::before {
     animation: fadeIn 2s ease-out;
 }
 
-.main-content h1,
-.main-content h2,
-.main-content p {
-    color: #ffffff; /* tout le texte en blanc */
-}
-
 /* TITRES */
-.main-content h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
-    animation: slideDown 1s ease forwards;
-}
-
+.main-content h1,
 .main-content h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
-    animation: slideUp 1s ease forwards;
+    color: #ffffff; /* titres blancs */
 }
 
+/* PARAGRAPHES / sous-texte */
 .main-content p {
     font-size: 1.2rem;
     max-width: 700px;
     line-height: 1.6;
     margin-bottom: 20px;
     animation: fadeIn 2s ease forwards;
+    color: #87CEFA; /* bleu ciel */
 }
 
 /* ANIMATIONS */
@@ -128,18 +115,18 @@ body::before {
     100% {opacity: 1; transform: translateY(0);}
 }
 
-/* HOVER SUR LE TEXTE */
+/* HOVER SUR LES PARAGRAPHES */
 .main-content p:hover {
     transform: scale(1.02);
     transition: transform 0.3s ease;
-    color: #ffffff;
+    color: #ffffff; /* devient blanc au hover */
 }
 
 /* ==================== */
 /* RESPONSIVE TABLETTE / MOBILE */
 @media (max-width: 768px) {
     .navbar ul li {
-        margin: 0 10px; 
+        margin: 0 10px;
     }
 
     .main-content {
@@ -173,7 +160,7 @@ body::before {
     }
 
     .main-content {
-        padding-top: 70px; 
+        padding-top: 70px;
         padding-left: 10px;
         padding-right: 10px;
     }
