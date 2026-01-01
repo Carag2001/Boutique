@@ -1,17 +1,52 @@
 body {
     margin: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #ffffff;
-    color: #111;
+    font-family: Arial, sans-serif;
+}
+
+/* MENU */
+.navbar {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    z-index: 10;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
 }
 
 /* HERO */
 .hero {
     height: 100vh;
-    background: linear-gradient(to right, #000000, #1a1a1a);
+    background-image: url("https://png.pngtree.com/thumb_back/fw800/background/20230411/pngtree-nature-forest-sun-ecology-image_2256183.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+}
+
+.hero-content {
+    position: relative;
     color: white;
     text-align: center;
-    padding-top: 200px;
+    top: 40%;
 }
 
 .hero h1 {
@@ -21,53 +56,5 @@ body {
 
 .hero p {
     font-size: 20px;
-    opacity: 0.8;
-}
-
-.btn {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 15px 40px;
-    border: 1px solid white;
-    color: white;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    background-color: white;
-    color: black;
-}
-
-/* SECTIONS */
-section {
-    padding: 100px 20px;
-    text-align: center;
-}
-
-.about {
-    background-color: #f7f7f7;
-}
-
-.services {
-    background-color: #ffffff;
-}
-
-.service-box {
-    max-width: 500px;
-    margin: 40px auto;
-}
-
-/* CONTACT */
-.contact {
-    background-color: #111;
-    color: white;
-}
-
-/* FOOTER */
-footer {
-    padding: 30px;
-    text-align: center;
-    background-color: black;
-    color: white;
+    opacity: 0.9;
 }
