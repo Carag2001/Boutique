@@ -3,160 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Dauber Services - Accueil</title>
-    <style>
-        /* RESET */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body, html {
-            height: 100%;
-        }
-
-        body {
-            /* IMAGE DE FOND */
-            background: url('https://i.pinimg.com/originals/7b/a8/bc/7ba8bce9ba9249a679d605bb964be6fa.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: #fff;
-            overflow-x: hidden;
-        }
-
-        /* OVERLAY POUR AMÉLIORER LA LECTURE DU TEXTE */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.4); /* semi-transparent pour lisibilité */
-            z-index: 0;
-        }
-
-        /* MENU FIXE */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            background-color: rgba(0,0,0,0.7);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
-
-        .navbar ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            padding: 12px 0;
-        }
-
-        .navbar ul li {
-            margin: 0 20px;
-        }
-
-        .navbar ul li a {
-            text-decoration: none;
-            color: #fff;
-            font-weight: bold;
-            font-size: 1.1rem;
-            padding: 8px 15px;
-            transition: all 0.3s ease;
-            border-radius: 5px;
-        }
-
-        .navbar ul li a:hover {
-            background-color: #00bcd4;
-            transform: scale(1.1);
-        }
-
-        /* CONTENU PRINCIPAL CENTRÉ */
-        .main-content {
-            position: relative;
-            z-index: 1; /* au-dessus de l'overlay */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            min-height: 100vh;
-            padding: 120px 20px 20px;
-            animation: fadeIn 2s ease-out;
-        }
-
-        /* TITRES ET PARAGRAPHES */
-        .main-content h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: #00e5ff;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
-            animation: slideDown 1s ease forwards;
-        }
-
-        .main-content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: #00bfa5;
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
-            animation: slideUp 1s ease forwards;
-        }
-
-        .main-content p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            line-height: 1.6;
-            margin-bottom: 40px;
-            animation: fadeIn 2s ease forwards;
-        }
-
-        /* ANIMATIONS */
-        @keyframes fadeIn {
-            0% {opacity: 0;}
-            100% {opacity: 1;}
-        }
-
-        @keyframes slideDown {
-            0% {opacity: 0; transform: translateY(-50px);}
-            100% {opacity: 1; transform: translateY(0);}
-        }
-
-        @keyframes slideUp {
-            0% {opacity: 0; transform: translateY(50px);}
-            100% {opacity: 1; transform: translateY(0);}
-        }
-
-        /* HOVER SUR LE TEXTE */
-        .main-content p:hover {
-            transform: scale(1.02);
-            transition: transform 0.3s ease;
-            color: #00e5ff;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .navbar ul li {
-                margin: 0 10px;
-            }
-
-            .main-content h1 {
-                font-size: 2.2rem;
-            }
-
-            .main-content h2 {
-                font-size: 2rem;
-            }
-
-            .main-content p {
-                font-size: 1rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- MENU FIXE -->
     <nav class="navbar">
         <ul>
             <li><a href="index.html">Accueil</a></li>
@@ -168,18 +18,11 @@
         </ul>
     </nav>
 
-    <!-- CONTENU PRINCIPAL CENTRÉ -->
     <section class="main-content">
         <h1>Dauber Services</h1>
-        <p>
-            Bienvenue, ici vous pourrez trouver tous mes services ainsi que mes projets en cours...
-        </p>
+        <p>Bienvenue, ici vous pourrez trouver tous mes services ainsi que mes projets en cours...</p>
         <h2>DauberProjets</h2>
-        <p>
-            Salut ! Le projet de ce site est actuellement de vous faire part de mes services gratuitement. 
-            Des recrutements pour créer et fonder ce projet avec moi sont ouverts. 
-            Déposez votre candidature via mon mail que vous trouverez dans l'onglet Contact.
-        </p>
+        <p>Salut ! Le projet de ce site est actuellement de vous faire part de mes services gratuitement. Des recrutements pour créer et fonder ce projet avec moi sont ouverts. Déposez votre candidature via mon mail que vous trouverez dans l'onglet Contact.</p>
     </section>
 
 </body>
