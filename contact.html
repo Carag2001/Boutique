@@ -4,86 +4,82 @@
     <meta charset="UTF-8">
     <title>Dauber Services - Contact</title>
     <link rel="stylesheet" href="style.css">
+
     <style>
-        /* Contenu principal centré */
-        .main-content {
-            position: relative;
-            z-index: 1;
+        /* CONTAINER DES CARTES */
+        .contact-grid {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            text-align: center;
-            min-height: 100vh;
-            padding: 140px 20px 40px;
-            color: #ffffff;
-        }
-
-        .main-content h1, .main-content p {
-            color: #ffffff;
-        }
-
-        /* Styles pour les logos */
-        .contact-item {
-            display: flex;
-            align-items: center;
+            flex-wrap: wrap;
             justify-content: center;
-            margin: 15px 0;
-            font-size: 1.2rem;
+            gap: 30px;
+            margin-top: 40px;
         }
 
-        .contact-item img {
-            width: 36px;
-            height: 36px;
-            margin-right: 12px;
-            transition: transform 0.3s ease;
+        /* CARTE CONTACT (STYLE ARTICLE) */
+        .contact-card {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.4);
+            border-radius: 18px;
+            width: 260px;
+            padding: 25px 20px;
+            text-align: center;
+            color: #ffffff;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
         }
 
-        .contact-item img:hover {
-            transform: scale(1.2);
+        .contact-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 0 25px rgba(0,188,212,0.6);
         }
 
-        .contact-item a {
+        /* LOGO */
+        .contact-card img {
+            width: 55px;
+            height: 55px;
+            margin-bottom: 15px;
+        }
+
+        /* TITRE */
+        .contact-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        /* TEXTE */
+        .contact-card p {
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        /* LIEN */
+        .contact-card a {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 8px;
+            background-color: rgba(0,188,212,0.8);
             color: #ffffff;
             text-decoration: none;
-            transition: color 0.3s ease;
+            font-weight: bold;
+            transition: all 0.3s ease;
         }
 
-        .contact-item a:hover {
-            color: #00e5ff;
+        .contact-card a:hover {
+            background-color: #00e5ff;
+            transform: scale(1.05);
         }
 
-        /* Responsive */
+        /* RESPONSIVE */
         @media (max-width: 768px) {
-            .main-content {
-                padding: 120px 15px 20px;
-            }
-            .contact-item {
-                font-size: 1rem;
-            }
-            .contact-item img {
-                width: 30px;
-                height: 30px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .main-content {
-                padding: 100px 10px 20px;
-            }
-            .contact-item {
-                font-size: 0.9rem;
-                flex-direction: column;
-            }
-            .contact-item img {
-                margin: 0 0 8px 0;
+            .contact-card {
+                width: 90%;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- MENU FIXE -->
+    <!-- MENU -->
     <nav class="navbar">
         <ul>
             <li><a href="index.html">Accueil</a></li>
@@ -95,41 +91,62 @@
         </ul>
     </nav>
 
-    <!-- CONTENU PRINCIPAL -->
+    <!-- CONTENU -->
     <section class="main-content">
         <h1>Contact</h1>
-        <p>Vous pouvez me contacter facilement via ces plateformes :</p>
+        <p>Retrouve-moi facilement sur ces plateformes</p>
 
-        <div class="contact-item">
-            <img src="https://img.icons8.com/ios-filled/50/ffffff/new-post.png" alt="Email">
-            <a href="mailto:maholo.contact@gmail.com">maholo.contact@gmail.com</a>
+        <div class="contact-grid">
+
+            <!-- EMAIL -->
+            <div class="contact-card">
+                <img src="https://img.icons8.com/ios-filled/100/ffffff/new-post.png">
+                <h3>Email</h3>
+                <p>Contact professionnel</p>
+                <a href="mailto:maholo.contact@gmail.com">Envoyer un mail</a>
+            </div>
+
+            <!-- DISCORD -->
+            <div class="contact-card">
+                <img src="https://img.icons8.com/ios-filled/100/ffffff/discord-logo.png">
+                <h3>Discord</h3>
+                <p>woody_2009</p>
+                <a href="https://discord.com/users/woody_2009" target="_blank">Me contacter</a>
+            </div>
+
+            <!-- INSTAGRAM -->
+            <div class="contact-card">
+                <img src="https://img.icons8.com/ios-filled/100/ffffff/instagram-new.png">
+                <h3>Instagram</h3>
+                <p>@daubermaholo20</p>
+                <a href="https://instagram.com/daubermaholo20" target="_blank">Voir le profil</a>
+            </div>
+
+            <!-- TIKTOK -->
+            <div class="contact-card">
+                <img src="https://img.icons8.com/ios-filled/100/ffffff/tiktok.png">
+                <h3>TikTok</h3>
+                <p>@_0_woody_0_</p>
+                <a href="https://www.tiktok.com/@_0_woody_0_" target="_blank">Voir le profil</a>
+            </div>
+
+            <!-- SNAPCHAT -->
+            <div class="contact-card">
+                <img src="https://img.icons8.com/ios-filled/100/ffffff/snapchat.png">
+                <h3>Snapchat</h3>
+                <p>@kini-dauber</p>
+                <a href="https://www.snapchat.com/add/kini-dauber" target="_blank">Ajouter</a>
+            </div>
+
+            <!-- TWITCH -->
+            <div class="contact-card">
+                <img src="https://img.icons8.com/ios-filled/100/ffffff/twitch.png">
+                <h3>Twitch</h3>
+                <p>@carag_2009</p>
+                <a href="https://www.twitch.tv/carag_2009" target="_blank">Voir la chaîne</a>
+            </div>
+
         </div>
-
-        <div class="contact-item">
-            <img src="https://img.icons8.com/ios-filled/50/ffffff/discord-logo.png" alt="Discord">
-            <a href="https://discord.com/users/woody_2009" target="_blank">woody_2009</a>
-        </div>
-
-        <div class="contact-item">
-            <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram">
-            <a href="https://instagram.com/daubermaholo20" target="_blank">@daubermaholo20</a>
-        </div>
-
-        <div class="contact-item">
-            <img src="https://img.icons8.com/ios-filled/50/ffffff/tiktok.png" alt="TikTok">
-            <a href="https://www.tiktok.com/@_0_woody_0_" target="_blank">@_0_woody_0_</a>
-        </div>
-
-        <div class="contact-item">
-            <img src="https://img.icons8.com/ios-filled/50/ffffff/snapchat.png" alt="Snapchat">
-            <a href="https://www.snapchat.com/add/kini-dauber" target="_blank">@kini-dauber</a>
-        </div>
-
-        <div class="contact-item">
-            <img src="https://img.icons8.com/ios-filled/50/ffffff/twitch.png" alt="Twitch">
-            <a href="https://www.twitch.tv/carag_2009" target="_blank">@carag_2009</a>
-        </div>
-
     </section>
 
 </body>
