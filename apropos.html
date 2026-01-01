@@ -149,9 +149,7 @@ body::before {
 @keyframes slideDown { from {opacity:0; transform:translateY(-40px);} to {opacity:1; transform:translateY(0);} }
 
 /* ================= RESPONSIVE ================= */
-@media (max-width:768px) { 
-    .card, .value-item { width:80%; } 
-}
+@media (max-width:768px) { .card, .value-item { width:80%; } }
 @media (max-width:480px) {
     .navbar ul { flex-direction:column; height:auto; padding:10px 0; }
     .navbar ul li { margin:6px 0; }
@@ -178,8 +176,8 @@ body::before {
 <section class="main-content">
     <h1>À propos de Dauber Services</h1>
     <p>
-        Dauber Services est un projet collaboratif créé pour proposer des services gratuits et de qualité dans les domaines du développement, du design et de la gestion de serveurs Discord et FiveM.
-        Notre objectif est de partager nos projets, d'accompagner de nouveaux talents et d'inviter des collaborateurs à rejoindre l’aventure.
+        Dauber Services est un projet collaboratif pour proposer des services gratuits et de qualité dans le développement, le design et la gestion de serveurs Discord et FiveM.
+        Notre objectif est de partager nos projets et inviter des collaborateurs à rejoindre l’aventure.
     </p>
 
     <!-- MISSION -->
@@ -198,28 +196,50 @@ body::before {
 
     <!-- ÉQUIPE -->
     <h2>Notre Équipe</h2>
-    <div class="section-cards">
-        <div class="card">
-            <img src="https://i.pravatar.cc/100?img=1" alt="Maholo">
-            <h3>Maholo</h3>
-            <p>Fondateur & Développeur principal. Passionné par le développement et la création de projets innovants.</p>
-        </div>
-        <div class="card">
-            <img src="https://i.pravatar.cc/100?img=2" alt="Collaborateur">
-            <h3>Collaborateur 1</h3>
-            <p>Designer et Graphiste. Responsable de la charte graphique et de l’identité visuelle des projets.</p>
-        </div>
-        <div class="card">
-            <img src="https://i.pravatar.cc/100?img=3" alt="Collaborateur">
-            <h3>Collaborateur 2</h3>
-            <p>Développeur & Community Manager. Assure la communication et le développement des serveurs.</p>
-        </div>
-    </div>
+    <div class="section-cards" id="teamContainer"></div>
 
     <!-- CONTACT RAPIDE -->
     <h2>Nous Contacter</h2>
-    <p>Pour toute question, collaboration ou proposition de projet : <strong>Discord : woody_2009</strong></p>
+    <p>Pour toute question ou collaboration : <strong>Discord : woody_2009</strong></p>
 </section>
+
+<script>
+// ================= ÉQUIPE DYNAMIQUE =================
+const teamMembers = [
+    {
+        name: "Maholo",
+        role: "Fondateur & Développeur principal",
+        img: "https://media.discordapp.net/attachments/1456307286606872587/1456414479884751094/Snapchat-103871741.jpg?ex=6958472e&is=6956f5ae&hm=56a788b374eb6412abf68ef2fd489c1a686d477c967c911a717458f6af4b8ce4&=&format=webp&width=540&height=960",
+        desc: "Passionné par le développement et la création de projets innovants."
+    },
+    {
+        name: "A la Recherche",
+        role: "Designer & Graphiste",
+        img: "https://i.pravatar.cc/100?img=2",
+        desc: "Responsable de la charte graphique et de l’identité visuelle."
+    },
+    {
+        name: "A la Recherche",
+        role: "Développeur & Community Manager",
+        img: "https://i.pravatar.cc/100?img=3",
+        desc: "Assure la communication et le développement des serveurs."
+    }
+];
+
+// Générer automatiquement les cards
+const container = document.getElementById('teamContainer');
+teamMembers.forEach(member => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+        <img src="${member.img}" alt="${member.name}">
+        <h3>${member.name}</h3>
+        <p><strong>${member.role}</strong></p>
+        <p>${member.desc}</p>
+    `;
+    container.appendChild(card);
+});
+</script>
 
 </body>
 </html>
