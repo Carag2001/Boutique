@@ -2,237 +2,156 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>CRG Services - FiveM</title>
+<title>Dauber Services - FiveM</title>
 <style>
-/* ===== RESET ===== */
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
-html, body { height:100%; }
-
-/* ===== FOND ===== */
-body {
-    background: url('https://tse2.mm.bing.net/th/id/OIP.RDStdOWibsHTs0f08IQdUAHaEo?rs=1&pid=ImgDetMain&o=7&rm=3') no-repeat center center fixed;
-    background-size: cover;
-    color: #fff;
-    position: relative;
-}
-body::before {
-    content:'';
-    position: fixed; inset:0;
-    background: rgba(0,0,0,0.5);
-    z-index:0;
-}
-
-/* ===== NAVBAR ===== */
-.navbar {
-    position: fixed; top:0; width:100%; z-index:1000;
-    background: rgba(0,0,0,0.75); backdrop-filter: blur(6px);
-}
-.navbar ul {
-    display:flex; justify-content:center; align-items:center; height:65px;
-}
-.navbar li { margin:0 18px; }
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background:#111; color:#fff; min-height:100vh; padding-top:80px; }
+.navbar { position:fixed; top:0; width:100%; background:rgba(0,0,0,0.8); z-index:1000; display:flex; justify-content:center; padding:15px 0; }
+.navbar ul { list-style:none; display:flex; gap:20px; }
 .navbar a { color:#fff; text-decoration:none; font-weight:600; position:relative; }
-.navbar a::after {
-    content:''; position:absolute; bottom:-5px; left:0; width:0; height:2px; background:#fff; transition:0.3s;
-}
+.navbar a::after { content:''; position:absolute; bottom:-3px; left:0; width:0; height:2px; background:#00e5ff; transition:0.3s; }
 .navbar a:hover::after { width:100%; }
 
-/* ===== CONTENU ===== */
-.main-content { position:relative; z-index:1; padding:140px 20px 60px; text-align:center; }
-h1 { font-size:3rem; margin-bottom:10px; }
-p { margin-bottom:25px; opacity:0.9; }
+.main-content { max-width:1200px; margin:auto; padding:20px; }
+h1,h2,h3 { margin-bottom:15px; }
+h1 { font-size:2.8rem; text-align:center; }
+h2 { margin-top:40px; color:#00e5ff; }
+h3 { margin-bottom:8px; }
 
-/* ===== CATEGORIES ===== */
-.category {
-    margin: 30px 0 20px;
-}
-.category h2 {
-    font-size:2rem; margin-bottom:15px; cursor:pointer; text-decoration:underline;
-}
-.subcategory {
-    display:none; flex-direction:column; gap:15px; margin-bottom:20px;
-}
-.subcategory h3 { cursor:pointer; text-decoration:underline; }
-.items { display:none; flex-direction:column; gap:12px; margin-left:20px; }
+.category, .sub-category { margin-bottom:25px; }
+.item-card { background:rgba(255,255,255,0.08); padding:15px; border-radius:12px; margin-bottom:10px; border:1px solid rgba(0,229,255,0.3); display:flex; flex-direction:column; gap:5px; }
+.item-card:hover { transform:scale(1.03); box-shadow:0 0 15px #00e5ff; }
+.item-card button { align-self:flex-start; padding:5px 10px; border:none; border-radius:6px; cursor:pointer; background:#ff3b3b; color:#fff; display:none; }
+.item-card a { align-self:flex-start; padding:5px 10px; border-radius:6px; background:#00e5ff; color:#111; text-decoration:none; font-weight:600; display:none; }
 
-/* ===== ITEM CARD ===== */
-.item-card {
-    background: rgba(255,255,255,0.08);
-    border-radius: 12px; padding:12px 15px;
-    border:1px solid rgba(255,255,255,0.3);
-    backdrop-filter: blur(4px);
-    display:flex; justify-content:space-between; align-items:center;
-    transition:0.3s;
-}
-.item-card:hover { transform:scale(1.02); box-shadow:0 0 15px rgba(0,229,255,0.6); }
-.item-info { text-align:left; }
-.item-info h4 { margin-bottom:3px; }
-.item-info span { font-weight:bold; color:#00e5ff; }
-.item-actions button {
-    margin-left:10px;
-    padding:5px 10px;
-    border:none; border-radius:6px; cursor:pointer;
-    font-weight:bold; color:#fff;
-    background: linear-gradient(135deg,#00e5ff,#0066ff);
-    transition:0.3s;
-}
-.item-actions button:hover { transform:scale(1.05); }
+.admin-btn { display:block; margin:20px auto; padding:10px 20px; background:#00e5ff; color:#111; border:none; border-radius:20px; cursor:pointer; font-weight:600; }
+.admin-form { display:none; max-width:400px; margin:20px auto; background:rgba(0,0,0,0.6); padding:20px; border-radius:12px; }
+.admin-form input, .admin-form select, .admin-form textarea, .admin-form button { width:100%; margin-bottom:10px; padding:8px; border-radius:6px; border:none; }
+.admin-form button { background:#00e5ff; color:#111; font-weight:600; cursor:pointer; }
 
-/* ===== ADMIN FORM ===== */
-.admin-form {
-    display:none; margin:20px auto; max-width:350px;
-    background: rgba(0,0,0,0.6); padding:20px; border-radius:15px;
-}
-.admin-form input, .admin-form select { width:100%; margin-bottom:10px; padding:8px; border-radius:6px; border:none; }
-.admin-form button { width:100%; padding:10px; border-radius:20px; border:none; background:#00e5ff; font-weight:bold; cursor:pointer; margin-bottom:5px; }
-.admin-form button:hover { background:#00bcd4; }
-
-/* ===== RESPONSIVE ===== */
-@media(max-width:768px) { .item-card { flex-direction:column; align-items:flex-start; } }
+@media(max-width:768px){ .navbar ul { flex-direction:column; gap:10px; } }
 </style>
 </head>
 <body>
 
 <nav class="navbar">
-    <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="presentation.html">Présentation</a></li>
-        <li><a href="boutique.html">Boutique</a></li>
-        <li><a href="offre.html">Offre</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="apropos.html">À propos</a></li>
-        <li><a href="fivem.html">FiveM</a></li>
-    </ul>
+<ul>
+<li><a href="index.html">Accueil</a></li>
+<li><a href="presentation.html">Présentation</a></li>
+<li><a href="boutique.html">Boutique</a></li>
+<li><a href="offre.html">Offre</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a href="apropos.html">À propos</a></li>
+<li><a href="fivem.html">FiveM</a></li>
+</ul>
 </nav>
 
 <section class="main-content">
-    <h1>FiveM - Catégories</h1>
-    <p>Explore les scripts, mappings et véhicules pour FiveM. Les articles gratuits peuvent être téléchargés directement.</p>
+<h1>Catégorie FiveM</h1>
 
-    <!-- ADMIN BUTTON -->
-    <button onclick="askAdminPassword()" style="margin-bottom:20px;padding:10px 20px;border:none;border-radius:10px;font-weight:bold;cursor:pointer;background:#00e5ff;color:#fff;">Ajouter un article</button>
+<div id="container"></div>
 
-    <!-- ADMIN FORM -->
-    <div class="admin-form" id="adminForm">
-        <input id="itemName" placeholder="Nom de l'article">
-        <input id="itemCategory" placeholder="Catégorie (Scripts, Mappings, Voitures)">
-        <input id="itemSubCategory" placeholder="Sous-catégorie (Police, Urgence...)">
-        <input id="itemType" placeholder="Type (Gratuit ou Payant)">
-        <input id="itemPrice" placeholder="Prix (€)">
-        <input id="itemLink" placeholder="Lien téléchargement si gratuit">
-        <button onclick="addItem()">Ajouter</button>
-        <button onclick="hideAdminForm()">Annuler</button>
-    </div>
+<button class="admin-btn" onclick="askPassword()">Ajouter un item</button>
 
-    <div id="categoriesContainer"></div>
+<div class="admin-form" id="adminForm">
+<input id="name" placeholder="Nom de l'item">
+<select id="category">
+  <option value="Scripts">Scripts</option>
+  <option value="Mappings">Mappings</option>
+  <option value="Voitures">Voitures</option>
+</select>
+<select id="subCategory">
+  <option value="Police">Police</option>
+  <option value="Urgence">Urgence</option>
+  <option value="Gouvernement">Gouvernement</option>
+  <option value="Civils">Civils</option>
+  <option value="Sport">Sport</option>
+  <option value="Utilitaires">Utilitaires</option>
+</select>
+<select id="type">
+  <option value="Gratuit">Gratuit</option>
+  <option value="Payant">Payant</option>
+</select>
+<input id="price" placeholder="Prix si payant (ex: 5€)">
+<input id="link" placeholder="Lien téléchargement si gratuit">
+<button onclick="addItem()">Ajouter</button>
+</div>
 </section>
 
 <script>
-const ADMIN_PASSWORD = "Maholo_56100";
+const PASSWORD = "Maholo_56100";
 let isAdmin = false;
-let items = JSON.parse(localStorage.getItem("fivemItems")) || [];
 
-function saveItems(){ localStorage.setItem("fivemItems", JSON.stringify(items)); }
+let items = JSON.parse(localStorage.getItem("fivemItems")) || [
+  {name:"", category:"Scripts", subCategory:"Police", type:"", price:"", link:""},
+  {name:"", category:"Mappings", subCategory:"Gouvernement", type:"", price:"", link:""},
+  {name:"", category:"Voitures", subCategory:"Sport", type:"", price:"", link:""}
+];
+
+const container = document.getElementById("container");
 
 function render(){
-    const container = document.getElementById("categoriesContainer");
-    container.innerHTML = "";
-
-    // Group by category and subcategory
-    const grouped = {};
-    items.forEach(it=>{
-        if(!grouped[it.category]) grouped[it.category] = {};
-        if(!grouped[it.category][it.subCategory]) grouped[it.category][it.subCategory] = [];
-        grouped[it.category][it.subCategory].push(it);
+  container.innerHTML = "";
+  const categories = [...new Set(items.map(i=>i.category))];
+  categories.forEach(cat=>{
+    const catDiv = document.createElement("div");
+    catDiv.className="category";
+    const h2 = document.createElement("h2"); h2.textContent=cat; catDiv.appendChild(h2);
+    
+    const subCats = [...new Set(items.filter(i=>i.category===cat).map(i=>i.subCategory))];
+    subCats.forEach(sub=>{
+      const subDiv = document.createElement("div");
+      subDiv.className="sub-category";
+      const h3 = document.createElement("h3"); h3.textContent=sub; subDiv.appendChild(h3);
+      
+      items.filter(i=>i.category===cat && i.subCategory===sub).forEach((item,iIndex)=>{
+        if(!item.name) return;
+        const div = document.createElement("div");
+        div.className="item-card";
+        div.innerHTML = `
+          <strong>${item.name}</strong>
+          <p>Type: ${item.type}${item.type==="Payant"?" - Prix: "+item.price:""}</p>
+          <a href="${item.link}" target="_blank">Télécharger</a>
+          <button onclick="removeItem(${items.indexOf(item)})">Supprimer</button>
+        `;
+        if(item.type==="Gratuit") div.querySelector("a").style.display="inline-block";
+        if(isAdmin) div.querySelector("button").style.display="inline-block";
+        subDiv.appendChild(div);
+      });
+      catDiv.appendChild(subDiv);
     });
-
-    for(const cat in grouped){
-        const catDiv = document.createElement("div");
-        catDiv.className="category";
-        const catTitle = document.createElement("h2");
-        catTitle.textContent = cat;
-        catDiv.appendChild(catTitle);
-
-        const subContainer = document.createElement("div");
-        subContainer.className="subcategory";
-
-        catTitle.onclick = ()=>{ subContainer.style.display = subContainer.style.display==="flex"?"none":"flex"; };
-
-        for(const sub in grouped[cat]){
-            const subDiv = document.createElement("div");
-            subDiv.className="subcategory-block";
-            const subTitle = document.createElement("h3");
-            subTitle.textContent = sub;
-            subDiv.appendChild(subTitle);
-
-            const itemsDiv = document.createElement("div");
-            itemsDiv.className="items";
-            subTitle.onclick = ()=>{ itemsDiv.style.display = itemsDiv.style.display==="flex"?"none":"flex"; };
-
-            grouped[cat][sub].forEach(it=>{
-                const itemCard = document.createElement("div");
-                itemCard.className="item-card";
-                itemCard.innerHTML = `
-                    <div class="item-info">
-                        <h4>${it.name}</h4>
-                        <span>${it.type==="Gratuit"?it.type+" - Téléchargable":it.type+" - "+it.price+"€"}</span>
-                    </div>
-                    <div class="item-actions">
-                        ${isAdmin?'<button onclick="removeItem('+items.indexOf(it)+')">Supprimer</button>':''}
-                        ${it.type==="Gratuit"?'<button onclick="window.open(\''+it.link+'\',\'_blank\')">Télécharger</button>':''}
-                    </div>
-                `;
-                itemsDiv.appendChild(itemCard);
-            });
-
-            subDiv.appendChild(itemsDiv);
-            subContainer.appendChild(subDiv);
-        }
-
-        catDiv.appendChild(subContainer);
-        container.appendChild(catDiv);
-    }
+    container.appendChild(catDiv);
+  });
 }
 
-function askAdminPassword(){
-    const pass = prompt("Mot de passe admin :");
-    if(pass === ADMIN_PASSWORD){
-        isAdmin = true;
-        document.getElementById("adminForm").style.display="block";
-        render();
-    } else { alert("Mot de passe incorrect"); }
+function askPassword(){
+  const pass = prompt("Mot de passe admin :");
+  if(pass===PASSWORD){ isAdmin=true; document.getElementById("adminForm").style.display="block"; render(); }
+  else alert("Mot de passe incorrect");
 }
-
-function hideAdminForm(){ document.getElementById("adminForm").style.display="none"; }
 
 function addItem(){
-    const name = document.getElementById("itemName").value;
-    const category = document.getElementById("itemCategory").value;
-    const subCategory = document.getElementById("itemSubCategory").value;
-    const type = document.getElementById("itemType").value;
-    const price = document.getElementById("itemPrice").value;
-    const link = document.getElementById("itemLink").value;
-
-    if(!name||!category||!subCategory||!type||(type==="Payant"&&!price)) return alert("Remplir tous les champs");
-
-    items.push({name,category,subCategory,type,price:price||"0",link});
-    saveItems();
-    render();
-    hideAdminForm();
-    document.getElementById("itemName").value="";
-    document.getElementById("itemCategory").value="";
-    document.getElementById("itemSubCategory").value="";
-    document.getElementById("itemType").value="";
-    document.getElementById("itemPrice").value="";
-    document.getElementById("itemLink").value="";
+  const newItem = {
+    name: document.getElementById("name").value,
+    category: document.getElementById("category").value,
+    subCategory: document.getElementById("subCategory").value,
+    type: document.getElementById("type").value,
+    price: document.getElementById("price").value,
+    link: document.getElementById("link").value
+  };
+  if(!newItem.name || !newItem.category || !newItem.subCategory || !newItem.type || (newItem.type==="Payant" && !newItem.price) || (newItem.type==="Gratuit" && !newItem.link))
+    return alert("Remplir tous les champs correctement !");
+  items.push(newItem);
+  localStorage.setItem("fivemItems", JSON.stringify(items));
+  render();
 }
 
 function removeItem(i){
-    if(confirm("Supprimer cet article ?")){
-        items.splice(i,1);
-        saveItems();
-        render();
-    }
+  if(confirm("Supprimer cet item ?")){
+    items.splice(i,1);
+    localStorage.setItem("fivemItems", JSON.stringify(items));
+    render();
+  }
 }
 
 render();
