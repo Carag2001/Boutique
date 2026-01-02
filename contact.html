@@ -2,191 +2,146 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>CRG Services - Contact</title>
-<style>
-/* ================= RESET ================= */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-html, body { height: 100%; }
+<title>Dauber Services - Contact</title>
 
-/* ================= FOND ================= */
+<style>
+/* RESET */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+html, body {height:100%;}
+
+/* FOND */
 body {
-    background: url('https://tse2.mm.bing.net/th/id/OIP.RDStdOWibsHTs0f08IQdUAHaEo?rs=1&pid=ImgDetMain&o=7&rm=3')
-                no-repeat center center fixed;
+    background: url('https://img.freepik.com/photos-premium/fond-neon-futuriste_1048-12604.jpg')
+        no-repeat center center fixed;
     background-size: cover;
-    color: #fff;
+    color:#fff;
     position: relative;
 }
 body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.45);
-    z-index: 0;
+    content:'';
+    position:fixed;
+    inset:0;
+    background: rgba(0,0,0,0.55);
+    z-index:0;
 }
 
-/* ================= NAVBAR ================= */
+/* NAVBAR */
 .navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:1000;
     background: rgba(0,0,0,0.75);
     backdrop-filter: blur(6px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
 }
 .navbar ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 65px;
+    list-style:none;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:65px;
 }
-.navbar li { margin: 0 18px; }
+.navbar li { margin:0 18px; }
 .navbar a {
-    position: relative;
-    text-decoration: none;
-    color: #fff;
-    font-size: 1.1rem;
-    font-weight: 600;
-    padding: 8px 6px;
-    transition: all 0.3s ease;
+    color:#fff;
+    text-decoration:none;
+    font-weight:600;
+    position:relative;
 }
 .navbar a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    width: 0;
-    height: 2px;
-    background: #fff;
-    transition: width 0.3s ease;
+    content:'';
+    position:absolute;
+    bottom:-5px;
+    left:0;
+    width:0;
+    height:2px;
+    background:#fff;
+    transition:0.3s;
 }
-.navbar a:hover::after { width: 100%; }
-.navbar a:hover { text-shadow: 0 0 10px rgba(255,255,255,0.8); transform: translateY(-2px); }
+.navbar a:hover::after { width:100%; }
 
-/* ================= CONTENU ================= */
+/* CONTENU */
 .main-content {
-    position: relative;
-    z-index: 1;
-    min-height: 100vh;
-    padding: 140px 20px 60px;
-    text-align: center;
+    position:relative;
+    z-index:1;
+    text-align:center;
+    padding:140px 20px 60px;
 }
-.main-content h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    animation: slideDown 1s ease;
-    text-shadow: 0 0 15px rgba(0,0,0,0.8);
-}
-.main-content p {
-    max-width: 900px;
-    margin: 0 auto 30px;
-    font-size: 1.15rem;
-    line-height: 1.8;
-    animation: fadeIn 1.5s ease;
-}
+.main-content h1 { font-size:3rem; margin-bottom:15px; }
+.main-content p { font-size:1.1rem; margin-bottom:40px; opacity:0.9; }
 
-/* ================= CARDS CONTACT ================= */
+/* CONTACT GRID */
 .contact-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 40px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:30px;
 }
 .contact-card {
-    width: 260px;
-    padding: 25px 20px;
+    width:260px;
+    padding:25px;
     background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.4);
-    border-radius: 18px;
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,0.4);
     backdrop-filter: blur(6px);
-    text-align: center;
-    color: #fff;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    transition: all 0.3s ease;
+    box-shadow:0 10px 25px rgba(0,0,0,0.5);
+    transition:0.3s;
+    text-align:center;
 }
 .contact-card:hover {
-    transform: translateY(-8px) scale(1.05);
-    box-shadow: 0 0 25px rgba(0,188,212,0.6);
+    transform:translateY(-8px) scale(1.05);
+    box-shadow:0 0 30px rgba(0,188,212,0.6);
 }
-.contact-card img {
-    width: 55px;
-    height: 55px;
-    margin-bottom: 15px;
-}
-.contact-card h3 {
-    font-size: 1.4rem;
-    margin-bottom: 10px;
-}
-.contact-card p {
-    font-size: 1rem;
-    margin-bottom: 15px;
-}
+.contact-card img { width:55px; height:55px; margin-bottom:15px; }
+.contact-card h3 { font-size:1.4rem; margin-bottom:10px; }
+.contact-card p { font-size:1rem; margin-bottom:15px; }
 .contact-card a {
-    display: inline-block;
-    padding: 8px 15px;
-    border-radius: 8px;
-    background-color: rgba(0,188,212,0.8);
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    transition: all 0.3s ease;
+    display:inline-block;
+    padding:8px 15px;
+    border-radius:8px;
+    background: rgba(0,188,212,0.8);
+    color:#fff;
+    font-weight:bold;
+    text-decoration:none;
+    transition:0.3s;
 }
-.contact-card a:hover {
-    background-color: #00e5ff;
-    transform: scale(1.05);
-}
+.contact-card a:hover { background:#00e5ff; transform:scale(1.05); }
 
-/* ================= ANIMATIONS ================= */
-@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
-@keyframes slideDown { from {opacity:0; transform:translateY(-40px);} to {opacity:1; transform:translateY(0);} }
-
-/* ================= RESPONSIVE ================= */
-@media (max-width:768px) { .contact-card { width: 90%; } }
-@media (max-width:480px) {
-    .navbar ul { flex-direction: column; height:auto; padding:10px 0; }
-    .navbar ul li { margin:6px 0; }
-    .main-content { padding-top:160px; }
-    .main-content h1 { font-size:1.8rem; }
-}
+/* RESPONSIVE */
+@media(max-width:768px) { .contact-card { width:90%; } }
 </style>
 </head>
+
 <body>
 
-<!-- NAVBAR -->
 <nav class="navbar">
     <ul>
         <li><a href="index.html">Accueil</a></li>
         <li><a href="presentation.html">Présentation</a></li>
+        <li><a href="fivem.html">FiveM</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="apropos.html">À propos</a></li>
     </ul>
 </nav>
 
-<!-- CONTENU -->
 <section class="main-content">
     <h1>Contact</h1>
-    <p>Retrouve-moi facilement sur ces plateformes</p>
+    <p>Retrouve-moi facilement sur ces plateformes :</p>
 
     <div class="contact-grid">
-        <div class="contact-card">
-            <img src="https://img.icons8.com/ios-filled/100/ffffff/discord-logo.png">
-            <h3>Serveur Discord</h3>
-            <p>Contact Direct</p>
-            <a href="https://discord.gg/QXz2mZPtkR">Rejoindre</a>
-        </div>
 
         <div class="contact-card">
             <img src="https://img.icons8.com/ios-filled/100/ffffff/discord-logo.png">
             <h3>Discord Privé</h3>
             <p>woody_2009</p>
             <a href="https://discord.com/users/woody_2009" target="_blank">Me contacter</a>
+        </div>
+
+        <div class="contact-card">
+            <img src="https://img.icons8.com/ios-filled/100/ffffff/discord-logo.png">
+            <h3>Serveur Discord</h3>
+            <p>Contact direct</p>
+            <a href="https://discord.gg/QXz2mZPtkR">Rejoindre le serveur</a>
         </div>
 
         <div class="contact-card">
@@ -216,6 +171,7 @@ body::before {
             <p>@carag_2009</p>
             <a href="https://www.twitch.tv/carag_2009" target="_blank">Voir la chaîne</a>
         </div>
+
     </div>
 </section>
 
