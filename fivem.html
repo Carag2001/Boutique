@@ -8,7 +8,7 @@
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 html,body{height:100%; color:#fff;}
 body {
-  background: url('https://img.freepik.com/photos-premium/fond-neon-futuriste_1048-12604.jpg') no-repeat center center fixed;
+  background: url('https://img.freepik.com/photos-premium/harmonie-hexagonale-abstrait-arriere-plan-hexagonal_957479-67404.jpg') no-repeat center center fixed;
   background-size: cover;
   position: relative;
 }
@@ -102,14 +102,15 @@ body::before { content:''; position:fixed; inset:0; background: rgba(0,0,0,0.45)
 
 <script>
 const PASSWORD = "Maholo_56100";
-let isAdmin = false;
+let isAdmin=false;
 let items = JSON.parse(localStorage.getItem("fivemItems")) || [];
 let filter = "";
 
 function render() {
     const container = document.getElementById("items");
     container.innerHTML = "";
-    items.filter(i => !filter || i.type === filter).forEach((i, idx) => {
+    items.filter(i => !filter || i.type === filter)
+         .forEach((i, idx) => {
         const card = document.createElement("div");
         card.className = "item-card";
         card.innerHTML = `
@@ -126,7 +127,7 @@ function render() {
     });
 }
 
-function filterType(t){ filter = t; render(); }
+function filterType(t){ filter=t; render(); }
 
 function askPassword() {
     if(prompt("Mot de passe admin :") === PASSWORD) {
@@ -163,15 +164,18 @@ function addItem() {
         link: linkEl.value.trim()
     };
 
-    if(!item.name || !item.desc) return alert("Veuillez remplir le nom et la description !");
+    if(!item.name || !item.desc) return alert("Nom et description obligatoires !");
     if(item.priceType==="Payant" && !item.price) return alert("Indiquez un prix pour la ressource payante !");
-    if(item.priceType==="Gratuit" && !item.link) return alert("Mettez un lien de téléchargement pour la ressource gratuite !");
+    if(item.priceType==="Gratuit" && !item.link) return alert("Mettez un lien pour la ressource gratuite !");
 
     items.push(item);
     localStorage.setItem("fivemItems", JSON.stringify(items));
+
+    // Afficher uniquement dans sa catégorie
+    filter = item.type;
     render();
 
-    // Reset form
+    // reset form
     nameEl.value=""; descEl.value=""; imgEl.value=""; priceEl.value=""; linkEl.value="";
 }
 
