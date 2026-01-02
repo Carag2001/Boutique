@@ -3,35 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <title>Dauber Services - À propos</title>
+
 <style>
-/* ================= RESET ================= */
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+/* RESET */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
 html, body { height:100%; }
 
-/* ================= FOND ================= */
+/* FOND */
 body {
-    background: url('https://tse2.mm.bing.net/th/id/OIP.RDStdOWibsHTs0f08IQdUAHaEo?rs=1&pid=ImgDetMain&o=7&rm=3') no-repeat center center fixed;
+    background: url('https://img.freepik.com/photos-premium/fond-hexagonal-futuriste_1048-16573.jpg')
+        no-repeat center center fixed;
     background-size: cover;
-    color: #fff;
-    position: relative;
+    color:#fff;
+    position:relative;
 }
 body::before {
     content:'';
-    position: fixed;
+    position:fixed;
     inset:0;
-    background: rgba(0,0,0,0.45);
+    background: rgba(0,0,0,0.55);
     z-index:0;
 }
 
-/* ================= NAVBAR ================= */
+/* NAVBAR */
 .navbar {
-    position: fixed;
+    position:fixed;
     top:0;
     width:100%;
     z-index:1000;
     background: rgba(0,0,0,0.75);
     backdrop-filter: blur(6px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
 }
 .navbar ul {
     list-style:none;
@@ -42,202 +43,94 @@ body::before {
 }
 .navbar li { margin:0 18px; }
 .navbar a {
-    position:relative;
-    text-decoration:none;
     color:#fff;
-    font-size:1.1rem;
+    text-decoration:none;
     font-weight:600;
-    padding:8px 6px;
-    transition: all 0.3s ease;
+    position:relative;
 }
 .navbar a::after {
     content:'';
     position:absolute;
+    bottom:-5px;
     left:0;
-    bottom:-4px;
     width:0;
     height:2px;
     background:#fff;
-    transition: width 0.3s ease;
+    transition:0.3s;
 }
 .navbar a:hover::after { width:100%; }
-.navbar a:hover { text-shadow:0 0 10px rgba(255,255,255,0.8); transform:translateY(-2px); }
 
-/* ================= CONTENU ================= */
+/* CONTENU */
 .main-content {
     position:relative;
     z-index:1;
-    min-height:100vh;
-    padding:140px 20px 60px;
     text-align:center;
+    padding:140px 20px 60px;
 }
-.main-content h1 {
-    font-size:3rem;
-    margin-bottom:20px;
-    animation:slideDown 1s ease;
-    text-shadow:0 0 15px rgba(0,0,0,0.8);
-}
-.main-content p {
-    max-width:900px;
-    margin:0 auto 30px;
-    font-size:1.15rem;
-    line-height:1.8;
-    animation:fadeIn 1.5s ease;
-}
-.main-content h2 {
-    margin:50px 0 30px;
-    font-size:2.1rem;
-    text-shadow:0 0 12px rgba(0,0,0,0.7);
-}
+.main-content h1 { font-size:3rem; margin-bottom:20px; }
+.main-content p { font-size:1.1rem; line-height:1.8; max-width:900px; margin:0 auto 40px; opacity:0.9; }
 
-/* ================= CARDS ================= */
-.section-cards {
+/* CARDS */
+.cards {
     display:flex;
     flex-wrap:wrap;
     justify-content:center;
     gap:30px;
-    margin-top:30px;
 }
 .card {
     width:260px;
-    padding:30px 22px;
     background: rgba(255,255,255,0.08);
-    border:1px solid rgba(255,255,255,0.4);
     border-radius:18px;
-    backdrop-filter:blur(6px);
-    text-align:center;
+    padding:25px;
+    border:1px solid rgba(255,255,255,0.4);
+    backdrop-filter: blur(6px);
     box-shadow:0 10px 30px rgba(0,0,0,0.5);
-    transition: all 0.35s ease;
+    transition:0.35s;
 }
-.card:hover {
-    transform: translateY(-8px) scale(1.06);
-    box-shadow:0 0 25px rgba(0,188,212,0.3);
-}
-.card img {
-    width:80px;
-    height:80px;
-    border-radius:50%;
-    margin-bottom:15px;
-}
-.card h3 { margin-bottom:10px; font-size:1.4rem; }
+.card:hover { transform:translateY(-8px) scale(1.06); box-shadow:0 0 25px rgba(0,229,255,0.5); }
+.card h3 { margin-bottom:15px; font-size:1.4rem; }
 .card p { font-size:1rem; line-height:1.6; }
 
-/* ================= LISTE VALEURS ================= */
-.values-list {
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:25px;
-    margin-top:30px;
-}
-.value-item {
-    background: rgba(0,188,212,0.1);
-    padding:20px;
-    border-radius:15px;
-    width:220px;
-    transition: all 0.3s ease;
-    text-align:center;
-    border:1px solid rgba(255,255,255,0.3);
-}
-.value-item:hover {
-    transform: translateY(-5px) scale(1.05);
-    background: rgba(0,188,212,0.25);
-}
-
-/* ================= ANIMATIONS ================= */
-@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
-@keyframes slideDown { from {opacity:0; transform:translateY(-40px);} to {opacity:1; transform:translateY(0);} }
-
-/* ================= RESPONSIVE ================= */
-@media (max-width:768px) { .card, .value-item { width:80%; } }
-@media (max-width:480px) {
-    .navbar ul { flex-direction:column; height:auto; padding:10px 0; }
-    .navbar ul li { margin:6px 0; }
-    .main-content { padding-top:160px; }
-    .main-content h1 { font-size:1.8rem; }
-}
+/* RESPONSIVE */
+@media(max-width:768px) { .card { width:85%; } }
 </style>
 </head>
+
 <body>
 
-<!-- NAVBAR -->
 <nav class="navbar">
     <ul>
         <li><a href="index.html">Accueil</a></li>
         <li><a href="presentation.html">Présentation</a></li>
+        <li><a href="fivem.html">FiveM</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="apropos.html">À propos</a></li>
     </ul>
 </nav>
 
-<!-- CONTENU -->
 <section class="main-content">
-    <h1>À propos de CRG Services</h1>
+    <h1>À propos de Dauber Services</h1>
     <p>
-        Dauber Services est un projet collaboratif pour proposer des services gratuits et de qualité dans le développement, le design et la gestion de serveurs Discord et FiveM.
-        Notre objectif est de partager nos projets et inviter des collaborateurs à rejoindre l’aventure.
+        Dauber Services est un projet dédié à la création et au partage de ressources FiveM.
+        Nous proposons des scripts, maps, véhicules et autres assets pour enrichir vos serveurs.
+        Notre objectif est de faciliter la collaboration et d’offrir des contenus gratuits et premium à la communauté.
     </p>
 
-    <!-- MISSION -->
-    <h2>Notre Mission</h2>
-    <p>Offrir des solutions créatives et techniques pour tous les projets, en favorisant l’entraide et la collaboration dans un environnement ouvert et respectueux.</p>
-
-    <!-- VALEURS -->
-    <h2>Nos Valeurs</h2>
-    <div class="values-list">
-        <div class="value-item">Collaboration</div>
-        <div class="value-item">Créativité</div>
-        <div class="value-item">Innovation</div>
-        <div class="value-item">Transparence</div>
-        <div class="value-item">Accessibilité</div>
+    <div class="cards">
+        <div class="card">
+            <h3>Notre Vision</h3>
+            <p>Créer un espace collaboratif où les développeurs et créateurs partagent leurs projets et compétences.</p>
+        </div>
+        <div class="card">
+            <h3>Nos Valeurs</h3>
+            <p>Transparence, accessibilité et qualité. Chaque contenu est pensé pour être utile et professionnel.</p>
+        </div>
+        <div class="card">
+            <h3>Collaboration</h3>
+            <p>Ouvert aux collaborations, suggestions et recrutements pour développer des projets ambitieux.</p>
+        </div>
     </div>
-
-    <!-- ÉQUIPE -->
-    <h2>Notre Équipe</h2>
-    <div class="section-cards" id="teamContainer"></div>
-
-    <!-- CONTACT RAPIDE -->
-    <h2>Nous Contacter</h2>
-    <p>Pour toute question ou collaboration : <strong>Discord : woody_2009</strong></p>
 </section>
-
-<script>
-// ================= ÉQUIPE DYNAMIQUE =================
-const teamMembers = [
-    {
-        name: "Maholo",
-        role: "Fondateur & Développeur principal",
-        img: "https://media.discordapp.net/attachments/1456307286606872587/1456415380237979658/Snapchat-1038717412.jpg?ex=69584805&is=6956f685&hm=601ccab36099480507b62c5ffdab4f405dfd34c60cc99e45115300d8692317d4&=&format=webp&width=905&height=960",
-        desc: "Passionné par le développement et la création de projets innovants."
-    },
-    {
-        name: "A la Recherche",
-        role: "Designer & Graphiste",
-        img: "https://i.pravatar.cc/100?img=2",
-        desc: "Responsable de la charte graphique et de l’identité visuelle."
-    },
-    {
-        name: "A la Recherche",
-        role: "Développeur & Community Manager",
-        img: "https://i.pravatar.cc/100?img=3",
-        desc: "Assure la communication et le développement des serveurs."
-    }
-];
-
-// Générer automatiquement les cards
-const container = document.getElementById('teamContainer');
-teamMembers.forEach(member => {
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = `
-        <img src="${member.img}" alt="${member.name}">
-        <h3>${member.name}</h3>
-        <p><strong>${member.role}</strong></p>
-        <p>${member.desc}</p>
-    `;
-    container.appendChild(card);
-});
-</script>
 
 </body>
 </html>
