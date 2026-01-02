@@ -7,23 +7,13 @@
 <style>
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 html,body{height:100%; color:#fff;}
-
-/* ================= FOND ================= */
 body {
-  background: url('https://img.freepik.com/photos-premium/harmonie-hexagonale-abstrait-arriere-plan-hexagonal_957479-67404.jpg')
-  no-repeat center center fixed;
+  background: url('https://img.freepik.com/photos-premium/harmonie-hexagonale-abstrait-arriere-plan-hexagonal_957479-67404.jpg') no-repeat center center fixed;
   background-size: cover;
   position: relative;
 }
-body::before {
-  content:'';
-  position:fixed;
-  inset:0;
-  background: rgba(0,0,0,0.45);
-  z-index:0;
-}
+body::before { content:''; position:fixed; inset:0; background: rgba(0,0,0,0.45); z-index:0; }
 
-/* ================= NAVBAR ================= */
 .navbar{position:fixed;top:0;width:100%;z-index:1000;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);}
 .navbar ul{list-style:none;display:flex;justify-content:center;align-items:center;height:65px;}
 .navbar li{margin:0 18px;}
@@ -31,17 +21,14 @@ body::before {
 .navbar a::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;background:#fff;transition:.3s;}
 .navbar a:hover::after{width:100%;}
 
-/* ================= MAIN CONTENT ================= */
 .main-content{position:relative;z-index:1;padding:140px 20px 60px;text-align:center;}
 .main-content h1{font-size:3rem;margin-bottom:10px;text-shadow:0 0 15px rgba(0,0,0,0.7);}
 .main-content p{margin-bottom:25px;font-size:1.1rem;opacity:.9;}
 
-/* ================= CATEGORY BUTTONS ================= */
 .category-buttons{display:flex;gap:20px;justify-content:center;margin:30px 0;flex-wrap:wrap;}
 .cat-btn{padding:14px 30px;border-radius:30px;border:none;cursor:pointer;font-weight:bold;color:#fff;background:linear-gradient(135deg,#00e5ff,#0066ff);box-shadow:0 0 15px rgba(0,229,255,0.6);transition:.3s;}
 .cat-btn:hover{transform:scale(1.1);}
 
-/* ================= ITEM CARDS ================= */
 .items{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;}
 .item-card{width:260px;background:rgba(255,255,255,.08);border-radius:18px;padding:20px;border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(6px);box-shadow:0 10px 25px rgba(0,0,0,.6);transition:.35s;position:relative;}
 .item-card:hover{transform:translateY(-8px) scale(1.05);box-shadow:0 0 35px rgba(0,229,255,.5);}
@@ -51,7 +38,6 @@ body::before {
 .download-btn{display:inline-block;margin-top:10px;padding:8px 15px;background:#00e5ff;color:#000;font-weight:bold;border-radius:20px;text-decoration:none;}
 .delete-btn{display:none;position:absolute;top:10px;right:10px;background:#ff3b3b;border:none;color:#fff;padding:5px 8px;border-radius:6px;cursor:pointer;}
 
-/* ================= ADMIN BUTTON & FORM ================= */
 .admin-btn{margin:35px auto;display:block;padding:12px 30px;border-radius:30px;border:none;background:#00e5ff;font-weight:bold;cursor:pointer;transition:.3s;}
 .admin-btn:hover{transform:scale(1.05);}
 .admin-form{display:none;max-width:400px;margin:30px auto;background:rgba(0,0,0,.6);padding:20px;border-radius:15px;}
@@ -59,11 +45,9 @@ body::before {
 .admin-form button{width:100%;padding:10px;border-radius:20px;border:none;background:#00e5ff;font-weight:bold;cursor:pointer;}
 .admin-form button:hover{background:#00bcd4;}
 
-/* ================= RESPONSIVE ================= */
 @media(max-width:768px){.item-card{width:85%;}.category-buttons{flex-direction:column;}}
 </style>
 </head>
-
 <body>
 
 <nav class="navbar">
@@ -94,13 +78,11 @@ body::before {
 <input id="name" placeholder="Nom de la ressource">
 <input id="desc" placeholder="Description">
 <input id="img" placeholder="URL de l'image (facultatif)">
-
 <select id="type">
 <option>Script</option>
 <option>Mapping</option>
 <option>Véhicule</option>
 </select>
-
 <select id="category">
 <option>Police</option>
 <option>Urgence</option>
@@ -108,95 +90,101 @@ body::before {
 <option>Civil</option>
 <option>Criminel</option>
 </select>
-
 <select id="priceType" onchange="toggleLink()">
 <option value="Gratuit">Gratuit</option>
 <option value="Payant">Payant</option>
 </select>
-
 <input id="price" placeholder="Prix (si payant)" style="display:none;">
 <input id="link" placeholder="Lien de téléchargement (si gratuit)">
-
 <button onclick="addItem()">Ajouter</button>
 </div>
 </section>
 
 <script>
-const PASSWORD="Maholo_56100";
-let isAdmin=false;
-let items=JSON.parse(localStorage.getItem("fivemItems"))||[];
-let filter="";
+const PASSWORD = "Maholo_56100";
+let isAdmin = false;
+let items = JSON.parse(localStorage.getItem("fivemItems")) || [];
+let filter = "";
 
-function render(){
-  const c=document.getElementById("items");
-  c.innerHTML="";
-  items.filter(i=>!filter||i.type===filter).forEach((i,idx)=>{
-    const d=document.createElement("div");
-    d.className="item-card";
-    d.innerHTML=`
-    ${i.img?`<img src="${i.img}">`:''}
-    <button class="delete-btn" onclick="del(${idx})">✖</button>
-    <h3>${i.name}</h3>
-    <p>${i.desc}</p>
-    <p>${i.type} • ${i.category}</p>
-    <span>${i.priceType==="Gratuit"?"Gratuit":i.price+" €"}</span>
-    ${i.priceType==="Gratuit"&&i.link?`<a class="download-btn" href="${i.link}" target="_blank">Télécharger</a>`:''}
-    `;
-    if(isAdmin)d.querySelector(".delete-btn").style.display="block";
-    c.appendChild(d);
-  });
+function render() {
+    const container = document.getElementById("items");
+    container.innerHTML = "";
+    items.filter(i => !filter || i.type === filter).forEach((i, idx) => {
+        const card = document.createElement("div");
+        card.className = "item-card";
+        card.innerHTML = `
+        ${i.img?`<img src="${i.img}">`:''}
+        <button class="delete-btn" onclick="del(${idx})">✖</button>
+        <h3>${i.name}</h3>
+        <p>${i.desc}</p>
+        <p>${i.type} • ${i.category}</p>
+        <span>${i.priceType==="Gratuit"?"Gratuit":i.price+" €"}</span>
+        ${i.priceType==="Gratuit"&&i.link?`<a class="download-btn" href="${i.link}" target="_blank">Télécharger</a>`:''}
+        `;
+        if(isAdmin) card.querySelector(".delete-btn").style.display="block";
+        container.appendChild(card);
+    });
 }
 
-function filterType(t){ filter=t; render(); }
+function filterType(t){ filter = t; render(); }
 
-function askPassword(){
-  if(prompt("Mot de passe admin :")===PASSWORD){
-    isAdmin=true;
-    document.getElementById("adminForm").style.display="block";
-    render();
-  }
+function askPassword() {
+    if(prompt("Mot de passe admin :") === PASSWORD) {
+        isAdmin = true;
+        document.getElementById("adminForm").style.display="block";
+        render();
+    }
 }
 
 function toggleLink(){
-  const pt=document.getElementById("priceType").value;
-  document.getElementById("price").style.display=pt==="Payant"?"block":"none";
-  document.getElementById("link").style.display=pt==="Gratuit"?"block":"none";
+    const pt = document.getElementById("priceType").value;
+    document.getElementById("price").style.display = pt==="Payant"?"block":"none";
+    document.getElementById("link").style.display = pt==="Gratuit"?"block":"none";
 }
 
-function addItem(){
-  const i={
-    name:name.value.trim(),
-    desc:desc.value.trim(),
-    img:img.value.trim(),
-    type:type.value,
-    category:category.value,
-    priceType:priceType.value,
-    price:price.value.trim(),
-    link:link.value.trim()
-  };
+function addItem() {
+    const nameEl = document.getElementById("name");
+    const descEl = document.getElementById("desc");
+    const imgEl = document.getElementById("img");
+    const typeEl = document.getElementById("type");
+    const categoryEl = document.getElementById("category");
+    const priceTypeEl = document.getElementById("priceType");
+    const priceEl = document.getElementById("price");
+    const linkEl = document.getElementById("link");
 
-  // Validation selon type
-  if(!i.name||!i.desc) return alert("Veuillez remplir le nom et la description !");
-  if(i.priceType==="Payant" && !i.price) return alert("Indiquez un prix pour la ressource payante !");
-  if(i.priceType==="Gratuit" && !i.link) return alert("Mettez un lien de téléchargement pour la ressource gratuite !");
+    const item = {
+        name: nameEl.value.trim(),
+        desc: descEl.value.trim(),
+        img: imgEl.value.trim(),
+        type: typeEl.value,
+        category: categoryEl.value,
+        priceType: priceTypeEl.value,
+        price: priceEl.value.trim(),
+        link: linkEl.value.trim()
+    };
 
-  items.push(i);
-  localStorage.setItem("fivemItems",JSON.stringify(items));
-  render();
+    if(!item.name || !item.desc) return alert("Veuillez remplir le nom et la description !");
+    if(item.priceType==="Payant" && !item.price) return alert("Indiquez un prix pour la ressource payante !");
+    if(item.priceType==="Gratuit" && !item.link) return alert("Mettez un lien de téléchargement pour la ressource gratuite !");
 
-  // Reset formulaire
-  name.value=""; desc.value=""; img.value=""; price.value=""; link.value="";
+    items.push(item);
+    localStorage.setItem("fivemItems", JSON.stringify(items));
+    render();
+
+    // Reset form
+    nameEl.value=""; descEl.value=""; imgEl.value=""; priceEl.value=""; linkEl.value="";
 }
 
 function del(i){
-  if(confirm("Supprimer cette ressource ?")){
-    items.splice(i,1);
-    localStorage.setItem("fivemItems",JSON.stringify(items));
-    render();
-  }
+    if(confirm("Supprimer cette ressource ?")){
+        items.splice(i,1);
+        localStorage.setItem("fivemItems", JSON.stringify(items));
+        render();
+    }
 }
 
 render();
 </script>
+
 </body>
 </html>
