@@ -109,21 +109,9 @@
     background: #00bcd4;
 }
 
-/* ================= RECHERCHE ================= */
-.search-bar {
-    margin: 25px auto;
-    max-width: 400px;
-    display: flex;
-    justify-content: center;
-}
-
-.search-bar input {
-    width: 100%;
-    padding: 10px 15px;
-    border-radius: 25px;
-    border: none;
-    outline: none;
-    font-size: 1rem;
+/* ================= RESPONSIVE ================= */
+@media(max-width:768px){
+    .member-card{width:85%;}
 }
 </style>
 </head>
@@ -143,10 +131,6 @@
 <section class="main-content">
 <h1>Équipe CRG Services</h1>
 <p>Découvrez tous les membres de notre équipe et leurs rôles.</p>
-
-<div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Rechercher par nom, pseudo, rôle..." onkeyup="searchMembers()">
-</div>
 
 <div class="members" id="members"></div>
 
@@ -172,13 +156,10 @@ const PASSWORD = "Maholo_56100";
 let isAdmin = false;
 let members = JSON.parse(localStorage.getItem("members")) || [];
 
-function renderMembers(filter="") {
+function renderMembers() {
     const container = document.getElementById("members");
     container.innerHTML = "";
-    members.filter(m => {
-        const str = (m.name + m.role + m.desc + m.email + m.level).toLowerCase();
-        return str.includes(filter.toLowerCase());
-    }).forEach((m,i) => {
+    members.forEach((m,i) => {
         const card = document.createElement("div");
         card.className = "member-card";
         card.innerHTML = `
@@ -225,11 +206,6 @@ function deleteMember(i){
         localStorage.setItem("members", JSON.stringify(members));
         renderMembers();
     }
-}
-
-function searchMembers() {
-    const query = document.getElementById("searchInput").value;
-    renderMembers(query);
 }
 
 // Initial render
