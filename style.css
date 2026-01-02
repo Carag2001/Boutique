@@ -1,5 +1,4 @@
-/* ===================== */
-/* RESET */
+/* ================= RESET GLOBAL ================= */
 * {
     margin: 0;
     padding: 0;
@@ -11,10 +10,9 @@ html, body {
     height: 100%;
 }
 
-/* ===================== */
-/* FOND HEXAGONAL (CELUI QUE TU VEUX) */
+/* ================= FOND GLOBAL ================= */
 body {
-    background: url('https://tse2.mm.bing.net/th/id/OIP.RDStdOWibsHTs0f08IQdUAHaEo?rs=1&pid=ImgDetMain&o=7&rm=3')
+    background: url("https://img.freepik.com/photos-premium/harmonie-hexagonale-abstrait-arriere-plan-hexagonal_957479-67404.jpg")
         no-repeat center center fixed;
     background-size: cover;
     color: #ffffff;
@@ -22,26 +20,23 @@ body {
     position: relative;
 }
 
-/* OVERLAY */
 body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.55);
+    background: rgba(0,0,0,0.55);
     z-index: 0;
 }
 
-/* ===================== */
-/* NAVBAR */
+/* ================= NAVBAR ================= */
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
-    padding: 10px 0;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.8);
     backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.7);
 }
 
 .navbar ul {
@@ -49,162 +44,157 @@ body::before {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 70px;
 }
 
-/* ===================== */
-/* BOUTONS MENU — STYLÉS */
-.navbar ul li {
-    margin: 0 12px;
+.navbar li {
+    margin: 0 20px;
 }
 
-.navbar ul li a {
+.navbar a {
     position: relative;
     text-decoration: none;
     color: #ffffff;
-    font-size: 1.1rem;
-    font-weight: 700;
-    padding: 10px 22px;
-    border-radius: 30px;
-    overflow: hidden;
-    transition: transform 0.3s ease, color 0.3s ease;
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 6px 4px;
+    transition: 0.3s;
 }
 
-/* LIGNE ANIMÉE */
-.navbar ul li a::before {
+/* underline animé */
+.navbar a::after {
     content: '';
     position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(0, 229, 255, 0.8),
-        transparent
-    );
-    transform: translateX(-100%);
-    transition: transform 0.6s ease;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #00e5ff, #6a00ff);
+    transition: 0.3s;
 }
 
-/* GLOW */
-.navbar ul li a::after {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    border-radius: 30px;
-    border: 2px solid rgba(0, 229, 255, 0.4);
-    opacity: 0;
-    transition: opacity 0.3s ease;
+.navbar a:hover::after {
+    width: 100%;
 }
 
-/* HOVER */
-.navbar ul li a:hover::before {
-    transform: translateX(100%);
+.navbar a:hover {
+    text-shadow: 0 0 12px rgba(0,229,255,0.9);
+    transform: translateY(-2px);
 }
 
-.navbar ul li a:hover::after {
-    opacity: 1;
-}
-
-.navbar ul li a:hover {
-    transform: scale(1.15);
-    color: #00e5ff;
-}
-
-/* ===================== */
-/* CONTENU */
+/* ================= CONTENU PRINCIPAL ================= */
 .main-content {
     position: relative;
     z-index: 1;
     min-height: 100vh;
-    padding: 140px 20px 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    padding: 150px 20px 80px;
     text-align: center;
-    animation: fadeIn 1.8s ease;
 }
 
-/* TITRES */
 .main-content h1 {
-    font-size: 3.2rem;
+    font-size: 3rem;
     margin-bottom: 20px;
-    text-shadow: 0 0 25px rgba(0,0,0,0.9);
+    text-shadow: 0 0 20px rgba(0,0,0,0.9);
+    animation: slideDown 1s ease;
 }
 
-.main-content h2 {
-    font-size: 2.3rem;
-    margin-bottom: 15px;
-}
-
-/* TEXTE */
 .main-content p {
-    font-size: 1.2rem;
-    max-width: 820px;
+    max-width: 900px;
+    margin: 0 auto 30px;
+    font-size: 1.15rem;
     line-height: 1.8;
-    margin-bottom: 20px;
+    opacity: 0.95;
+    animation: fadeIn 1.5s ease;
 }
 
-/* ===================== */
-/* CARTES (SERVICES / OFFRES / CONTACT) */
+/* ================= CARTES ================= */
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 35px;
+    margin-top: 40px;
+}
+
 .card {
-    background: linear-gradient(
-        145deg,
-        rgba(255,255,255,0.12),
-        rgba(255,255,255,0.03)
-    );
-    border-radius: 18px;
-    padding: 25px;
-    margin: 15px 0;
-    width: 100%;
-    max-width: 420px;
-    box-shadow: 0 0 35px rgba(0,0,0,0.6);
-    backdrop-filter: blur(6px);
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    width: 280px;
+    padding: 28px 22px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.35);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    transition: 0.4s;
 }
 
 .card:hover {
-    transform: scale(1.07) rotate(0.3deg);
-    box-shadow: 0 0 40px rgba(0, 229, 255, 0.35);
+    transform: translateY(-10px) scale(1.07);
+    box-shadow: 0 0 35px rgba(0,229,255,0.6);
 }
 
-/* ===================== */
-/* ANIMATION */
+.card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.card p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* ================= BOUTON ================= */
+.btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 25px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #00e5ff, #6a00ff);
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(0,229,255,0.7);
+    transition: 0.35s;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(0,229,255,1);
+}
+
+/* ================= ANIMATIONS ================= */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 
-/* ===================== */
-/* RESPONSIVE */
+@keyframes slideDown {
+    from {opacity: 0; transform: translateY(-50px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
-    .navbar ul li a {
-        font-size: 1rem;
-        padding: 8px 18px;
-    }
-
     .main-content h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
 
-    .main-content h2 {
-        font-size: 1.5rem;
-    }
-
-    .main-content p {
-        font-size: 1rem;
+    .card {
+        width: 90%;
     }
 }
 
 @media (max-width: 480px) {
     .navbar ul {
         flex-direction: column;
+        height: auto;
+        padding: 10px 0;
     }
 
-    .navbar ul li {
+    .navbar li {
         margin: 6px 0;
     }
 
     .main-content {
-        padding-top: 100px;
+        padding-top: 180px;
     }
 }
