@@ -5,15 +5,17 @@
 <title>CRG Services - FiveM</title>
 <link rel="stylesheet" href="style.css">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-html,body{height:100%; color:#fff;}
-body {
-  background: url('https://img.freepik.com/photos-premium/fond-neon-futuriste_1048-12604.jpg') no-repeat center center fixed;
-  background-size: cover;
-  position: relative;
+/* ===== RESET ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
+html,body{height:100%;color:#fff;}
+body{
+    background: url('https://img.freepik.com/photos-premium/harmonie-hexagonale-abstrait-arriere-plan-hexagonal_957479-67404.jpg') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
 }
-body::before { content:''; position:fixed; inset:0; background: rgba(0,0,0,0.45); z-index:0; }
+body::before{content:'';position:fixed;inset:0;background: rgba(0,0,0,0.45); z-index:0;}
 
+/* ===== NAVBAR ===== */
 .navbar{position:fixed;top:0;width:100%;z-index:1000;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);}
 .navbar ul{list-style:none;display:flex;justify-content:center;align-items:center;height:65px;}
 .navbar li{margin:0 18px;}
@@ -21,15 +23,22 @@ body::before { content:''; position:fixed; inset:0; background: rgba(0,0,0,0.45)
 .navbar a::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;background:#fff;transition:.3s;}
 .navbar a:hover::after{width:100%;}
 
+/* ===== MAIN CONTENT ===== */
 .main-content{position:relative;z-index:1;padding:140px 20px 60px;text-align:center;}
 .main-content h1{font-size:3rem;margin-bottom:10px;text-shadow:0 0 15px rgba(0,0,0,0.7);}
 .main-content p{margin-bottom:25px;font-size:1.1rem;opacity:.9;}
 
+/* ===== CATEGORY BUTTONS ===== */
 .category-buttons{display:flex;gap:20px;justify-content:center;margin:30px 0;flex-wrap:wrap;}
 .cat-btn{padding:14px 30px;border-radius:30px;border:none;cursor:pointer;font-weight:bold;color:#fff;background:linear-gradient(135deg,#00e5ff,#0066ff);box-shadow:0 0 15px rgba(0,229,255,0.6);transition:.3s;}
 .cat-btn:hover{transform:scale(1.1);}
 
-.items{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;}
+/* ===== SEARCH ===== */
+.search-container{position:relative;margin-bottom:25px;text-align:right;}
+#searchInput{padding:10px 15px;border-radius:20px;border:none;width:250px;font-size:1rem;}
+
+/* ===== ITEM CARDS ===== */
+.items{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;margin-top:20px;}
 .item-card{width:260px;background:rgba(255,255,255,.08);border-radius:18px;padding:20px;border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(6px);box-shadow:0 10px 25px rgba(0,0,0,.6);transition:.35s;position:relative;}
 .item-card:hover{transform:translateY(-8px) scale(1.05);box-shadow:0 0 35px rgba(0,229,255,.5);}
 .item-card img{width:100%;border-radius:12px;margin-bottom:10px;}
@@ -38,6 +47,7 @@ body::before { content:''; position:fixed; inset:0; background: rgba(0,0,0,0.45)
 .download-btn{display:inline-block;margin-top:10px;padding:8px 15px;background:#00e5ff;color:#000;font-weight:bold;border-radius:20px;text-decoration:none;}
 .delete-btn{display:none;position:absolute;top:10px;right:10px;background:#ff3b3b;border:none;color:#fff;padding:5px 8px;border-radius:6px;cursor:pointer;}
 
+/* ===== ADMIN BUTTON & FORM ===== */
 .admin-btn{margin:35px auto;display:block;padding:12px 30px;border-radius:30px;border:none;background:#00e5ff;font-weight:bold;cursor:pointer;transition:.3s;}
 .admin-btn:hover{transform:scale(1.05);}
 .admin-form{display:none;max-width:400px;margin:30px auto;background:rgba(0,0,0,.6);padding:20px;border-radius:15px;}
@@ -64,16 +74,23 @@ body::before { content:''; position:fixed; inset:0; background: rgba(0,0,0,0.45)
 <h1>FiveM</h1>
 <p>Scripts • Mappings • Véhicules</p>
 
+<!-- Boutons catégories -->
 <div class="category-buttons">
 <button class="cat-btn" onclick="filterType('Script')">Scripts</button>
 <button class="cat-btn" onclick="filterType('Mapping')">Mappings</button>
 <button class="cat-btn" onclick="filterType('Véhicule')">Véhicules</button>
 </div>
 
+<!-- Barre de recherche -->
+<div class="search-container">
+<input type="text" id="searchInput" placeholder="Rechercher une ressource..." oninput="render()">
+</div>
+
+<!-- Conteneur des ressources -->
 <div class="items" id="items"></div>
 
+<!-- Admin -->
 <button class="admin-btn" onclick="askPassword()">Ajouter une ressource</button>
-
 <div class="admin-form" id="adminForm">
 <input id="name" placeholder="Nom de la ressource">
 <input id="desc" placeholder="Description">
@@ -106,14 +123,21 @@ let isAdmin=false;
 let items = JSON.parse(localStorage.getItem("fivemItems")) || [];
 let filter = "";
 
-function render() {
+function normalizeString(str){
+    return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+function render(){
     const container = document.getElementById("items");
-    container.innerHTML = "";
-    items.filter(i => !filter || i.type === filter)
-         .forEach((i, idx) => {
+    container.innerHTML="";
+    const search = normalizeString(document.getElementById("searchInput").value);
+
+    items
+    .filter(i => (!filter || i.type===filter) && (!search || normalizeString(i.name).includes(search) || normalizeString(i.desc).includes(search)))
+    .forEach((i,idx)=>{
         const card = document.createElement("div");
-        card.className = "item-card";
-        card.innerHTML = `
+        card.className="item-card";
+        card.innerHTML=`
         ${i.img?`<img src="${i.img}">`:''}
         <button class="delete-btn" onclick="del(${idx})">✖</button>
         <h3>${i.name}</h3>
@@ -143,17 +167,17 @@ function toggleLink(){
     document.getElementById("link").style.display = pt==="Gratuit"?"block":"none";
 }
 
-function addItem() {
-    const nameEl = document.getElementById("name");
-    const descEl = document.getElementById("desc");
-    const imgEl = document.getElementById("img");
-    const typeEl = document.getElementById("type");
-    const categoryEl = document.getElementById("category");
-    const priceTypeEl = document.getElementById("priceType");
-    const priceEl = document.getElementById("price");
-    const linkEl = document.getElementById("link");
+function addItem(){
+    const nameEl=document.getElementById("name");
+    const descEl=document.getElementById("desc");
+    const imgEl=document.getElementById("img");
+    const typeEl=document.getElementById("type");
+    const categoryEl=document.getElementById("category");
+    const priceTypeEl=document.getElementById("priceType");
+    const priceEl=document.getElementById("price");
+    const linkEl=document.getElementById("link");
 
-    const item = {
+    const item={
         name: nameEl.value.trim(),
         desc: descEl.value.trim(),
         img: imgEl.value.trim(),
@@ -171,11 +195,10 @@ function addItem() {
     items.push(item);
     localStorage.setItem("fivemItems", JSON.stringify(items));
 
-    // Afficher uniquement dans sa catégorie
-    filter = item.type;
+    filter = item.type; // afficher la catégorie directement
+    document.getElementById("searchInput").value="";
     render();
 
-    // reset form
     nameEl.value=""; descEl.value=""; imgEl.value=""; priceEl.value=""; linkEl.value="";
 }
 
