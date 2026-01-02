@@ -4,125 +4,191 @@
 <meta charset="UTF-8">
 <title>CRG Services - Équipe</title>
 <link rel="stylesheet" href="style.css">
+
 <style>
-/* ===== RESET ===== */
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
-html,body{height:100%;color:#fff;}
-body{
-    background: url('https://img.freepik.com/photos-premium/harmonie-hexagonale-abstrait-arriere-plan-hexagonal_957479-67404.jpg') no-repeat center center fixed;
-    background-size: cover;
+/* ================= GRILLE MEMBRES ================= */
+.members {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.member-card {
+    width: 260px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.35);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.6);
+    text-align: center;
+    transition: 0.35s;
     position: relative;
 }
-body::before{content:'';position:fixed;inset:0;background: rgba(0,0,0,0.45); z-index:0;}
 
-/* ===== NAVBAR ===== */
-.navbar{position:fixed;top:0;width:100%;z-index:1000;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);}
-.navbar ul{list-style:none;display:flex;justify-content:center;align-items:center;height:65px;}
-.navbar li{margin:0 18px;}
-.navbar a{color:#fff;text-decoration:none;font-weight:600;position:relative;}
-.navbar a::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;background:#fff;transition:.3s;}
-.navbar a:hover::after{width:100%;}
+.member-card:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 0 30px rgba(0,229,255,0.6);
+}
 
-/* ===== MAIN CONTENT ===== */
-.main-content{position:relative;z-index:1;padding:140px 20px 60px;text-align:center;}
-.main-content h1{font-size:3rem;margin-bottom:10px;text-shadow:0 0 15px rgba(0,0,0,0.7);}
-.main-content p{margin-bottom:25px;font-size:1.1rem;opacity:.9;}
+.member-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 2px solid #00e5ff;
+}
 
-/* ===== SEARCH ===== */
-.search-container{position:relative;margin-bottom:25px;text-align:right;}
-#searchInput{padding:10px 15px;border-radius:20px;border:none;width:250px;font-size:1rem;}
+.member-card h3 {
+    margin-bottom: 5px;
+    font-size: 1.3rem;
+}
 
-/* ===== MEMBER CARDS ===== */
-.members{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;margin-top:20px;}
-.member-card{width:260px;background:rgba(255,255,255,.08);border-radius:18px;padding:20px;border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(6px);box-shadow:0 10px 25px rgba(0,0,0,.6);transition:.35s;position:relative;text-align:center;}
-.member-card:hover{transform:translateY(-8px) scale(1.05);box-shadow:0 0 35px rgba(0,229,255,.5);}
-.member-card img{width:100px;height:100px;border-radius:50%;margin-bottom:10px;object-fit:cover;}
-.member-card h3{margin-bottom:5px;}
-.member-card p{margin-bottom:5px;font-size:0.95rem;}
-.member-card span{color:#00e5ff;font-weight:bold;font-size:0.9rem;}
-.delete-btn{display:none;position:absolute;top:10px;right:10px;background:#ff3b3b;border:none;color:#fff;padding:5px 8px;border-radius:6px;cursor:pointer;}
+.member-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
 
-/* ===== ADMIN BUTTON & FORM ===== */
-.admin-btn{margin:35px auto;display:block;padding:12px 30px;border-radius:30px;border:none;background:#00e5ff;font-weight:bold;cursor:pointer;transition:.3s;}
-.admin-btn:hover{transform:scale(1.05);}
-.admin-form{display:none;max-width:400px;margin:30px auto;background:rgba(0,0,0,.6);padding:20px;border-radius:15px;}
-.admin-form input, .admin-form select{width:100%;margin-bottom:10px;padding:8px;border-radius:6px;border:none;}
-.admin-form button{width:100%;padding:10px;border-radius:20px;border:none;background:#00e5ff;font-weight:bold;cursor:pointer;}
-.admin-form button:hover{background:#00bcd4;}
+.delete-btn {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background:#ff3b3b;
+    border:none;
+    color:#fff;
+    padding:5px 8px;
+    border-radius:6px;
+    cursor:pointer;
+}
 
-@media(max-width:768px){.member-card{width:85%;}}
+/* ================= FORMULAIRE ADMIN ================= */
+.admin-btn {
+    margin: 35px auto;
+    display:block;
+    padding: 12px 30px;
+    border-radius: 30px;
+    border:none;
+    background: #00e5ff;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.admin-form {
+    display: none;
+    max-width: 400px;
+    margin: 30px auto;
+    background: rgba(0,0,0,0.6);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.admin-form input, .admin-form select, .admin-form textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+}
+
+.admin-form button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border:none;
+    background: #00e5ff;
+    font-weight: bold;
+    cursor:pointer;
+}
+
+.admin-form button:hover {
+    background: #00bcd4;
+}
+
+/* ================= RECHERCHE ================= */
+.search-bar {
+    margin: 25px auto;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+}
 </style>
 </head>
-<body>
 
+<body>
 <nav class="navbar">
 <ul>
 <li><a href="index.html">Accueil</a></li>
 <li><a href="presentation.html">Présentation</a></li>
 <li><a href="fivem.html">FiveM</a></li>
+<li><a href="personnel.html" class="active">Équipe</a></li>
 <li><a href="contact.html">Contact</a></li>
 <li><a href="apropos.html">À propos</a></li>
-<li><a href="personnel.html" class="active">Équipe</a></li>
 </ul>
 </nav>
 
 <section class="main-content">
-<h1>Équipe</h1>
-<p>Découvrez les membres de l’équipe</p>
+<h1>Équipe CRG Services</h1>
+<p>Découvrez tous les membres de notre équipe et leurs rôles.</p>
 
-<!-- Recherche -->
-<div class="search-container">
-<input type="text" id="searchInput" placeholder="Rechercher un membre..." oninput="render()">
+<div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Rechercher par nom, pseudo, rôle..." onkeyup="searchMembers()">
 </div>
 
-<!-- Liste des membres -->
 <div class="members" id="members"></div>
 
-<!-- Admin -->
 <button class="admin-btn" onclick="askPassword()">Ajouter un membre</button>
+
 <div class="admin-form" id="adminForm">
-<input id="pseudo" placeholder="Pseudo">
-<input id="desc" placeholder="Description">
-<input id="role" placeholder="Profession / rôle">
-<input id="img" placeholder="URL de l'image">
-<input id="email" placeholder="Email (facultatif)">
-<input id="social" placeholder="Réseaux sociaux (facultatif)">
-<select id="status">
-<option>Actif</option>
-<option>En pause</option>
-<option>Ancien</option>
+<input id="mName" placeholder="Nom complet ou pseudo">
+<input id="mRole" placeholder="Rôle / Profession">
+<textarea id="mDesc" placeholder="Description / bio"></textarea>
+<input id="mImg" placeholder="URL de l'image">
+<input id="mEmail" placeholder="Email (optionnel)">
+<select id="mLevel">
+    <option>Équipe</option>
+    <option>Admin</option>
+    <option>Fondateur</option>
 </select>
-<button onclick="addMember()">Ajouter</button>
+<button onclick="addMember()">Ajouter le membre</button>
 </div>
 </section>
 
 <script>
 const PASSWORD = "Maholo_56100";
 let isAdmin = false;
-let members = JSON.parse(localStorage.getItem("teamMembers")) || [];
+let members = JSON.parse(localStorage.getItem("members")) || [];
 
-function normalizeString(str){
-    return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-}
-
-function render(){
+function renderMembers(filter="") {
     const container = document.getElementById("members");
-    container.innerHTML="";
-    const search = normalizeString(document.getElementById("searchInput").value);
-
-    members
-    .filter(m => !search || normalizeString(m.pseudo).includes(search) || normalizeString(m.desc).includes(search) || normalizeString(m.role).includes(search))
-    .forEach((m,idx)=>{
+    container.innerHTML = "";
+    members.filter(m => {
+        const str = (m.name + m.role + m.desc + m.email + m.level).toLowerCase();
+        return str.includes(filter.toLowerCase());
+    }).forEach((m,i) => {
         const card = document.createElement("div");
-        card.className="member-card";
-        card.innerHTML=`
-        ${m.img?`<img src="${m.img}">`:''}
-        <button class="delete-btn" onclick="del(${idx})">✖</button>
-        <h3>${m.pseudo}</h3>
+        card.className = "member-card";
+        card.innerHTML = `
+        <button class="delete-btn" onclick="deleteMember(${i})">✖</button>
+        <img src="${m.img || 'https://via.placeholder.com/100'}">
+        <h3>${m.name}</h3>
+        <p><strong>Rôle :</strong> ${m.role}</p>
         <p>${m.desc}</p>
-        <span>${m.role} | ${m.status}</span>
-        ${m.email?`<p>Email: ${m.email}</p>`:''}
-        ${m.social?`<p>Réseaux: ${m.social}</p>`:''}
+        ${m.email?`<p><strong>Email :</strong> ${m.email}</p>`:""}
+        <p><strong>Niveau :</strong> ${m.level}</p>
         `;
         if(isAdmin) card.querySelector(".delete-btn").style.display="block";
         container.appendChild(card);
@@ -130,49 +196,44 @@ function render(){
 }
 
 function askPassword() {
-    if(prompt("Mot de passe admin :") === PASSWORD) {
+    const pass = prompt("Mot de passe admin :");
+    if(pass === PASSWORD){
         isAdmin = true;
         document.getElementById("adminForm").style.display="block";
-        render();
-    }
+        renderMembers();
+    } else alert("Mot de passe incorrect");
 }
 
-function addMember(){
-    const member={
-        pseudo: document.getElementById("pseudo").value.trim(),
-        desc: document.getElementById("desc").value.trim(),
-        role: document.getElementById("role").value.trim(),
-        img: document.getElementById("img").value.trim(),
-        email: document.getElementById("email").value.trim(),
-        social: document.getElementById("social").value.trim(),
-        status: document.getElementById("status").value
+function addMember() {
+    const m = {
+        name: document.getElementById("mName").value,
+        role: document.getElementById("mRole").value,
+        desc: document.getElementById("mDesc").value,
+        img: document.getElementById("mImg").value,
+        email: document.getElementById("mEmail").value,
+        level: document.getElementById("mLevel").value
     };
-
-    if(!member.pseudo || !member.desc || !member.role) return alert("Pseudo, description et rôle obligatoires !");
-
-    members.push(member);
-    localStorage.setItem("teamMembers", JSON.stringify(members));
-    render();
-
-    // Reset formulaire
-    document.getElementById("pseudo").value="";
-    document.getElementById("desc").value="";
-    document.getElementById("role").value="";
-    document.getElementById("img").value="";
-    document.getElementById("email").value="";
-    document.getElementById("social").value="";
+    if(!m.name || !m.role || !m.desc) return alert("Veuillez remplir tous les champs obligatoires");
+    members.push(m);
+    localStorage.setItem("members", JSON.stringify(members));
+    renderMembers();
 }
 
-function del(i){
+function deleteMember(i){
     if(confirm("Supprimer ce membre ?")){
         members.splice(i,1);
-        localStorage.setItem("teamMembers", JSON.stringify(members));
-        render();
+        localStorage.setItem("members", JSON.stringify(members));
+        renderMembers();
     }
 }
 
-render();
-</script>
+function searchMembers() {
+    const query = document.getElementById("searchInput").value;
+    renderMembers(query);
+}
 
+// Initial render
+renderMembers();
+</script>
 </body>
 </html>
