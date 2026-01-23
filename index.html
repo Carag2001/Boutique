@@ -1,76 +1,130 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>CRG Services - Accueil</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+/* ===== GTA DEV STYLE - CRG SERVICES ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
-<!-- ================= NAVBAR ================= -->
-<nav class="navbar">
-    <ul>
-        <li><a href="index.html" class="active">Accueil</a></li>
-        <li><a href="presentation.html">Présentation</a></li>
-        <li><a href="fivem.html">FiveM</a></li>
-        <li><a href="personnel.html">Équipe</a></li> <!-- Nouveau lien ajouté -->
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="apropos.html">À propos</a></li>
-    </ul>
-</nav>
+:root{
+  --bg:#0e0f12;
+  --panel:#16181d;
+  --border:#22252c;
+  --accent:#00e5ff;
+  --text:#eaeaea;
+  --muted:#9aa0a6;
+}
 
-<!-- ================= CONTENU ================= -->
-<section class="main-content">
-    <h1>CRG Services</h1>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter',sans-serif;
+}
 
-    <p>
-        Bienvenue sur <strong>CRG Services</strong>.<br>
-        Un projet dédié à la création, au développement et au partage
-        de contenus modernes et immersifs, notamment autour de l’univers FiveM.
-    </p>
+body{
+  background: radial-gradient(circle at top,#1a1d24,#0e0f12 70%);
+  color:var(--text);
+  min-height:100vh;
+}
 
-    <div class="cards">
+/* ===== NAVBAR ===== */
+.navbar{
+  position:fixed;
+  top:0;
+  width:100%;
+  height:70px;
+  background:rgba(14,15,18,.95);
+  border-bottom:1px solid var(--border);
+  z-index:1000;
+}
 
-        <div class="card">
-            <h3>🔧 Développement</h3>
-            <p>
-                Création de scripts FiveM, systèmes personnalisés,
-                optimisations et solutions techniques sur mesure.
-            </p>
-        </div>
+.navbar ul{
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:35px;
+  list-style:none;
+}
 
-        <div class="card">
-            <h3>🗺️ Mapping</h3>
-            <p>
-                Mappings immersifs pour la police, les services d’urgence,
-                le gouvernement et bien plus encore.
-            </p>
-        </div>
+.navbar a{
+  color:var(--muted);
+  text-decoration:none;
+  font-weight:600;
+  font-size:.95rem;
+  letter-spacing:.04em;
+  position:relative;
+}
 
-        <div class="card">
-            <h3>🚗 Véhicules</h3>
-            <p>
-                Véhicules optimisés, packs personnalisés
-                et intégration adaptée à vos serveurs FiveM.
-            </p>
-        </div>
+.navbar a.active,
+.navbar a:hover{
+  color:var(--accent);
+}
 
-        <div class="card">
-            <h3>🤝 Collaboration</h3>
-            <p>
-                Ouvert aux collaborations, partenariats
-                et projets communautaires sérieux.
-            </p>
-        </div>
+/* ===== MAIN ===== */
+.main-content{
+  padding:140px 20px 80px;
+  max-width:1200px;
+  margin:auto;
+  text-align:center;
+}
 
-    </div>
+h1{
+  font-size:3rem;
+  margin-bottom:20px;
+  letter-spacing:.08em;
+}
 
-    <p style="margin-top: 45px;">
-        👉 Explore la section <strong>FiveM</strong> pour découvrir tout le contenu disponible.
-    </p>
+p{
+  color:var(--muted);
+  max-width:900px;
+  margin:0 auto 40px;
+  line-height:1.7;
+}
 
-    <a href="fivem.html" class="btn">Accéder à FiveM</a>
-</section>
+/* ===== CARDS ===== */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+  margin-top:50px;
+}
 
-</body>
-</html>
+.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:28px;
+  text-align:left;
+  transition:.3s;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  border-color:var(--accent);
+  box-shadow:0 0 25px rgba(0,229,255,.12);
+}
+
+.card h3{
+  margin-bottom:12px;
+  color:var(--accent);
+}
+
+/* ===== BUTTON ===== */
+.btn{
+  display:inline-block;
+  margin-top:40px;
+  padding:12px 28px;
+  border-radius:30px;
+  border:1px solid var(--accent);
+  color:var(--accent);
+  text-decoration:none;
+  font-weight:600;
+  transition:.3s;
+}
+
+.btn:hover{
+  background:var(--accent);
+  color:#000;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  h1{font-size:2.2rem;}
+}
