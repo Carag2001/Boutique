@@ -80,6 +80,8 @@
             align-items: center;
             position: relative;
             z-index: 2;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .logo {
@@ -93,6 +95,7 @@
                 0 0 40px #6a0dad;
             animation: logoGlow 2s ease-in-out infinite;
             cursor: pointer;
+            flex-shrink: 0;
         }
 
         @keyframes logoGlow {
@@ -117,6 +120,14 @@
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+        }
+
+        @media (min-width: 769px) {
+            .nav-buttons {
+                width: auto;
+            }
         }
 
         .nav-btn {
@@ -367,7 +378,7 @@
         /* Hero Section */
         .hero {
             color: white;
-            padding: 6rem 2rem;
+            padding: 4rem 2rem;
             text-align: center;
             position: relative;
             overflow: hidden;
