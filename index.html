@@ -95,37 +95,6 @@
             cursor: pointer;
         }
 
-        /* Menu Burger */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 0.5rem;
-            z-index: 1002;
-        }
-
-        .menu-toggle span {
-            width: 30px;
-            height: 3px;
-            background: linear-gradient(90deg, #8a2be2, #ba55d3);
-            border-radius: 3px;
-            transition: all 0.3s;
-            box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
-        }
-
-        .menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-        }
-
-        .menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
         @keyframes logoGlow {
             0%, 100% { 
                 text-shadow: 
@@ -148,59 +117,6 @@
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
-        }
-
-        /* Menu mobile overlay */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 280px;
-            height: 100vh;
-            background: linear-gradient(180deg, #1a0033 0%, #0d001a 100%);
-            padding: 5rem 2rem 2rem;
-            transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            z-index: 1001;
-            box-shadow: -5px 0 30px rgba(138, 43, 226, 0.5);
-            border-left: 2px solid rgba(138, 43, 226, 0.5);
-            overflow-y: auto;
-        }
-
-        .mobile-menu.active {
-            right: 0;
-        }
-
-        .mobile-menu .nav-btn {
-            width: 100%;
-            margin-bottom: 1rem;
-            padding: 1.2rem;
-            font-size: 1.1rem;
-            text-align: center;
-        }
-
-        .menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-            z-index: 1000;
-        }
-
-        .menu-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        @media (min-width: 769px) {
-            .nav-buttons {
-                width: auto;
-            }
         }
 
         .nav-btn {
@@ -962,22 +878,10 @@
     </style>
 </head>
 <body>
-    <!-- Overlay pour le menu mobile -->
-    <div class="menu-overlay" id="menuOverlay"></div>
-
     <header>
         <nav>
             <div class="logo" onclick="showSection('accueil')">CRG R.D</div>
-            
-            <!-- Menu burger (mobile) -->
-            <div class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-
-            <!-- Menu desktop -->
-            <div class="nav-buttons" id="desktopMenu">
+            <div class="nav-buttons">
                 <button class="nav-btn active" onclick="showSection('accueil')">Accueil</button>
                 <button class="nav-btn" onclick="showSection('tarifs')">Tarifs</button>
                 <button class="nav-btn" onclick="showSection('nettoyage')">Nettoyage</button>
@@ -986,15 +890,6 @@
             </div>
         </nav>
     </header>
-
-    <!-- Menu mobile (slide from right) -->
-    <div class="mobile-menu" id="mobileMenu">
-        <button class="nav-btn active" onclick="showSection('accueil'); closeMobileMenu();">Accueil</button>
-        <button class="nav-btn" onclick="showSection('tarifs'); closeMobileMenu();">Tarifs</button>
-        <button class="nav-btn" onclick="showSection('nettoyage'); closeMobileMenu();">Nettoyage</button>
-        <button class="nav-btn" onclick="showSection('debarras'); closeMobileMenu();">Débarras</button>
-        <button class="nav-btn" onclick="showSection('jardinage'); closeMobileMenu();">Jardinage</button>
-    </div>
 
     <!-- Page Accueil -->
     <section id="accueil" class="active">
@@ -1286,29 +1181,6 @@
     </footer>
 
     <script>
-        // Menu burger mobile
-        const menuToggle = document.getElementById('menuToggle');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const menuOverlay = document.getElementById('menuOverlay');
-
-        menuToggle.addEventListener('click', function() {
-            this.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-            menuOverlay.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-        });
-
-        menuOverlay.addEventListener('click', function() {
-            closeMobileMenu();
-        });
-
-        function closeMobileMenu() {
-            menuToggle.classList.remove('active');
-            mobileMenu.classList.remove('active');
-            menuOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
         function showSection(sectionId) {
             // Masquer toutes les sections
             const sections = document.querySelectorAll('section');
@@ -1319,30 +1191,18 @@
             // Afficher la section demandée
             document.getElementById(sectionId).classList.add('active');
 
-            // Mettre à jour les boutons actifs (desktop)
-            const navBtns = document.querySelectorAll('#desktopMenu .nav-btn');
+            // Mettre à jour les boutons actifs
+            const navBtns = document.querySelectorAll('.nav-btn');
             navBtns.forEach(btn => {
                 btn.classList.remove('active');
             });
 
+            // Trouver et activer le bouton correspondant
             const activeBtn = Array.from(navBtns).find(btn => 
                 btn.getAttribute('onclick').includes(sectionId)
             );
             if (activeBtn) {
                 activeBtn.classList.add('active');
-            }
-
-            // Mettre à jour les boutons actifs (mobile)
-            const mobileNavBtns = document.querySelectorAll('#mobileMenu .nav-btn');
-            mobileNavBtns.forEach(btn => {
-                btn.classList.remove('active');
-            });
-
-            const activeMobileBtn = Array.from(mobileNavBtns).find(btn => 
-                btn.getAttribute('onclick').includes(sectionId)
-            );
-            if (activeMobileBtn) {
-                activeMobileBtn.classList.add('active');
             }
 
             // Scroll vers le haut
