@@ -1,130 +1,1235 @@
-/* ===== GTA DEV STYLE - CRG SERVICES ===== */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRG R.D - Services Professionnels</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-:root{
-  --bg:#0e0f12;
-  --panel:#16181d;
-  --border:#22252c;
-  --accent:#00e5ff;
-  --text:#eaeaea;
-  --muted:#9aa0a6;
-}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: #0a0015;
+            overflow-x: hidden;
+        }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Inter',sans-serif;
-}
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(138, 43, 226, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(75, 0, 130, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(138, 43, 226, 0.1) 0%, transparent 50%);
+            animation: bgShift 15s ease infinite;
+            z-index: -1;
+        }
 
-body{
-  background: radial-gradient(circle at top,#1a1d24,#0e0f12 70%);
-  color:var(--text);
-  min-height:100vh;
-}
+        @keyframes bgShift {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+        }
 
-/* ===== NAVBAR ===== */
-.navbar{
-  position:fixed;
-  top:0;
-  width:100%;
-  height:70px;
-  background:rgba(14,15,18,.95);
-  border-bottom:1px solid var(--border);
-  z-index:1000;
-}
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1a0033 0%, #3d0066 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 4px 30px rgba(138, 43, 226, 0.5),
+                        0 0 50px rgba(138, 43, 226, 0.3);
+            border-bottom: 2px solid #8a2be2;
+            position: relative;
+            overflow: hidden;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-.navbar ul{
-  height:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:35px;
-  list-style:none;
-}
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.3), transparent);
+            animation: headerShine 3s infinite;
+        }
 
-.navbar a{
-  color:var(--muted);
-  text-decoration:none;
-  font-weight:600;
-  font-size:.95rem;
-  letter-spacing:.04em;
-  position:relative;
-}
+        @keyframes headerShine {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
 
-.navbar a.active,
-.navbar a:hover{
-  color:var(--accent);
-}
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
 
-/* ===== MAIN ===== */
-.main-content{
-  padding:140px 20px 80px;
-  max-width:1200px;
-  margin:auto;
-  text-align:center;
-}
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 
+                0 0 10px #8a2be2,
+                0 0 20px #8a2be2,
+                0 0 30px #8a2be2,
+                0 0 40px #6a0dad;
+            animation: logoGlow 2s ease-in-out infinite;
+            cursor: pointer;
+        }
 
-h1{
-  font-size:3rem;
-  margin-bottom:20px;
-  letter-spacing:.08em;
-}
+        @keyframes logoGlow {
+            0%, 100% { 
+                text-shadow: 
+                    0 0 10px #8a2be2,
+                    0 0 20px #8a2be2,
+                    0 0 30px #8a2be2,
+                    0 0 40px #6a0dad;
+            }
+            50% { 
+                text-shadow: 
+                    0 0 20px #8a2be2,
+                    0 0 30px #8a2be2,
+                    0 0 40px #8a2be2,
+                    0 0 60px #6a0dad,
+                    0 0 80px #6a0dad;
+            }
+        }
 
-p{
-  color:var(--muted);
-  max-width:900px;
-  margin:0 auto 40px;
-  line-height:1.7;
-}
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
 
-/* ===== CARDS ===== */
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:30px;
-  margin-top:50px;
-}
+        .nav-btn {
+            background: linear-gradient(135deg, #3d0066 0%, #6a0dad 100%);
+            color: white;
+            border: 2px solid rgba(138, 43, 226, 0.5);
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 
+                0 0 20px rgba(138, 43, 226, 0.3),
+                inset 0 0 10px rgba(138, 43, 226, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
 
-.card{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:28px;
-  text-align:left;
-  transition:.3s;
-}
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
 
-.card:hover{
-  transform:translateY(-6px);
-  border-color:var(--accent);
-  box-shadow:0 0 25px rgba(0,229,255,.12);
-}
+        .nav-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
 
-.card h3{
-  margin-bottom:12px;
-  color:var(--accent);
-}
+        .nav-btn:hover,
+        .nav-btn.active {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 0 30px rgba(138, 43, 226, 0.6),
+                0 0 60px rgba(138, 43, 226, 0.4),
+                inset 0 0 20px rgba(138, 43, 226, 0.3);
+            border-color: #8a2be2;
+            text-shadow: 0 0 10px #fff;
+        }
 
-/* ===== BUTTON ===== */
-.btn{
-  display:inline-block;
-  margin-top:40px;
-  padding:12px 28px;
-  border-radius:30px;
-  border:1px solid var(--accent);
-  color:var(--accent);
-  text-decoration:none;
-  font-weight:600;
-  transition:.3s;
-}
+        .nav-btn.active {
+            background: linear-gradient(135deg, #6a0dad 0%, #8a2be2 100%);
+        }
 
-.btn:hover{
-  background:var(--accent);
-  color:#000;
-}
+        /* Section Tarifs */
+        .pricing-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
 
-/* ===== RESPONSIVE ===== */
-@media(max-width:768px){
-  h1{font-size:2.2rem;}
-}
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: linear-gradient(145deg, #1a0033, #0d001a);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 2px solid rgba(138, 43, 226, 0.3);
+            box-shadow: 
+                0 0 20px rgba(138, 43, 226, 0.3),
+                0 0 40px rgba(138, 43, 226, 0.2),
+                inset 0 0 20px rgba(138, 43, 226, 0.1);
+            transition: all 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(138, 43, 226, 0.1), transparent);
+            animation: cardShine 4s infinite;
+        }
+
+        .pricing-card.featured {
+            border-color: #8a2be2;
+            transform: scale(1.05);
+            box-shadow: 
+                0 0 40px rgba(138, 43, 226, 0.5),
+                0 0 80px rgba(138, 43, 226, 0.3),
+                inset 0 0 30px rgba(138, 43, 226, 0.2);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 
+                0 0 40px rgba(138, 43, 226, 0.6),
+                0 0 80px rgba(138, 43, 226, 0.4),
+                inset 0 0 30px rgba(138, 43, 226, 0.2);
+            border-color: #8a2be2;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .pricing-badge {
+            background: linear-gradient(135deg, #6a0dad 0%, #8a2be2 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        .pricing-card h3 {
+            color: #e0e0e0;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.8);
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            color: #8a2be2;
+            font-weight: bold;
+            text-shadow: 
+                0 0 20px rgba(138, 43, 226, 0.8),
+                0 0 40px rgba(138, 43, 226, 0.5);
+        }
+
+        .pricing-price span {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .pricing-features li {
+            padding: 1rem;
+            margin-bottom: 0.8rem;
+            background: linear-gradient(145deg, #0d001a, #1a0033);
+            border-left: 3px solid #8a2be2;
+            border-radius: 5px;
+            color: #c0c0c0;
+            transition: all 0.3s;
+            position: relative;
+            padding-left: 2.5rem;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 1rem;
+            color: #8a2be2;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px #8a2be2;
+        }
+
+        .pricing-features li:hover {
+            background: linear-gradient(145deg, #1a0033, #0d001a);
+            transform: translateX(5px);
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+        }
+
+        .pricing-btn {
+            background: linear-gradient(135deg, #6a0dad 0%, #8a2be2 100%);
+            color: white;
+            border: 2px solid #8a2be2;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 1.1rem;
+            width: 100%;
+            box-shadow: 
+                0 0 20px rgba(138, 43, 226, 0.4),
+                inset 0 0 10px rgba(138, 43, 226, 0.2);
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .pricing-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .pricing-btn:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .pricing-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 0 30px rgba(138, 43, 226, 0.7),
+                0 0 60px rgba(138, 43, 226, 0.5);
+            text-shadow: 0 0 10px #fff;
+        }
+
+        /* Sections */
+        section {
+            display: none;
+            min-height: calc(100vh - 200px);
+            padding: 4rem 2rem;
+        }
+
+        section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Section */
+        .hero {
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            animation: titlePulse 3s ease-in-out infinite;
+            text-shadow: 
+                0 0 20px #8a2be2,
+                0 0 40px #8a2be2,
+                0 0 60px #6a0dad,
+                0 0 80px #6a0dad;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { 
+                transform: scale(1);
+                text-shadow: 
+                    0 0 20px #8a2be2,
+                    0 0 40px #8a2be2,
+                    0 0 60px #6a0dad;
+            }
+            50% { 
+                transform: scale(1.02);
+                text-shadow: 
+                    0 0 30px #8a2be2,
+                    0 0 60px #8a2be2,
+                    0 0 90px #6a0dad,
+                    0 0 120px #6a0dad;
+            }
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.8);
+        }
+
+        /* Service Cards Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: linear-gradient(145deg, #1a0033, #0d001a);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 2px solid rgba(138, 43, 226, 0.3);
+            box-shadow: 
+                0 0 20px rgba(138, 43, 226, 0.3),
+                0 0 40px rgba(138, 43, 226, 0.2),
+                inset 0 0 20px rgba(138, 43, 226, 0.1);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            animation: cardFloat 6s ease-in-out infinite;
+        }
+
+        .service-card:nth-child(2) {
+            animation-delay: 2s;
+        }
+
+        .service-card:nth-child(3) {
+            animation-delay: 4s;
+        }
+
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(138, 43, 226, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: cardShine 4s infinite;
+        }
+
+        @keyframes cardShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 
+                0 0 40px rgba(138, 43, 226, 0.6),
+                0 0 80px rgba(138, 43, 226, 0.4),
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 0 30px rgba(138, 43, 226, 0.2);
+            border-color: #8a2be2;
+        }
+
+        .service-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #3d0066 0%, #6a0dad 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 
+                0 0 30px rgba(138, 43, 226, 0.6),
+                0 0 60px rgba(138, 43, 226, 0.4),
+                inset 0 0 20px rgba(138, 43, 226, 0.3);
+            animation: iconPulse 2s ease-in-out infinite;
+            border: 3px solid rgba(138, 43, 226, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 30px rgba(138, 43, 226, 0.6),
+                    0 0 60px rgba(138, 43, 226, 0.4);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 50px rgba(138, 43, 226, 0.8),
+                    0 0 100px rgba(138, 43, 226, 0.6);
+            }
+        }
+
+        .service-card h3 {
+            color: #e0e0e0;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            text-shadow: 
+                0 0 10px #8a2be2,
+                0 0 20px #8a2be2;
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-card p {
+            color: #b0b0b0;
+            line-height: 1.8;
+            text-align: center;
+            font-size: 1.05rem;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 1.5rem;
+        }
+
+        .view-btn {
+            background: linear-gradient(135deg, #6a0dad 0%, #8a2be2 100%);
+            color: white;
+            border: 2px solid #8a2be2;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 1.1rem;
+            width: 100%;
+            box-shadow: 
+                0 0 20px rgba(138, 43, 226, 0.4),
+                inset 0 0 10px rgba(138, 43, 226, 0.2);
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .view-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .view-btn:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .view-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 0 30px rgba(138, 43, 226, 0.7),
+                0 0 60px rgba(138, 43, 226, 0.5),
+                inset 0 0 20px rgba(138, 43, 226, 0.3);
+            text-shadow: 0 0 10px #fff;
+        }
+
+        /* Service Detail Page */
+        .service-detail {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-detail h1 {
+            font-size: 3rem;
+            color: #e0e0e0;
+            margin-bottom: 3rem;
+            text-align: center;
+            text-shadow: 
+                0 0 20px #8a2be2,
+                0 0 40px #8a2be2,
+                0 0 60px #6a0dad;
+            animation: titleFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes titleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #3d0066 0%, #6a0dad 100%);
+            color: white;
+            border: 2px solid rgba(138, 43, 226, 0.5);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 
+                0 0 20px rgba(138, 43, 226, 0.3),
+                inset 0 0 10px rgba(138, 43, 226, 0.2);
+            margin-bottom: 2rem;
+            display: inline-block;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 0 30px rgba(138, 43, 226, 0.6),
+                0 0 60px rgba(138, 43, 226, 0.4);
+            border-color: #8a2be2;
+            text-shadow: 0 0 10px #fff;
+        }
+
+        .detail-card {
+            background: linear-gradient(145deg, #1a0033, #0d001a);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 2px solid rgba(138, 43, 226, 0.3);
+            box-shadow: 
+                0 0 20px rgba(138, 43, 226, 0.3),
+                0 0 40px rgba(138, 43, 226, 0.2),
+                inset 0 0 20px rgba(138, 43, 226, 0.1);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .detail-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(138, 43, 226, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: cardShine 4s infinite;
+        }
+
+        .service-icon-large {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #3d0066 0%, #6a0dad 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            box-shadow: 
+                0 0 30px rgba(138, 43, 226, 0.6),
+                0 0 60px rgba(138, 43, 226, 0.4),
+                inset 0 0 20px rgba(138, 43, 226, 0.3);
+            animation: iconRotate 10s linear infinite, iconPulse 2s ease-in-out infinite;
+            border: 3px solid rgba(138, 43, 226, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes iconRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .detail-description {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .detail-description p {
+            font-size: 1.2rem;
+            color: #c0c0c0;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(145deg, #0d001a, #1a0033);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid rgba(138, 43, 226, 0.2);
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: #8a2be2;
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.4);
+        }
+
+        .feature-card h3 {
+            color: #8a2be2;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.8);
+        }
+
+        .feature-card p {
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-item {
+            background: linear-gradient(145deg, #0d001a, #1a0033);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #8a2be2;
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.2);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item::before {
+            content: '►';
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8a2be2;
+            font-size: 1.2rem;
+            animation: arrowPulse 2s ease-in-out infinite;
+            text-shadow: 0 0 10px #8a2be2;
+        }
+
+        @keyframes arrowPulse {
+            0%, 100% { transform: translateY(-50%) translateX(0); }
+            50% { transform: translateY(-50%) translateX(5px); }
+        }
+
+        .feature-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 0 25px rgba(138, 43, 226, 0.4);
+            border-left-width: 6px;
+        }
+
+        .feature-item p {
+            color: #c0c0c0;
+            margin: 0;
+            padding-left: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1a0033 0%, #3d0066 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+            box-shadow: 
+                0 -4px 30px rgba(138, 43, 226, 0.5),
+                0 0 50px rgba(138, 43, 226, 0.3);
+            border-top: 2px solid #8a2be2;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #8a2be2, transparent);
+            animation: footerLine 3s linear infinite;
+        }
+
+        @keyframes footerLine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        footer p {
+            font-size: 1.1rem;
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.8);
+            margin: 0.5rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .nav-btn {
+                width: 100%;
+            }
+
+            .services-grid,
+            .features-grid,
+            .features-list {
+                grid-template-columns: 1fr;
+            }
+
+            .service-detail h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0015;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #3d0066, #8a2be2);
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #6a0dad, #9370db);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" onclick="showSection('accueil')">CRG R.D</div>
+            <div class="nav-buttons">
+                <button class="nav-btn active" onclick="showSection('accueil')">Accueil</button>
+                <button class="nav-btn" onclick="showSection('tarifs')">Tarifs</button>
+                <button class="nav-btn" onclick="showSection('nettoyage')">Nettoyage</button>
+                <button class="nav-btn" onclick="showSection('debarras')">Débarras</button>
+                <button class="nav-btn" onclick="showSection('jardinage')">Jardinage</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Accueil -->
+    <section id="accueil" class="active">
+        <div class="hero">
+            <h1>Votre Partenaire du Quotidien</h1>
+            <p>Des services professionnels et de qualité pour votre maison et votre jardin. Nous prenons soin de votre environnement avec passion et expertise.</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M3 21h18M4 18h16M6 6l10-3 4 11-10 3z"/>
+                        </svg>
+                    </div>
+                    <h3>Nettoyage / Ménage</h3>
+                    <p>Un service de nettoyage professionnel pour un intérieur impeccable et un environnement sain.</p>
+                    <button class="view-btn" onclick="showSection('nettoyage')">Voir le service</button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <rect x="1" y="3" width="15" height="13"/>
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                            <circle cx="5.5" cy="18.5" r="2.5"/>
+                            <circle cx="18.5" cy="18.5" r="2.5"/>
+                        </svg>
+                    </div>
+                    <h3>Débarras de Déchets</h3>
+                    <p>Évacuation et gestion responsable de tous vos déchets et encombrants en toute simplicité.</p>
+                    <button class="view-btn" onclick="showSection('debarras')">Voir le service</button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            <path d="M17.2 5.2a12 12 0 0 1 0 13.6M6.8 5.2a12 12 0 0 0 0 13.6"/>
+                        </svg>
+                    </div>
+                    <h3>Jardinage / Paysagiste</h3>
+                    <p>Création et entretien de vos espaces verts pour un jardin magnifique toute l'année.</p>
+                    <button class="view-btn" onclick="showSection('jardinage')">Voir le service</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page Tarifs -->
+    <section id="tarifs">
+        <div class="pricing-section">
+            <h1 style="font-size: 3rem; color: #e0e0e0; margin-bottom: 1rem; text-align: center; text-shadow: 0 0 20px #8a2be2, 0 0 40px #8a2be2, 0 0 60px #6a0dad;">Nos Tarifs</h1>
+            <p style="text-align: center; font-size: 1.2rem; color: #b0b0b0; margin-bottom: 3rem;">Des formules adaptées à tous vos besoins</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Nettoyage Express</h3>
+                        <div class="pricing-price">49€<span>/intervention</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Nettoyage standard</li>
+                        <li>Durée 2h</li>
+                        <li>1 pièce principale</li>
+                        <li>Produits inclus</li>
+                        <li>Disponible 7j/7</li>
+                    </ul>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="pricing-header">
+                        <h3>Nettoyage Premium</h3>
+                        <div class="pricing-price">99€<span>/intervention</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Nettoyage complet</li>
+                        <li>Durée 4h</li>
+                        <li>Jusqu'à 5 pièces</li>
+                        <li>Produits écologiques</li>
+                        <li>Vitres incluses</li>
+                        <li>Garantie satisfaction</li>
+                    </ul>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Nettoyage Pro</h3>
+                        <div class="pricing-price">199€<span>/intervention</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Nettoyage en profondeur</li>
+                        <li>Durée illimitée</li>
+                        <li>Maison complète</li>
+                        <li>Équipe de 2 personnes</li>
+                        <li>Matériel professionnel</li>
+                        <li>Service sur mesure</li>
+                    </ul>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Débarras Simple</h3>
+                        <div class="pricing-price">79€<span>/m³</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Évacuation standard</li>
+                        <li>Tri inclus</li>
+                        <li>Petits volumes</li>
+                        <li>Intervention rapide</li>
+                        <li>Recyclage responsable</li>
+                    </ul>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="pricing-header">
+                        <h3>Débarras Complet</h3>
+                        <div class="pricing-price">149€<span>/m³</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Débarras total</li>
+                        <li>Gros volumes</li>
+                        <li>Équipe complète</li>
+                        <li>Nettoyage après débarras</li>
+                        <li>Transport inclus</li>
+                        <li>Devis gratuit</li>
+                    </ul>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Entretien Jardin</h3>
+                        <div class="pricing-price">69€<span>/intervention</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Tonte de pelouse</li>
+                        <li>Taille de haies</li>
+                        <li>Désherbage</li>
+                        <li>Jusqu'à 200m²</li>
+                        <li>Outils fournis</li>
+                        <li>Évacuation déchets</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page Nettoyage -->
+    <section id="nettoyage">
+        <div class="service-detail">
+            <button class="back-btn" onclick="showSection('accueil')">← Retour à l'accueil</button>
+            <h1>Nettoyage / Ménage</h1>
+            
+            <div class="detail-card">
+                <div class="service-icon-large">
+                    <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M3 21h18M4 18h16M6 6l10-3 4 11-10 3z"/>
+                    </svg>
+                </div>
+                
+                <div class="detail-description">
+                    <p>Un service de nettoyage professionnel pour un intérieur impeccable et un environnement sain.</p>
+                    <p>Notre équipe qualifiée intervient avec des produits écologiques et professionnels pour garantir un résultat irréprochable.</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Service Complet</h3>
+                        <p>Nettoyage en profondeur de toutes les pièces de votre habitation avec attention aux détails.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Produits Écologiques</h3>
+                        <p>Utilisation exclusive de produits respectueux de l'environnement et de votre santé.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Équipe Professionnelle</h3>
+                        <p>Personnel formé, expérimenté et équipé pour tous types d'interventions.</p>
+                    </div>
+                </div>
+
+                <div class="features-list">
+                    <div class="feature-item"><p>Nettoyage complet de toutes les pièces</p></div>
+                    <div class="feature-item"><p>Dépoussiérage et désinfection des surfaces</p></div>
+                    <div class="feature-item"><p>Nettoyage des sols et vitres</p></div>
+                    <div class="feature-item"><p>Entretien des sanitaires</p></div>
+                    <div class="feature-item"><p>Service personnalisé selon vos besoins</p></div>
+                    <div class="feature-item"><p>Intervention rapide et efficace</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page Débarras -->
+    <section id="debarras">
+        <div class="service-detail">
+            <button class="back-btn" onclick="showSection('accueil')">← Retour à l'accueil</button>
+            <h1>Débarras de Déchets</h1>
+            
+            <div class="detail-card">
+                <div class="service-icon-large">
+                    <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <rect x="1" y="3" width="15" height="13"/>
+                        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                        <circle cx="5.5" cy="18.5" r="2.5"/>
+                        <circle cx="18.5" cy="18.5" r="2.5"/>
+                    </svg>
+                </div>
+                
+                <div class="detail-description">
+                    <p>Évacuation et gestion responsable de tous vos déchets et encombrants en toute simplicité.</p>
+                    <p>Service rapide, discret et respectueux de l'environnement pour tous vos besoins de débarras.</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Débarras Total</h3>
+                        <p>Évacuation complète d'appartements, maisons, caves, greniers et locaux professionnels.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Recyclage Responsable</h3>
+                        <p>Tri sélectif et recyclage dans le respect des normes environnementales.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Service Rapide</h3>
+                        <p>Intervention rapide et efficace pour libérer vos espaces rapidement.</p>
+                    </div>
+                </div>
+
+                <div class="features-list">
+                    <div class="feature-item"><p>Débarras d'appartements et maisons</p></div>
+                    <div class="feature-item"><p>Évacuation d'encombrants et gros volumes</p></div>
+                    <div class="feature-item"><p>Vidage de caves et greniers</p></div>
+                    <div class="feature-item"><p>Tri et recyclage responsable</p></div>
+                    <div class="feature-item"><p>Service rapide et discret</p></div>
+                    <div class="feature-item"><p>Tarifs compétitifs et transparents</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page Jardinage -->
+    <section id="jardinage">
+        <div class="service-detail">
+            <button class="back-btn" onclick="showSection('accueil')">← Retour à l'accueil</button>
+            <h1>Jardinage / Paysagiste</h1>
+            
+            <div class="detail-card">
+                <div class="service-icon-large">
+                    <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        <path d="M17.2 5.2a12 12 0 0 1 0 13.6M6.8 5.2a12 12 0 0 0 0 13.6"/>
+                    </svg>
+                </div>
+                
+                <div class="detail-description">
+                    <p>Création et entretien de vos espaces verts pour un jardin magnifique toute l'année.</p>
+                    <p>Expertise professionnelle en aménagement paysager et entretien régulier de vos jardins.</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Entretien Régulier</h3>
+                        <p>Maintenance continue de vos espaces verts pour une beauté durable.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Création Paysagère</h3>
+                        <p>Conception et réalisation d'espaces verts sur mesure selon vos envies.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Expertise Végétale</h3>
+                        <p>Conseils personnalisés pour le choix et l'entretien de vos plantes.</p>
+                    </div>
+                </div>
+
+                <div class="features-list">
+                    <div class="feature-item"><p>Entretien régulier des jardins</p></div>
+                    <div class="feature-item"><p>Tonte professionnelle de pelouses</p></div>
+                    <div class="feature-item"><p>Taille et élagage d'arbustes</p></div>
+                    <div class="feature-item"><p>Création d'espaces paysagers</p></div>
+                    <div class="feature-item"><p>Plantation et aménagement</p></div>
+                    <div class="feature-item"><p>Conseils personnalisés</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 CRG R.D - Tous droits réservés</p>
+        <p>Votre satisfaction est notre priorité</p>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // Masquer toutes les sections
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Afficher la section demandée
+            document.getElementById(sectionId).classList.add('active');
+
+            // Mettre à jour les boutons actifs
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Trouver et activer le bouton correspondant
+            const activeBtn = Array.from(navBtns).find(btn => 
+                btn.getAttribute('onclick').includes(sectionId)
+            );
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+
+            // Scroll vers le haut
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Effet parallaxe 3D au mouvement de la souris
+        document.addEventListener('mousemove', function(e) {
+            const cards = document.querySelectorAll('.service-card, .detail-card, .feature-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                const rotateX = (y / rect.height) * 3;
+                const rotateY = (x / rect.width) * 3;
+                
+                card.style.transform = `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+        });
+
+        // Reset au départ de la souris
+        document.querySelectorAll('.service-card, .detail-card, .feature-card').forEach(card => {
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+            });
+        });
+    </script>
+</body>
+</html>
