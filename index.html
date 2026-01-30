@@ -143,18 +143,6 @@
             transition: all 0.3s ease;
         }
 
-        .menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-
         /* Hero Section */
         .hero {
             margin-top: 80px;
@@ -752,6 +740,7 @@
             gap: 1rem;
             margin-bottom: 2rem;
             border-bottom: 2px solid var(--bg-secondary);
+            overflow-x: auto;
         }
 
         .tab-btn {
@@ -763,6 +752,7 @@
             font-weight: 600;
             color: var(--text-medium);
             transition: all 0.3s ease;
+            white-space: nowrap;
         }
 
         .tab-btn.active {
@@ -784,6 +774,7 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 4px 20px var(--shadow);
+            overflow-x: auto;
         }
 
         .requests-table table {
@@ -859,6 +850,27 @@
             background: #c82333;
         }
 
+        .btn-edit {
+            background: var(--accent-orange);
+            color: var(--white);
+            margin-right: 0.5rem;
+        }
+
+        .btn-edit:hover {
+            background: #e67e22;
+        }
+
+        .btn-add {
+            background: #28a745;
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-add:hover {
+            background: #218838;
+        }
+
         /* Modal */
         .modal {
             display: none;
@@ -881,7 +893,7 @@
             background: var(--white);
             padding: 2.5rem;
             border-radius: 15px;
-            max-width: 600px;
+            max-width: 800px;
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
@@ -918,6 +930,53 @@
         .success-message.active {
             display: block;
             animation: slideDown 0.5s ease-out;
+        }
+
+        /* Editor Styles */
+        .editor-section {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .editor-section h3 {
+            font-family: 'Crimson Pro', serif;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .items-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .item-card {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-info h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .item-info p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 0.5rem;
         }
 
         /* Responsive Design */
@@ -1014,8 +1073,8 @@
         <section class="hero">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1>Un accompagnement humain pour votre quotidien</h1>
-                    <p>CRG Aide & Services est là pour vous accompagner dans les moments où vous en avez besoin. Sans jugement, avec bienveillance et professionnalisme.</p>
+                    <h1 id="hero-title">Un accompagnement humain pour votre quotidien</h1>
+                    <p id="hero-subtitle">CRG Aide & Services est là pour vous accompagner dans les moments où vous en avez besoin. Sans jugement, avec bienveillance et professionnalisme.</p>
                     <div class="hero-buttons">
                         <a href="#" class="btn-primary" onclick="showPage('contact')">Demander de l'aide</a>
                         <a href="#" class="btn-secondary" onclick="showPage('services')">Nos services</a>
@@ -1035,37 +1094,8 @@
         <section class="values">
             <h2 class="section-title">Nos valeurs fondamentales</h2>
             <p class="section-subtitle">Ces principes guident chacune de nos actions et accompagnements</p>
-            <div class="values-grid">
-                <div class="value-card">
-                    <span class="value-icon">❤️</span>
-                    <h3>Respect</h3>
-                    <p>Chaque personne et chaque situation est unique. Nous respectons votre parcours et vos choix.</p>
-                </div>
-                <div class="value-card">
-                    <span class="value-icon">👂</span>
-                    <h3>Écoute sans jugement</h3>
-                    <p>Nous vous écoutons avec bienveillance, sans jugement ni préjugé sur votre situation.</p>
-                </div>
-                <div class="value-card">
-                    <span class="value-icon">🌟</span>
-                    <h3>Simplicité</h3>
-                    <p>Nous rendons l'aide accessible et compréhensible, sans jargon ni complication.</p>
-                </div>
-                <div class="value-card">
-                    <span class="value-icon">🔓</span>
-                    <h3>Accessibilité</h3>
-                    <p>L'aide doit être accessible à tous, quels que soient votre situation ou votre parcours.</p>
-                </div>
-                <div class="value-card">
-                    <span class="value-icon">💬</span>
-                    <h3>Honnêteté</h3>
-                    <p>Nous sommes transparents sur nos possibilités et nos limites.</p>
-                </div>
-                <div class="value-card">
-                    <span class="value-icon">🔒</span>
-                    <h3>Confidentialité</h3>
-                    <p>Vos informations restent confidentielles et sont protégées.</p>
-                </div>
+            <div class="values-grid" id="values-grid">
+                <!-- Values will be loaded dynamically -->
             </div>
         </section>
 
@@ -1073,45 +1103,16 @@
         <section class="services">
             <h2 class="section-title">Nos services</h2>
             <p class="section-subtitle">Une gamme complète d'accompagnements pour votre quotidien</p>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>🏠 Aide à domicile</h3>
-                    <p>Assistance pour les tâches du quotidien : ménage, courses, préparation de repas, accompagnement.</p>
-                    <a href="#" class="service-link" onclick="showPage('services')">En savoir plus →</a>
-                </div>
-                <div class="service-card">
-                    <h3>🌱 Jardinage</h3>
-                    <p>Entretien de jardin, tonte, taille, plantation et aménagement d'espaces verts.</p>
-                    <a href="#" class="service-link" onclick="showPage('services')">En savoir plus →</a>
-                </div>
-                <div class="service-card">
-                    <h3>🧹 Débarras</h3>
-                    <p>Débarras de cave, grenier, garage. Tri et évacuation de vos encombrants.</p>
-                    <a href="#" class="service-link" onclick="showPage('services')">En savoir plus →</a>
-                </div>
-                <div class="service-card">
-                    <h3>💻 Aide informatique</h3>
-                    <p>Assistance pour vos démarches en ligne, utilisation d'ordinateur, smartphone ou tablette.</p>
-                    <a href="#" class="service-link" onclick="showPage('services')">En savoir plus →</a>
-                </div>
-                <div class="service-card">
-                    <h3>📋 Aide administrative</h3>
-                    <p>Accompagnement dans vos démarches : courriers, formulaires, compréhension de documents.</p>
-                    <a href="#" class="service-link" onclick="showPage('services')">En savoir plus →</a>
-                </div>
-                <div class="service-card">
-                    <h3>🛠️ Petits services</h3>
-                    <p>Bricolage, petites réparations, montage de meubles et autres services du quotidien.</p>
-                    <a href="#" class="service-link" onclick="showPage('services')">En savoir plus →</a>
-                </div>
+            <div class="services-grid" id="services-grid">
+                <!-- Services will be loaded dynamically -->
             </div>
         </section>
 
         <!-- CTA Section -->
         <section class="cta-section">
             <div class="cta-content">
-                <h2>Besoin d'aide aujourd'hui ?</h2>
-                <p>N'attendez pas. Contactez-nous et expliquez-nous votre situation. Nous vous répondrons rapidement.</p>
+                <h2 id="cta-title">Besoin d'aide aujourd'hui ?</h2>
+                <p id="cta-text">N'attendez pas. Contactez-nous et expliquez-nous votre situation. Nous vous répondrons rapidement.</p>
                 <a href="#" class="btn-white" onclick="showPage('contact')">Faire une demande</a>
             </div>
         </section>
@@ -1125,77 +1126,8 @@
                     <h1>Nos services</h1>
                     <p>Découvrez l'ensemble de nos accompagnements pour faciliter votre quotidien</p>
                 </div>
-
-                <div class="content-section">
-                    <h2>🏠 Aide à domicile</h2>
-                    <p>Nous proposons une assistance complète pour les tâches de votre vie quotidienne :</p>
-                    <ul>
-                        <li>Entretien du logement (ménage, rangement)</li>
-                        <li>Aide aux courses et préparation de repas</li>
-                        <li>Accompagnement pour les rendez-vous</li>
-                        <li>Présence et compagnie</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h2>🌱 Jardinage et espaces verts</h2>
-                    <p>Entretien et embellissement de vos extérieurs :</p>
-                    <ul>
-                        <li>Tonte de pelouse et débroussaillage</li>
-                        <li>Taille de haies et arbustes</li>
-                        <li>Plantation et aménagement</li>
-                        <li>Entretien général du jardin</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h2>🧹 Débarras et nettoyage</h2>
-                    <p>Libérez de l'espace et redonnez vie à vos pièces :</p>
-                    <ul>
-                        <li>Débarras de cave, grenier, garage</li>
-                        <li>Tri et organisation</li>
-                        <li>Évacuation d'encombrants</li>
-                        <li>Nettoyage après débarras</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h2>💻 Aide informatique</h2>
-                    <p>Accompagnement pour vos outils numériques :</p>
-                    <ul>
-                        <li>Aide aux démarches en ligne</li>
-                        <li>Utilisation d'ordinateur, smartphone, tablette</li>
-                        <li>Installation et configuration de logiciels</li>
-                        <li>Formation aux outils du quotidien</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h2>📋 Aide administrative</h2>
-                    <p>Soutien pour vos démarches et papiers :</p>
-                    <ul>
-                        <li>Compréhension de courriers administratifs</li>
-                        <li>Aide au remplissage de formulaires</li>
-                        <li>Orientation vers les bons organismes</li>
-                        <li>Organisation de documents</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h2>🛠️ Petits services du quotidien</h2>
-                    <p>Tous les petits services qui facilitent la vie :</p>
-                    <ul>
-                        <li>Petites réparations</li>
-                        <li>Montage de meubles</li>
-                        <li>Petits travaux de bricolage</li>
-                        <li>Et toute autre demande spécifique</li>
-                    </ul>
-                </div>
-
-                <div class="content-section" style="background: linear-gradient(135deg, var(--accent-orange), var(--accent-light)); color: var(--white);">
-                    <h2 style="color: var(--white);">Une demande spécifique ?</h2>
-                    <p style="color: var(--white); opacity: 0.95;">Vous avez un besoin qui ne figure pas dans cette liste ? N'hésitez pas à nous contacter. Nous étudierons chaque demande avec attention et vous proposerons une solution adaptée.</p>
-                    <a href="#" class="btn-white" onclick="showPage('contact')">Faire une demande</a>
+                <div id="services-detail-container">
+                    <!-- Service details will be loaded dynamically -->
                 </div>
             </div>
         </div>
@@ -1234,16 +1166,7 @@
                         <label for="service">Type de demande *</label>
                         <select id="service" name="service" required>
                             <option value="">Sélectionnez...</option>
-                            <option value="aide-domicile">Aide à domicile</option>
-                            <option value="jardinage">Jardinage</option>
-                            <option value="debarras">Débarras</option>
-                            <option value="informatique">Aide informatique</option>
-                            <option value="administratif">Aide administrative</option>
-                            <option value="petits-services">Petits services</option>
-                            <option value="probleme-quotidien">Problème du quotidien</option>
-                            <option value="demarche-admin">Démarche administrative</option>
-                            <option value="projet">Projet à développer</option>
-                            <option value="autre">Autre</option>
+                            <!-- Options will be loaded dynamically from services -->
                         </select>
                     </div>
 
@@ -1266,52 +1189,8 @@
     <!-- Problèmes du quotidien Page -->
     <div id="problemes-page" class="page hidden">
         <div class="page-content">
-            <div class="content-container">
-                <div class="page-header">
-                    <h1>Problèmes du quotidien</h1>
-                    <p>Vous vous sentez perdu, dépassé ou simplement en manque d'écoute ? Nous sommes là.</p>
-                </div>
-
-                <div class="content-section">
-                    <h2>Un espace d'écoute et d'orientation</h2>
-                    <p>La vie présente parfois des difficultés qui nous dépassent : problèmes personnels, émotionnels, organisationnels, relationnels ou simplement un sentiment de ne plus savoir par où commencer.</p>
-                    <p>CRG Aide & Services propose un espace d'écoute bienveillante où vous pouvez exprimer vos difficultés sans jugement et recevoir des conseils pour avancer.</p>
-                </div>
-
-                <div class="content-section">
-                    <h2>Comment pouvons-nous vous aider ?</h2>
-                    <p>Nous pouvons vous accompagner sur :</p>
-                    <ul>
-                        <li><strong>L'écoute :</strong> Parfois, parler de sa situation à quelqu'un qui écoute vraiment suffit à y voir plus clair</li>
-                        <li><strong>L'orientation :</strong> Nous pouvons vous guider vers les professionnels ou organismes adaptés à votre situation</li>
-                        <li><strong>La réflexion :</strong> Prendre du recul ensemble sur votre situation pour identifier des pistes de solutions</li>
-                        <li><strong>L'organisation :</strong> Vous aider à structurer votre quotidien et à prioriser vos besoins</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h2>Situations que nous rencontrons</h2>
-                    <p>Nous accompagnons des personnes dans des situations très variées :</p>
-                    <ul>
-                        <li>Sentiment d'isolement ou de solitude</li>
-                        <li>Difficultés à gérer le quotidien</li>
-                        <li>Période de transition (séparation, deuil, changement professionnel)</li>
-                        <li>Besoin de soutien moral</li>
-                        <li>Questionnements sur l'avenir</li>
-                        <li>Manque d'organisation ou de structure</li>
-                    </ul>
-                </div>
-
-                <div class="content-section" style="background: var(--accent-light);">
-                    <h2>Nos limites</h2>
-                    <p>Nous ne sommes pas psychologues, médecins ou travailleurs sociaux. Si votre situation nécessite une prise en charge professionnelle spécialisée, nous vous orienterons vers les bons interlocuteurs. Notre rôle est d'offrir une première écoute et de faciliter l'accès aux solutions qui existent.</p>
-                </div>
-
-                <div class="content-section" style="background: linear-gradient(135deg, var(--primary), var(--accent)); color: var(--white); text-align: center;">
-                    <h2 style="color: var(--white);">Parlez-nous de votre situation</h2>
-                    <p style="color: var(--white); opacity: 0.95;">Aucune situation n'est trop petite ou trop grande. Nous sommes là pour écouter, comprendre et vous accompagner.</p>
-                    <a href="#" class="btn-white" onclick="showPage('contact')">Prendre contact</a>
-                </div>
+            <div class="content-container" id="problemes-container">
+                <!-- Content will be loaded dynamically -->
             </div>
         </div>
     </div>
@@ -1319,55 +1198,8 @@
     <!-- Démarches administratives Page -->
     <div id="demarches-page" class="page hidden">
         <div class="page-content">
-            <div class="content-container">
-                <div class="page-header">
-                    <h1>Démarches administratives</h1>
-                    <p>Simplifiez vos démarches avec un accompagnement bienveillant et efficace</p>
-                </div>
-
-                <div class="content-section">
-                    <h2>Pourquoi les démarches administratives sont-elles si complexes ?</h2>
-                    <p>Courriers incompréhensibles, formulaires compliqués, sites web peu clairs, vocabulaire technique... Les démarches administratives sont souvent sources de stress et d'incompréhension.</p>
-                    <p>Nous sommes là pour vous aider à y voir clair et à avancer sereinement.</p>
-                </div>
-
-                <div class="content-section">
-                    <h2>Notre accompagnement</h2>
-                    <p>Nous pouvons vous aider à :</p>
-                    <ul>
-                        <li><strong>Comprendre vos courriers :</strong> Décryptage de lettres administratives, mises en demeure, notifications</li>
-                        <li><strong>Remplir des formulaires :</strong> Assistance pour comprendre et compléter tous types de documents</li>
-                        <li><strong>Effectuer des démarches en ligne :</strong> Navigation sur les sites administratifs, création de comptes, envoi de documents</li>
-                        <li><strong>Organiser vos papiers :</strong> Tri, classement et archivage de vos documents importants</li>
-                        <li><strong>Vous orienter :</strong> Identification des bons interlocuteurs et organismes pour vos démarches</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h2>Exemples de démarches que nous accompagnons</h2>
-                    <ul>
-                        <li>Déclaration d'impôts</li>
-                        <li>Demandes d'aides sociales (CAF, Pôle Emploi, etc.)</li>
-                        <li>Dossiers de retraite</li>
-                        <li>Démarches de santé (Sécurité sociale, mutuelle)</li>
-                        <li>Courriers aux administrations</li>
-                        <li>Demandes de documents officiels</li>
-                        <li>Démarches liées au logement</li>
-                        <li>Et bien d'autres...</li>
-                    </ul>
-                </div>
-
-                <div class="content-section" style="background: var(--accent-light);">
-                    <h2>Important à savoir</h2>
-                    <p><strong>Nous ne remplaçons pas les administrations</strong> et ne pouvons pas effectuer toutes les démarches à votre place. Notre rôle est de vous aider à comprendre, à vous organiser et à gagner en autonomie pour vos futures démarches.</p>
-                    <p>Nous travaillons toujours avec votre accord et en transparence totale.</p>
-                </div>
-
-                <div class="content-section" style="background: linear-gradient(135deg, var(--primary), var(--accent)); color: var(--white); text-align: center;">
-                    <h2 style="color: var(--white);">Besoin d'aide pour une démarche ?</h2>
-                    <p style="color: var(--white); opacity: 0.95;">Expliquez-nous votre situation et nous trouverons ensemble la meilleure façon de vous accompagner.</p>
-                    <a href="#" class="btn-white" onclick="showPage('contact')">Demander de l'aide</a>
-                </div>
+            <div class="content-container" id="demarches-container">
+                <!-- Content will be loaded dynamically -->
             </div>
         </div>
     </div>
@@ -1375,66 +1207,8 @@
     <!-- Projets Page -->
     <div id="projets-page" class="page hidden">
         <div class="page-content">
-            <div class="content-container">
-                <div class="page-header">
-                    <h1>Idées de projets</h1>
-                    <p>Vous avez une idée, une envie, un projet ? Nous vous aidons à le structurer et à le concrétiser.</p>
-                </div>
-
-                <div class="content-section">
-                    <h2>Transformer une idée en projet concret</h2>
-                    <p>Beaucoup de personnes ont des idées, des envies ou des projets en tête, mais ne savent pas comment les structurer, les organiser ou les concrétiser.</p>
-                    <p>CRG Aide & Services propose un accompagnement personnalisé pour vous aider à clarifier vos objectifs et à construire un plan d'action réaliste.</p>
-                </div>
-
-                <div class="content-section">
-                    <h2>Types de projets que nous accompagnons</h2>
-                    <p>Nous travaillons sur tous types de projets, qu'ils soient :</p>
-                    <ul>
-                        <li><strong>Projets personnels :</strong> déménagement, réorganisation de vie, objectifs personnels</li>
-                        <li><strong>Projets professionnels :</strong> reconversion, création d'activité, recherche d'emploi</li>
-                        <li><strong>Projets créatifs :</strong> lancement d'une passion, développement d'un hobby</li>
-                        <li><strong>Projets de vie :</strong> grands changements, nouvelles orientations</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h2>Notre méthodologie d'accompagnement</h2>
-                    <p>Nous vous aidons à :</p>
-                    <ul>
-                        <li><strong>Clarifier votre idée :</strong> Qu'est-ce que vous voulez vraiment ? Pourquoi ce projet vous tient-il à cœur ?</li>
-                        <li><strong>Définir des objectifs :</strong> Transformer une idée vague en objectifs précis et atteignables</li>
-                        <li><strong>Identifier les étapes :</strong> Découper le projet en actions concrètes et réalisables</li>
-                        <li><strong>Anticiper les obstacles :</strong> Prévoir les difficultés et préparer des solutions</li>
-                        <li><strong>Créer un planning :</strong> Organiser les étapes dans le temps de manière réaliste</li>
-                        <li><strong>Trouver les ressources :</strong> Identifier ce dont vous avez besoin pour réussir</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h2>Exemples de projets accompagnés</h2>
-                    <ul>
-                        <li>Reconversion professionnelle vers un métier passion</li>
-                        <li>Création d'une micro-entreprise</li>
-                        <li>Projet de déménagement dans une autre région</li>
-                        <li>Lancement d'un blog ou d'une chaîne YouTube</li>
-                        <li>Retour aux études ou formation</li>
-                        <li>Organisation d'un événement personnel</li>
-                        <li>Développement d'une activité artistique</li>
-                    </ul>
-                </div>
-
-                <div class="content-section" style="background: var(--accent-light);">
-                    <h2>Notre approche</h2>
-                    <p>Nous ne vous imposons rien. Notre rôle est de vous poser les bonnes questions, de vous aider à structurer votre réflexion et de vous accompagner dans l'organisation de votre projet.</p>
-                    <p>Vous restez maître de vos décisions et de vos choix. Nous sommes là pour faciliter, clarifier et encourager.</p>
-                </div>
-
-                <div class="content-section" style="background: linear-gradient(135deg, var(--primary), var(--accent)); color: var(--white); text-align: center;">
-                    <h2 style="color: var(--white);">Prêt à structurer votre projet ?</h2>
-                    <p style="color: var(--white); opacity: 0.95;">Parlez-nous de votre idée. Nous vous aiderons à y voir plus clair et à passer à l'action.</p>
-                    <a href="#" class="btn-white" onclick="showPage('contact')">Parler de mon projet</a>
-                </div>
+            <div class="content-container" id="projets-container">
+                <!-- Content will be loaded dynamically -->
             </div>
         </div>
     </div>
@@ -1472,16 +1246,20 @@
     <div id="admin-dashboard" class="page hidden">
         <div class="dashboard">
             <div class="dashboard-header">
-                <h1>Tableau de bord</h1>
+                <h1>Tableau de bord - Gestion complète du site</h1>
                 <button class="btn-logout" onclick="logout()">Se déconnecter</button>
             </div>
 
             <div class="dashboard-tabs">
-                <button class="tab-btn active" onclick="showTab('requests')">Demandes d'aide</button>
-                <button class="tab-btn" onclick="showTab('content')">Gestion du contenu</button>
+                <button class="tab-btn active" onclick="showTab('requests')">Demandes</button>
+                <button class="tab-btn" onclick="showTab('services')">Services</button>
+                <button class="tab-btn" onclick="showTab('values')">Valeurs</button>
+                <button class="tab-btn" onclick="showTab('hero')">Page d'accueil</button>
+                <button class="tab-btn" onclick="showTab('pages')">Pages spéciales</button>
                 <button class="tab-btn" onclick="showTab('stats')">Statistiques</button>
             </div>
 
+            <!-- Requests Tab -->
             <div id="requests-tab" class="tab-content active">
                 <div class="requests-table">
                     <table>
@@ -1502,14 +1280,71 @@
                 </div>
             </div>
 
-            <div id="content-tab" class="tab-content">
-                <div class="content-section">
-                    <h2>Gestion du contenu</h2>
-                    <p>Cette section permet de modifier les contenus du site directement depuis l'interface.</p>
-                    <p style="color: var(--text-light); margin-top: 1rem;">Fonctionnalité en développement.</p>
+            <!-- Services Tab -->
+            <div id="services-tab" class="tab-content">
+                <div class="editor-section">
+                    <h3>
+                        Gestion des services
+                        <button class="action-btn btn-add" onclick="addService()">➕ Ajouter un service</button>
+                    </h3>
+                    <div class="items-list" id="services-list">
+                        <!-- Services will be loaded here -->
+                    </div>
                 </div>
             </div>
 
+            <!-- Values Tab -->
+            <div id="values-tab" class="tab-content">
+                <div class="editor-section">
+                    <h3>
+                        Gestion des valeurs
+                        <button class="action-btn btn-add" onclick="addValue()">➕ Ajouter une valeur</button>
+                    </h3>
+                    <div class="items-list" id="values-list">
+                        <!-- Values will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Tab -->
+            <div id="hero-tab" class="tab-content">
+                <div class="editor-section">
+                    <h3>Modifier la page d'accueil</h3>
+                    <form id="hero-form">
+                        <div class="form-group">
+                            <label>Titre principal</label>
+                            <input type="text" id="hero-title-input" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Sous-titre</label>
+                            <textarea id="hero-subtitle-input" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Titre CTA</label>
+                            <input type="text" id="cta-title-input">
+                        </div>
+                        <div class="form-group">
+                            <label>Texte CTA</label>
+                            <textarea id="cta-text-input" rows="2"></textarea>
+                        </div>
+                        <button type="submit" class="action-btn btn-add">💾 Sauvegarder les modifications</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Pages Tab -->
+            <div id="pages-tab" class="tab-content">
+                <div class="editor-section">
+                    <h3>Gestion des pages spéciales</h3>
+                    <div style="margin-bottom: 2rem;">
+                        <button class="action-btn btn-edit" onclick="editPage('problemes')">✏️ Modifier "Problèmes du quotidien"</button>
+                        <button class="action-btn btn-edit" onclick="editPage('demarches')">✏️ Modifier "Démarches administratives"</button>
+                        <button class="action-btn btn-edit" onclick="editPage('projets')">✏️ Modifier "Idées de projets"</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Tab -->
             <div id="stats-tab" class="tab-content">
                 <div class="content-section">
                     <h2>Statistiques</h2>
@@ -1538,6 +1373,16 @@
             <button class="modal-close" onclick="closeModal()">✕</button>
             <div id="modal-body">
                 <!-- Request details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for editing content -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeEditModal()">✕</button>
+            <div id="edit-modal-body">
+                <!-- Edit form will be loaded here -->
             </div>
         </div>
     </div>
@@ -1573,6 +1418,597 @@
     </footer>
 
     <script>
+        // Default site content
+        const defaultContent = {
+            hero: {
+                title: "Un accompagnement humain pour votre quotidien",
+                subtitle: "CRG Aide & Services est là pour vous accompagner dans les moments où vous en avez besoin. Sans jugement, avec bienveillance et professionnalisme.",
+                ctaTitle: "Besoin d'aide aujourd'hui ?",
+                ctaText: "N'attendez pas. Contactez-nous et expliquez-nous votre situation. Nous vous répondrons rapidement."
+            },
+            services: [
+                {
+                    id: 1,
+                    icon: "🏠",
+                    title: "Aide à domicile",
+                    description: "Assistance pour les tâches du quotidien : ménage, courses, préparation de repas, accompagnement.",
+                    details: "Nous proposons une assistance complète pour les tâches de votre vie quotidienne :\n• Entretien du logement (ménage, rangement)\n• Aide aux courses et préparation de repas\n• Accompagnement pour les rendez-vous\n• Présence et compagnie"
+                },
+                {
+                    id: 2,
+                    icon: "🌱",
+                    title: "Jardinage",
+                    description: "Entretien de jardin, tonte, taille, plantation et aménagement d'espaces verts.",
+                    details: "Entretien et embellissement de vos extérieurs :\n• Tonte de pelouse et débroussaillage\n• Taille de haies et arbustes\n• Plantation et aménagement\n• Entretien général du jardin"
+                },
+                {
+                    id: 3,
+                    icon: "🧹",
+                    title: "Débarras",
+                    description: "Débarras de cave, grenier, garage. Tri et évacuation de vos encombrants.",
+                    details: "Libérez de l'espace et redonnez vie à vos pièces :\n• Débarras de cave, grenier, garage\n• Tri et organisation\n• Évacuation d'encombrants\n• Nettoyage après débarras"
+                },
+                {
+                    id: 4,
+                    icon: "💻",
+                    title: "Aide informatique",
+                    description: "Assistance pour vos démarches en ligne, utilisation d'ordinateur, smartphone ou tablette.",
+                    details: "Accompagnement pour vos outils numériques :\n• Aide aux démarches en ligne\n• Utilisation d'ordinateur, smartphone, tablette\n• Installation et configuration de logiciels\n• Formation aux outils du quotidien"
+                },
+                {
+                    id: 5,
+                    icon: "📋",
+                    title: "Aide administrative",
+                    description: "Accompagnement dans vos démarches : courriers, formulaires, compréhension de documents.",
+                    details: "Soutien pour vos démarches et papiers :\n• Compréhension de courriers administratifs\n• Aide au remplissage de formulaires\n• Orientation vers les bons organismes\n• Organisation de documents"
+                },
+                {
+                    id: 6,
+                    icon: "🛠️",
+                    title: "Petits services",
+                    description: "Bricolage, petites réparations, montage de meubles et autres services du quotidien.",
+                    details: "Tous les petits services qui facilitent la vie :\n• Petites réparations\n• Montage de meubles\n• Petits travaux de bricolage\n• Et toute autre demande spécifique"
+                }
+            ],
+            values: [
+                {
+                    id: 1,
+                    icon: "❤️",
+                    title: "Respect",
+                    description: "Chaque personne et chaque situation est unique. Nous respectons votre parcours et vos choix."
+                },
+                {
+                    id: 2,
+                    icon: "👂",
+                    title: "Écoute sans jugement",
+                    description: "Nous vous écoutons avec bienveillance, sans jugement ni préjugé sur votre situation."
+                },
+                {
+                    id: 3,
+                    icon: "🌟",
+                    title: "Simplicité",
+                    description: "Nous rendons l'aide accessible et compréhensible, sans jargon ni complication."
+                },
+                {
+                    id: 4,
+                    icon: "🔓",
+                    title: "Accessibilité",
+                    description: "L'aide doit être accessible à tous, quels que soient votre situation ou votre parcours."
+                },
+                {
+                    id: 5,
+                    icon: "💬",
+                    title: "Honnêteté",
+                    description: "Nous sommes transparents sur nos possibilités et nos limites."
+                },
+                {
+                    id: 6,
+                    icon: "🔒",
+                    title: "Confidentialité",
+                    description: "Vos informations restent confidentielles et sont protégées."
+                }
+            ],
+            pages: {
+                problemes: {
+                    title: "Problèmes du quotidien",
+                    subtitle: "Vous vous sentez perdu, dépassé ou simplement en manque d'écoute ? Nous sommes là.",
+                    sections: [
+                        {
+                            title: "Un espace d'écoute et d'orientation",
+                            content: "La vie présente parfois des difficultés qui nous dépassent : problèmes personnels, émotionnels, organisationnels, relationnels ou simplement un sentiment de ne plus savoir par où commencer.\n\nCRG Aide & Services propose un espace d'écoute bienveillante où vous pouvez exprimer vos difficultés sans jugement et recevoir des conseils pour avancer."
+                        }
+                    ]
+                },
+                demarches: {
+                    title: "Démarches administratives",
+                    subtitle: "Simplifiez vos démarches avec un accompagnement bienveillant et efficace",
+                    sections: [
+                        {
+                            title: "Pourquoi les démarches administratives sont-elles si complexes ?",
+                            content: "Courriers incompréhensibles, formulaires compliqués, sites web peu clairs, vocabulaire technique... Les démarches administratives sont souvent sources de stress et d'incompréhension.\n\nNous sommes là pour vous aider à y voir clair et à avancer sereinement."
+                        }
+                    ]
+                },
+                projets: {
+                    title: "Idées de projets",
+                    subtitle: "Vous avez une idée, une envie, un projet ? Nous vous aidons à le structurer et à le concrétiser.",
+                    sections: [
+                        {
+                            title: "Transformer une idée en projet concret",
+                            content: "Beaucoup de personnes ont des idées, des envies ou des projets en tête, mais ne savent pas comment les structurer, les organiser ou les concrétiser.\n\nCRG Aide & Services propose un accompagnement personnalisé pour vous aider à clarifier vos objectifs et à construire un plan d'action réaliste."
+                        }
+                    ]
+                }
+            }
+        };
+
+        // Initialize content from localStorage or use defaults
+        function initializeContent() {
+            if (!localStorage.getItem('siteContent')) {
+                localStorage.setItem('siteContent', JSON.stringify(defaultContent));
+            }
+        }
+
+        function getSiteContent() {
+            return JSON.parse(localStorage.getItem('siteContent')) || defaultContent;
+        }
+
+        function saveSiteContent(content) {
+            localStorage.setItem('siteContent', JSON.stringify(content));
+        }
+
+        // Load dynamic content
+        function loadContent() {
+            const content = getSiteContent();
+            
+            // Load hero
+            document.getElementById('hero-title').textContent = content.hero.title;
+            document.getElementById('hero-subtitle').textContent = content.hero.subtitle;
+            document.getElementById('cta-title').textContent = content.hero.ctaTitle;
+            document.getElementById('cta-text').textContent = content.hero.ctaText;
+
+            // Load services
+            loadServices(content.services);
+
+            // Load values
+            loadValues(content.values);
+
+            // Load pages
+            loadPages(content.pages);
+
+            // Load service options in contact form
+            loadServiceOptions(content.services);
+        }
+
+        function loadServices(services) {
+            const grid = document.getElementById('services-grid');
+            grid.innerHTML = '';
+            
+            services.forEach(service => {
+                const card = document.createElement('div');
+                card.className = 'service-card';
+                card.innerHTML = `
+                    <h3>${service.icon} ${service.title}</h3>
+                    <p>${service.description}</p>
+                    <a href="#" class="service-link" onclick="showPage('services')">En savoir plus →</a>
+                `;
+                grid.appendChild(card);
+            });
+
+            // Load service details page
+            const detailContainer = document.getElementById('services-detail-container');
+            detailContainer.innerHTML = '';
+            
+            services.forEach(service => {
+                const section = document.createElement('div');
+                section.className = 'content-section';
+                section.innerHTML = `
+                    <h2>${service.icon} ${service.title}</h2>
+                    <p>${service.details.replace(/\n/g, '<br>')}</p>
+                `;
+                detailContainer.appendChild(section);
+            });
+        }
+
+        function loadValues(values) {
+            const grid = document.getElementById('values-grid');
+            grid.innerHTML = '';
+            
+            values.forEach(value => {
+                const card = document.createElement('div');
+                card.className = 'value-card';
+                card.innerHTML = `
+                    <span class="value-icon">${value.icon}</span>
+                    <h3>${value.title}</h3>
+                    <p>${value.description}</p>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function loadPages(pages) {
+            // Load problemes page
+            const problemesContainer = document.getElementById('problemes-container');
+            problemesContainer.innerHTML = `
+                <div class="page-header">
+                    <h1>${pages.problemes.title}</h1>
+                    <p>${pages.problemes.subtitle}</p>
+                </div>
+                ${pages.problemes.sections.map(section => `
+                    <div class="content-section">
+                        <h2>${section.title}</h2>
+                        <p>${section.content.replace(/\n\n/g, '</p><p>')}</p>
+                    </div>
+                `).join('')}
+            `;
+
+            // Load demarches page
+            const demarchesContainer = document.getElementById('demarches-container');
+            demarchesContainer.innerHTML = `
+                <div class="page-header">
+                    <h1>${pages.demarches.title}</h1>
+                    <p>${pages.demarches.subtitle}</p>
+                </div>
+                ${pages.demarches.sections.map(section => `
+                    <div class="content-section">
+                        <h2>${section.title}</h2>
+                        <p>${section.content.replace(/\n\n/g, '</p><p>')}</p>
+                    </div>
+                `).join('')}
+            `;
+
+            // Load projets page
+            const projetsContainer = document.getElementById('projets-container');
+            projetsContainer.innerHTML = `
+                <div class="page-header">
+                    <h1>${pages.projets.title}</h1>
+                    <p>${pages.projets.subtitle}</p>
+                </div>
+                ${pages.projets.sections.map(section => `
+                    <div class="content-section">
+                        <h2>${section.title}</h2>
+                        <p>${section.content.replace(/\n\n/g, '</p><p>')}</p>
+                    </div>
+                `).join('')}
+            `;
+        }
+
+        function loadServiceOptions(services) {
+            const select = document.getElementById('service');
+            const currentOptions = select.innerHTML;
+            select.innerHTML = '<option value="">Sélectionnez...</option>';
+            
+            services.forEach(service => {
+                const option = document.createElement('option');
+                option.value = service.title.toLowerCase().replace(/ /g, '-');
+                option.textContent = service.title;
+                select.appendChild(option);
+            });
+
+            select.innerHTML += `
+                <option value="probleme-quotidien">Problème du quotidien</option>
+                <option value="demarche-admin">Démarche administrative</option>
+                <option value="projet">Projet à développer</option>
+                <option value="autre">Autre</option>
+            `;
+        }
+
+        // Admin functions for services
+        function loadAdminServices() {
+            const content = getSiteContent();
+            const list = document.getElementById('services-list');
+            list.innerHTML = '';
+
+            content.services.forEach(service => {
+                const card = document.createElement('div');
+                card.className = 'item-card';
+                card.innerHTML = `
+                    <div class="item-info">
+                        <h4>${service.icon} ${service.title}</h4>
+                        <p>${service.description}</p>
+                    </div>
+                    <div class="item-actions">
+                        <button class="action-btn btn-edit" onclick="editService(${service.id})">✏️ Modifier</button>
+                        <button class="action-btn btn-delete" onclick="deleteService(${service.id})">🗑️ Supprimer</button>
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function addService() {
+            const modalBody = document.getElementById('edit-modal-body');
+            modalBody.innerHTML = `
+                <h2>Ajouter un service</h2>
+                <form id="service-form">
+                    <div class="form-group">
+                        <label>Icône (emoji)</label>
+                        <input type="text" id="service-icon" required placeholder="🏠">
+                    </div>
+                    <div class="form-group">
+                        <label>Titre</label>
+                        <input type="text" id="service-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description courte</label>
+                        <textarea id="service-description" required rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Détails complets</label>
+                        <textarea id="service-details" required rows="6"></textarea>
+                    </div>
+                    <button type="submit" class="action-btn btn-add">💾 Enregistrer</button>
+                </form>
+            `;
+
+            document.getElementById('service-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const content = getSiteContent();
+                const newService = {
+                    id: Date.now(),
+                    icon: document.getElementById('service-icon').value,
+                    title: document.getElementById('service-title').value,
+                    description: document.getElementById('service-description').value,
+                    details: document.getElementById('service-details').value
+                };
+                content.services.push(newService);
+                saveSiteContent(content);
+                loadContent();
+                loadAdminServices();
+                closeEditModal();
+                alert('Service ajouté avec succès !');
+            });
+
+            document.getElementById('edit-modal').classList.add('active');
+        }
+
+        function editService(id) {
+            const content = getSiteContent();
+            const service = content.services.find(s => s.id === id);
+            
+            const modalBody = document.getElementById('edit-modal-body');
+            modalBody.innerHTML = `
+                <h2>Modifier le service</h2>
+                <form id="service-form">
+                    <div class="form-group">
+                        <label>Icône (emoji)</label>
+                        <input type="text" id="service-icon" required value="${service.icon}">
+                    </div>
+                    <div class="form-group">
+                        <label>Titre</label>
+                        <input type="text" id="service-title" required value="${service.title}">
+                    </div>
+                    <div class="form-group">
+                        <label>Description courte</label>
+                        <textarea id="service-description" required rows="3">${service.description}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Détails complets</label>
+                        <textarea id="service-details" required rows="6">${service.details}</textarea>
+                    </div>
+                    <button type="submit" class="action-btn btn-add">💾 Enregistrer</button>
+                </form>
+            `;
+
+            document.getElementById('service-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                service.icon = document.getElementById('service-icon').value;
+                service.title = document.getElementById('service-title').value;
+                service.description = document.getElementById('service-description').value;
+                service.details = document.getElementById('service-details').value;
+                saveSiteContent(content);
+                loadContent();
+                loadAdminServices();
+                closeEditModal();
+                alert('Service modifié avec succès !');
+            });
+
+            document.getElementById('edit-modal').classList.add('active');
+        }
+
+        function deleteService(id) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer ce service ?')) {
+                const content = getSiteContent();
+                content.services = content.services.filter(s => s.id !== id);
+                saveSiteContent(content);
+                loadContent();
+                loadAdminServices();
+                alert('Service supprimé avec succès !');
+            }
+        }
+
+        // Admin functions for values
+        function loadAdminValues() {
+            const content = getSiteContent();
+            const list = document.getElementById('values-list');
+            list.innerHTML = '';
+
+            content.values.forEach(value => {
+                const card = document.createElement('div');
+                card.className = 'item-card';
+                card.innerHTML = `
+                    <div class="item-info">
+                        <h4>${value.icon} ${value.title}</h4>
+                        <p>${value.description}</p>
+                    </div>
+                    <div class="item-actions">
+                        <button class="action-btn btn-edit" onclick="editValue(${value.id})">✏️ Modifier</button>
+                        <button class="action-btn btn-delete" onclick="deleteValue(${value.id})">🗑️ Supprimer</button>
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function addValue() {
+            const modalBody = document.getElementById('edit-modal-body');
+            modalBody.innerHTML = `
+                <h2>Ajouter une valeur</h2>
+                <form id="value-form">
+                    <div class="form-group">
+                        <label>Icône (emoji)</label>
+                        <input type="text" id="value-icon" required placeholder="❤️">
+                    </div>
+                    <div class="form-group">
+                        <label>Titre</label>
+                        <input type="text" id="value-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="value-description" required rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="action-btn btn-add">💾 Enregistrer</button>
+                </form>
+            `;
+
+            document.getElementById('value-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const content = getSiteContent();
+                const newValue = {
+                    id: Date.now(),
+                    icon: document.getElementById('value-icon').value,
+                    title: document.getElementById('value-title').value,
+                    description: document.getElementById('value-description').value
+                };
+                content.values.push(newValue);
+                saveSiteContent(content);
+                loadContent();
+                loadAdminValues();
+                closeEditModal();
+                alert('Valeur ajoutée avec succès !');
+            });
+
+            document.getElementById('edit-modal').classList.add('active');
+        }
+
+        function editValue(id) {
+            const content = getSiteContent();
+            const value = content.values.find(v => v.id === id);
+            
+            const modalBody = document.getElementById('edit-modal-body');
+            modalBody.innerHTML = `
+                <h2>Modifier la valeur</h2>
+                <form id="value-form">
+                    <div class="form-group">
+                        <label>Icône (emoji)</label>
+                        <input type="text" id="value-icon" required value="${value.icon}">
+                    </div>
+                    <div class="form-group">
+                        <label>Titre</label>
+                        <input type="text" id="value-title" required value="${value.title}">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="value-description" required rows="3">${value.description}</textarea>
+                    </div>
+                    <button type="submit" class="action-btn btn-add">💾 Enregistrer</button>
+                </form>
+            `;
+
+            document.getElementById('value-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                value.icon = document.getElementById('value-icon').value;
+                value.title = document.getElementById('value-title').value;
+                value.description = document.getElementById('value-description').value;
+                saveSiteContent(content);
+                loadContent();
+                loadAdminValues();
+                closeEditModal();
+                alert('Valeur modifiée avec succès !');
+            });
+
+            document.getElementById('edit-modal').classList.add('active');
+        }
+
+        function deleteValue(id) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer cette valeur ?')) {
+                const content = getSiteContent();
+                content.values = content.values.filter(v => v.id !== id);
+                saveSiteContent(content);
+                loadContent();
+                loadAdminValues();
+                alert('Valeur supprimée avec succès !');
+            }
+        }
+
+        // Hero editing
+        function loadHeroEditor() {
+            const content = getSiteContent();
+            document.getElementById('hero-title-input').value = content.hero.title;
+            document.getElementById('hero-subtitle-input').value = content.hero.subtitle;
+            document.getElementById('cta-title-input').value = content.hero.ctaTitle;
+            document.getElementById('cta-text-input').value = content.hero.ctaText;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroForm = document.getElementById('hero-form');
+            if (heroForm) {
+                heroForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const content = getSiteContent();
+                    content.hero.title = document.getElementById('hero-title-input').value;
+                    content.hero.subtitle = document.getElementById('hero-subtitle-input').value;
+                    content.hero.ctaTitle = document.getElementById('cta-title-input').value;
+                    content.hero.ctaText = document.getElementById('cta-text-input').value;
+                    saveSiteContent(content);
+                    loadContent();
+                    alert('Page d\'accueil modifiée avec succès !');
+                });
+            }
+        });
+
+        // Page editing
+        function editPage(pageName) {
+            const content = getSiteContent();
+            const page = content.pages[pageName];
+            
+            const modalBody = document.getElementById('edit-modal-body');
+            modalBody.innerHTML = `
+                <h2>Modifier "${page.title}"</h2>
+                <form id="page-form">
+                    <div class="form-group">
+                        <label>Titre de la page</label>
+                        <input type="text" id="page-title" required value="${page.title}">
+                    </div>
+                    <div class="form-group">
+                        <label>Sous-titre</label>
+                        <textarea id="page-subtitle" required rows="2">${page.subtitle}</textarea>
+                    </div>
+                    ${page.sections.map((section, index) => `
+                        <div class="form-group">
+                            <label>Section ${index + 1} - Titre</label>
+                            <input type="text" id="section-title-${index}" value="${section.title}">
+                        </div>
+                        <div class="form-group">
+                            <label>Section ${index + 1} - Contenu</label>
+                            <textarea id="section-content-${index}" rows="5">${section.content}</textarea>
+                        </div>
+                    `).join('')}
+                    <button type="submit" class="action-btn btn-add">💾 Enregistrer</button>
+                </form>
+            `;
+
+            document.getElementById('page-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                page.title = document.getElementById('page-title').value;
+                page.subtitle = document.getElementById('page-subtitle').value;
+                page.sections = page.sections.map((section, index) => ({
+                    title: document.getElementById(`section-title-${index}`).value,
+                    content: document.getElementById(`section-content-${index}`).value
+                }));
+                saveSiteContent(content);
+                loadContent();
+                closeEditModal();
+                alert('Page modifiée avec succès !');
+            });
+
+            document.getElementById('edit-modal').classList.add('active');
+        }
+
+        function closeEditModal() {
+            document.getElementById('edit-modal').classList.remove('active');
+        }
+
         // Navigation system
         function showPage(pageName) {
             if (event) event.preventDefault();
@@ -1586,7 +2022,6 @@
                 window.scrollTo(0, 0);
             }
 
-            // Check if user is logged in and trying to access dashboard
             if (pageName === 'admin-dashboard') {
                 if (!isLoggedIn()) {
                     showPage('admin-login');
@@ -1610,14 +2045,10 @@
                 status: 'pending'
             };
 
-            // Save to localStorage (in production, this would be sent to a server)
             saveRequest(formData);
-
-            // Show success message
             document.getElementById('success-message').classList.add('active');
             document.getElementById('contact-form').reset();
 
-            // Hide success message after 5 seconds
             setTimeout(() => {
                 document.getElementById('success-message').classList.remove('active');
             }, 5000);
@@ -1630,7 +2061,6 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            // Simple authentication (in production, this would verify against a secure backend)
             if (username === 'admin' && password === 'crg2026') {
                 localStorage.setItem('isLoggedIn', 'true');
                 document.getElementById('login-error').style.display = 'none';
@@ -1702,22 +2132,24 @@
                 tbody.appendChild(row);
             });
 
-            // Update stats
             document.getElementById('total-requests').textContent = requests.length;
             document.getElementById('pending-requests').textContent = 
                 requests.filter(r => r.status === 'pending').length;
             document.getElementById('completed-requests').textContent = 
                 requests.filter(r => r.status === 'completed').length;
+
+            // Load admin content
+            loadAdminServices();
+            loadAdminValues();
+            loadHeroEditor();
         }
 
         function getServiceLabel(service) {
+            const content = getSiteContent();
+            const foundService = content.services.find(s => s.title.toLowerCase().replace(/ /g, '-') === service);
+            if (foundService) return foundService.title;
+
             const labels = {
-                'aide-domicile': 'Aide à domicile',
-                'jardinage': 'Jardinage',
-                'debarras': 'Débarras',
-                'informatique': 'Aide informatique',
-                'administratif': 'Aide administrative',
-                'petits-services': 'Petits services',
                 'probleme-quotidien': 'Problème du quotidien',
                 'demarche-admin': 'Démarche administrative',
                 'projet': 'Projet',
@@ -1806,16 +2238,24 @@
             }
         }
 
-        // Close modal when clicking outside
+        // Close modals when clicking outside
         document.getElementById('request-modal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeModal();
             }
         });
 
+        document.getElementById('edit-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeEditModal();
+            }
+        });
+
         // Initialize
         window.addEventListener('DOMContentLoaded', function() {
-            // Check if coming back to admin dashboard
+            initializeContent();
+            loadContent();
+
             if (window.location.hash === '#admin' && isLoggedIn()) {
                 showPage('admin-dashboard');
             }
@@ -1831,7 +2271,6 @@
                 });
             }
 
-            // Close mobile menu when clicking a link
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.addEventListener('click', function() {
                     navLinks.classList.remove('active');
