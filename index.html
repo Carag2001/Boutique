@@ -997,6 +997,7 @@
                 <li><a href="#" onclick="showPage('problemes')">Problèmes du quotidien</a></li>
                 <li><a href="#" onclick="showPage('demarches')">Démarches administratives</a></li>
                 <li><a href="#" onclick="showPage('projets')">Idées de projets</a></li>
+                <li><a href="#" onclick="showAdminPage()" style="color: var(--accent);">🔐 Staff</a></li>
             </ul>
             <a href="#" class="nav-cta" onclick="showPage('contact')">Demander de l'aide</a>
             <div class="menu-toggle">
@@ -1441,19 +1442,29 @@
     <!-- Admin Login Page -->
     <div id="admin-login-page" class="page hidden">
         <div class="admin-login">
-            <h2>Connexion Staff</h2>
+            <h2>🔐 Connexion Staff</h2>
+            <p style="text-align: center; color: var(--text-medium); margin-bottom: 2rem;">
+                Accédez à l'espace de gestion des demandes
+            </p>
             <form id="login-form">
                 <div class="form-group">
                     <label for="username">Identifiant</label>
-                    <input type="text" id="username" name="username" required>
+                    <input type="text" id="username" name="username" required placeholder="admin">
                 </div>
                 <div class="form-group">
                     <label for="password">Mot de passe</label>
-                    <input type="password" id="password" name="password" required>
+                    <input type="password" id="password" name="password" required placeholder="••••••">
                 </div>
                 <button type="submit" class="form-submit">Se connecter</button>
             </form>
-            <div id="login-error" style="display: none; color: #dc3545; margin-top: 1rem; text-align: center;">Identifiants incorrects</div>
+            <div id="login-error" style="display: none; color: #dc3545; margin-top: 1rem; text-align: center; padding: 1rem; background: #f8d7da; border-radius: 8px;">
+                ❌ Identifiants incorrects
+            </div>
+            <div style="margin-top: 2rem; padding: 1rem; background: var(--bg-secondary); border-radius: 8px; font-size: 0.9rem; color: var(--text-medium); text-align: center;">
+                <strong>Identifiants par défaut :</strong><br>
+                Identifiant : <code style="background: var(--white); padding: 0.2rem 0.5rem; border-radius: 4px;">admin</code><br>
+                Mot de passe : <code style="background: var(--white); padding: 0.2rem 0.5rem; border-radius: 4px;">crg2026</code>
+            </div>
         </div>
     </div>
 
@@ -1544,7 +1555,7 @@
                     <li><a href="#" onclick="showPage('home')">Accueil</a></li>
                     <li><a href="#" onclick="showPage('services')">Services</a></li>
                     <li><a href="#" onclick="showPage('contact')">Contact</a></li>
-                    <li><a href="#" onclick="showPage('admin-login')">Espace Staff</a></li>
+                    <li><a href="#" onclick="showAdminPage()">Espace Staff</a></li>
                 </ul>
             </div>
             <div class="footer-links">
@@ -1622,8 +1633,9 @@
             // Simple authentication (in production, this would verify against a secure backend)
             if (username === 'admin' && password === 'crg2026') {
                 localStorage.setItem('isLoggedIn', 'true');
-                showPage('admin-dashboard');
                 document.getElementById('login-error').style.display = 'none';
+                document.getElementById('login-form').reset();
+                showPage('admin-dashboard');
             } else {
                 document.getElementById('login-error').style.display = 'block';
             }
@@ -1636,6 +1648,15 @@
         function logout() {
             localStorage.removeItem('isLoggedIn');
             showPage('home');
+        }
+
+        function showAdminPage() {
+            if (event) event.preventDefault();
+            if (isLoggedIn()) {
+                showPage('admin-dashboard');
+            } else {
+                showPage('admin-login');
+            }
         }
 
         // Request management
@@ -1768,14 +1789,21 @@
 
         // Tab system
         function showTab(tabName) {
+            if (event) event.preventDefault();
             const tabs = document.querySelectorAll('.tab-content');
             tabs.forEach(tab => tab.classList.remove('active'));
             
             const buttons = document.querySelectorAll('.tab-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             
-            document.getElementById(tabName + '-tab').classList.add('active');
-            event.target.classList.add('active');
+            const targetTab = document.getElementById(tabName + '-tab');
+            if (targetTab) {
+                targetTab.classList.add('active');
+            }
+            
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
         }
 
         // Close modal when clicking outside
