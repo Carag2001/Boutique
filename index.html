@@ -1002,6 +1002,16 @@
                 display: flex;
             }
 
+            nav > div {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            nav > div a {
+                font-size: 0.85rem;
+                padding: 0.5rem 1rem !important;
+            }
+
             .hero-content {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -1056,9 +1066,13 @@
                 <li><a href="#" onclick="showPage('problemes')">Problèmes du quotidien</a></li>
                 <li><a href="#" onclick="showPage('demarches')">Démarches administratives</a></li>
                 <li><a href="#" onclick="showPage('projets')">Idées de projets</a></li>
-                <li><a href="#" onclick="showAdminPage()" style="color: var(--accent);">🔐 Staff</a></li>
             </ul>
-            <a href="#" class="nav-cta" onclick="showPage('contact')">Demander de l'aide</a>
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <a href="#" class="nav-cta" onclick="showPage('contact')">Demander de l'aide</a>
+                <a href="#" onclick="showAdminPage()" style="padding: 0.7rem 1.5rem; background: var(--accent); color: var(--white); border-radius: 30px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3); display: flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(231, 76, 60, 0.4)'" onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 15px rgba(231, 76, 60, 0.3)'">
+                    🔐 Connexion Staff
+                </a>
+            </div>
             <div class="menu-toggle">
                 <span></span>
                 <span></span>
@@ -1400,7 +1414,7 @@
                     <li><a href="#" onclick="showPage('home')">Accueil</a></li>
                     <li><a href="#" onclick="showPage('services')">Services</a></li>
                     <li><a href="#" onclick="showPage('contact')">Contact</a></li>
-                    <li><a href="#" onclick="showAdminPage()">Espace Staff</a></li>
+                    <li><a href="#" onclick="showAdminPage()" style="color: var(--accent-light);">🔐 Connexion Staff</a></li>
                 </ul>
             </div>
             <div class="footer-links">
