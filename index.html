@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRG Aide & Services — Agence de stratégie et développement digital</title>
+    <title>CRG Dashboard — Gestion Interne</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,1014 +15,1127 @@
         }
 
         :root {
-            --noir-profond: #0B0F19;
-            --bleu-nuit: #111827;
-            --blanc-pur: #FFFFFF;
-            --bleu-roi: #1E40AF;
-            --gris-fonce: #1a1f2e;
-            --gris-moyen: #2a3142;
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #111827;
+            --bg-tertiary: #1a1f2e;
+            --bg-card: #1e2433;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #60a5fa;
+            --accent-success: #10b981;
+            --accent-warning: #f59e0b;
+            --accent-danger: #ef4444;
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --border-color: #2d3548;
+            --sidebar-width: 260px;
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--noir-profond);
-            color: var(--blanc-pur);
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             overflow-x: hidden;
         }
 
-        /* Navigation */
-        nav {
+        /* Sidebar */
+        .sidebar {
             position: fixed;
-            top: 0;
             left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(11, 15, 25, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 2rem 5%;
-            animation: slideDown 0.8s ease;
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
+            top: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .logo {
-            font-family: 'Cormorant Garamond', serif;
             font-size: 1.5rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            color: var(--blanc-pur);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 3rem;
-            list-style: none;
+        .sidebar-nav {
+            flex: 1;
+            padding: 1rem 0;
+            overflow-y: auto;
         }
 
-        .nav-links a {
-            color: var(--blanc-pur);
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 400;
-            letter-spacing: 0.5px;
-            transition: color 0.3s ease;
-            position: relative;
+        .nav-section {
+            margin-bottom: 2rem;
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--bleu-roi);
-            transition: width 0.3s ease;
+        .nav-section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            padding: 0 1.5rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
+        .nav-item {
             display: flex;
             align-items: center;
-            padding: 8rem 5% 6rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 80%;
-            height: 180%;
-            background: radial-gradient(circle, rgba(30, 64, 175, 0.15) 0%, transparent 70%);
-            animation: float 20s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(-30px, 30px) rotate(2deg); }
-            50% { transform: translate(0, 60px) rotate(-2deg); }
-            75% { transform: translate(30px, 30px) rotate(1deg); }
-        }
-
-        .hero-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-            animation: fadeInUp 1s ease 0.3s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-subtitle {
-            font-size: 0.875rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--bleu-roi);
-            margin-bottom: 2rem;
-            font-weight: 500;
-            animation: fadeInUp 1s ease 0.5s both;
-        }
-
-        .hero h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            font-weight: 400;
-            line-height: 1.2;
-            margin-bottom: 2rem;
-            max-width: 900px;
-            color: var(--blanc-pur);
-            animation: fadeInUp 1s ease 0.7s both;
-        }
-
-        .hero p {
-            font-size: 1.125rem;
-            line-height: 1.8;
-            max-width: 600px;
-            margin-bottom: 3rem;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 300;
-            animation: fadeInUp 1s ease 0.9s both;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1.125rem 3rem;
-            background: var(--blanc-pur);
-            color: var(--noir-profond);
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.875rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            font-weight: 500;
-            transition: all 0.4s ease;
-            border: 2px solid var(--blanc-pur);
-            position: relative;
-            overflow: hidden;
-            animation: fadeInUp 1s ease 1.1s both;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border-left: 3px solid transparent;
         }
 
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
+        .nav-item:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            background: var(--bg-tertiary);
+            color: var(--accent-primary);
+            border-left-color: var(--accent-primary);
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebar-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+        }
+
+        .user-profile:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            background: var(--bleu-roi);
-            transition: width 0.6s ease, height 0.6s ease, top 0.6s ease, left 0.6s ease;
-            transform: translate(-50%, -50%);
-            z-index: 0;
-        }
-
-        .cta-button:hover::before {
-            width: 400px;
-            height: 400px;
-        }
-
-        .cta-button span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .cta-button:hover {
-            border-color: var(--bleu-roi);
-            color: var(--blanc-pur);
-            transform: translateY(-2px);
-        }
-
-        /* Section Valeur */
-        .valeur {
-            padding: 8rem 5%;
-            background: var(--gris-fonce);
-            position: relative;
-        }
-
-        .valeur-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .section-label {
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--bleu-roi);
-            margin-bottom: 3rem;
-            font-weight: 500;
-        }
-
-        .valeur h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            font-weight: 400;
-            line-height: 1.4;
-            margin-bottom: 2.5rem;
-            color: var(--blanc-pur);
-        }
-
-        .valeur p {
-            font-size: 1.125rem;
-            line-height: 1.9;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 300;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-        }
-
-        /* Services Section */
-        .services {
-            padding: 8rem 5%;
-            background: var(--noir-profond);
-        }
-
-        .services-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .services h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            font-weight: 400;
-            margin-bottom: 1rem;
-            text-align: center;
-            color: var(--blanc-pur);
-        }
-
-        .services-intro {
-            text-align: center;
-            font-size: 1.125rem;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 300;
-            max-width: 700px;
-            margin: 0 auto 5rem;
-            line-height: 1.8;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
-        }
-
-        .service-card {
-            padding: 3rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s ease;
-            background: var(--gris-fonce);
-            position: relative;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--bleu-roi);
-            transition: width 0.4s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(30, 64, 175, 0.5);
-            box-shadow: 0 20px 40px rgba(30, 64, 175, 0.2);
-            background: var(--gris-moyen);
-        }
-
-        .service-card:hover::before {
-            width: 100%;
-        }
-
-        .service-number {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3rem;
-            font-weight: 300;
-            color: rgba(30, 64, 175, 0.3);
-            margin-bottom: 1rem;
-        }
-
-        .service-card h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.75rem;
-            font-weight: 500;
-            margin-bottom: 1.5rem;
-            color: var(--blanc-pur);
-        }
-
-        .service-card p {
-            font-size: 1rem;
-            line-height: 1.8;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 300;
-        }
-
-        /* Expertise Section */
-        .expertise {
-            padding: 8rem 5%;
-            background: var(--bleu-nuit);
-            color: var(--blanc-pur);
-            text-align: center;
-            position: relative;
-        }
-
-        .expertise::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(30, 64, 175, 0.1) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .expertise-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .expertise h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            font-weight: 400;
-            margin-bottom: 2rem;
-        }
-
-        .expertise p {
-            font-size: 1.125rem;
-            line-height: 1.9;
-            font-weight: 300;
-            opacity: 0.9;
-            max-width: 800px;
-            margin: 0 auto 3rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 4rem;
-            margin-top: 5rem;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .stat {
-            padding: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .stat-number {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3.5rem;
-            font-weight: 300;
-            color: var(--blanc-pur);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
             font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 400;
         }
 
-        /* CTA Section */
-        .cta-section {
-            padding: 10rem 5%;
-            background: var(--gris-fonce);
-            text-align: center;
+        .user-info h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
         }
 
-        .cta-section h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            font-weight: 400;
-            margin-bottom: 2rem;
-            color: var(--blanc-pur);
-        }
-
-        .cta-section p {
-            font-size: 1.125rem;
-            line-height: 1.8;
-            max-width: 600px;
-            margin: 0 auto 3rem;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 300;
-        }
-
-        /* Portfolio Section */
-        .portfolio {
-            padding: 8rem 5%;
-            background: var(--noir-profond);
-        }
-
-        .portfolio-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .portfolio h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            font-weight: 400;
-            margin-bottom: 1rem;
-            text-align: center;
-            color: var(--blanc-pur);
-        }
-
-        .portfolio-intro {
-            text-align: center;
-            font-size: 1.125rem;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 300;
-            max-width: 700px;
-            margin: 0 auto 5rem;
-            line-height: 1.8;
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-
-        .portfolio-card {
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.5s ease;
-            background: var(--gris-fonce);
-            aspect-ratio: 16/10;
-        }
-
-        .portfolio-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(30, 64, 175, 0.1) 0%, transparent 50%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .portfolio-card:hover::before {
-            opacity: 1;
-        }
-
-        .portfolio-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(30, 64, 175, 0.5);
-            box-shadow: 0 25px 50px rgba(30, 64, 175, 0.3);
-        }
-
-        .portfolio-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .portfolio-card:hover .portfolio-image {
-            transform: scale(1.05);
-        }
-
-        .portfolio-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 2.5rem;
-            background: linear-gradient(to top, rgba(11, 15, 25, 0.95) 0%, transparent 100%);
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.4s ease;
-        }
-
-        .portfolio-card:hover .portfolio-overlay {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .portfolio-category {
+        .user-info p {
             font-size: 0.75rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--bleu-roi);
-            margin-bottom: 0.75rem;
-            font-weight: 500;
+            color: var(--text-muted);
         }
 
-        .portfolio-overlay h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.75rem;
-            font-weight: 500;
-            color: var(--blanc-pur);
-            margin-bottom: 0.5rem;
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
         }
 
-        .portfolio-overlay p {
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.6;
+        .topbar {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        /* Testimonials Section */
-        .testimonials {
-            padding: 8rem 5%;
-            background: var(--gris-moyen);
+        .topbar-left h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
         }
 
-        .testimonials-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .testimonials h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            font-weight: 400;
-            margin-bottom: 1rem;
-            text-align: center;
-            color: var(--blanc-pur);
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            margin-top: 4rem;
-        }
-
-        .testimonial-card {
-            padding: 3rem;
-            background: var(--gris-fonce);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            transition: all 0.4s ease;
-        }
-
-        .testimonial-card::before {
-            content: '"';
-            position: absolute;
-            top: 2rem;
-            left: 2rem;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 6rem;
-            color: rgba(30, 64, 175, 0.2);
-            line-height: 1;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(30, 64, 175, 0.4);
-            box-shadow: 0 15px 30px rgba(30, 64, 175, 0.2);
-        }
-
-        .testimonial-text {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: rgba(255, 255, 255, 0.85);
-            margin-bottom: 2rem;
-            position: relative;
-            z-index: 1;
-            font-weight: 300;
-            font-style: italic;
-        }
-
-        .testimonial-author {
+        .topbar-right {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
 
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--bleu-roi) 0%, rgba(30, 64, 175, 0.5) 100%);
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-tertiary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            min-width: 300px;
+        }
+
+        .search-bar input {
+            background: none;
+            border: none;
+            outline: none;
+            color: var(--text-primary);
+            flex: 1;
+            font-size: 0.875rem;
+        }
+
+        .btn {
+            padding: 0.625rem 1.25rem;
+            border-radius: 8px;
+            border: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-card);
+        }
+
+        .content-area {
+            padding: 2rem;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+        }
+
+        .stat-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            color: var(--blanc-pur);
-            font-weight: 500;
+            font-size: 1.25rem;
         }
 
-        .author-info h4 {
-            color: var(--blanc-pur);
-            font-size: 1rem;
-            font-weight: 500;
-            margin-bottom: 0.25rem;
+        .stat-icon.blue { background: rgba(59, 130, 246, 0.15); color: var(--accent-primary); }
+        .stat-icon.green { background: rgba(16, 185, 129, 0.15); color: var(--accent-success); }
+        .stat-icon.orange { background: rgba(245, 158, 11, 0.15); color: var(--accent-warning); }
+        .stat-icon.red { background: rgba(239, 68, 68, 0.15); color: var(--accent-danger); }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
         }
 
-        .author-info p {
-            color: rgba(255, 255, 255, 0.6);
+        .stat-change {
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .stat-change.positive { color: var(--accent-success); }
+        .stat-change.negative { color: var(--accent-danger); }
+
+        /* Data Table */
+        .section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .section-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table thead {
+            background: var(--bg-tertiary);
+        }
+
+        .data-table th {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .data-table td {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border-color);
             font-size: 0.875rem;
         }
 
-        /* Footer */
-        footer {
-            padding: 5rem 5% 3rem;
-            background: var(--noir-profond);
-            color: var(--blanc-pur);
+        .data-table tbody tr {
+            transition: background 0.2s ease;
         }
 
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 4rem;
+        .data-table tbody tr:hover {
+            background: var(--bg-tertiary);
         }
 
-        .footer-about h3 {
-            font-family: 'Cormorant Garamond', serif;
+        .badge {
+            display: inline-block;
+            padding: 0.375rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge.status-new { background: rgba(59, 130, 246, 0.15); color: var(--accent-primary); }
+        .badge.status-contacted { background: rgba(245, 158, 11, 0.15); color: var(--accent-warning); }
+        .badge.status-meeting { background: rgba(139, 92, 246, 0.15); color: #a78bfa; }
+        .badge.status-proposal { background: rgba(16, 185, 129, 0.15); color: var(--accent-success); }
+        .badge.status-signed { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
+        .badge.status-refused { background: rgba(239, 68, 68, 0.15); color: var(--accent-danger); }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            border: none;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn:hover {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            padding: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
             font-size: 1.5rem;
-            font-weight: 500;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: none;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            font-size: 1.25rem;
+        }
+
+        .modal-close:hover {
+            background: var(--accent-danger);
+            color: white;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .form-group {
             margin-bottom: 1.5rem;
         }
 
-        .footer-about p {
-            font-size: 0.95rem;
-            line-height: 1.8;
-            opacity: 0.8;
-            font-weight: 300;
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
         }
 
-        .footer-section h4 {
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .modal-footer {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        /* Kanban Board */
+        .kanban-board {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding: 1rem;
+        }
+
+        .kanban-column {
+            min-width: 300px;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .kanban-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .kanban-title {
+            font-weight: 600;
             font-size: 0.875rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 1.5rem;
-            font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
-        .footer-section ul {
-            list-style: none;
+        .kanban-count {
+            background: var(--bg-card);
+            padding: 0.25rem 0.625rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
         }
 
-        .footer-section ul li {
+        .kanban-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .kanban-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: move;
+            transition: all 0.2s ease;
+        }
+
+        .kanban-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .kanban-card h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .kanban-card p {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
             margin-bottom: 0.75rem;
         }
 
-        .footer-section a {
-            color: var(--blanc-pur);
-            text-decoration: none;
-            opacity: 0.7;
-            font-size: 0.95rem;
-            font-weight: 300;
-            transition: opacity 0.3s ease;
+        .kanban-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
         }
 
-        .footer-section a:hover {
-            opacity: 1;
+        /* Calendar */
+        .calendar {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
         }
 
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 2rem;
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+
+        .calendar-day-header {
             text-align: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            padding: 0.5rem;
+            text-transform: uppercase;
         }
 
-        .signature {
-            font-family: 'Cormorant Garamond', serif;
+        .calendar-day {
+            aspect-ratio: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.5rem;
             font-size: 0.875rem;
-            opacity: 0.6;
-            font-weight: 300;
-            font-style: italic;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
         }
 
-        .footer-bottom p {
-            font-size: 0.875rem;
-            opacity: 0.6;
-            margin-top: 1rem;
+        .calendar-day:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .calendar-day.today {
+            background: var(--accent-primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .calendar-day.has-event::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            background: var(--accent-primary);
+            border-radius: 50%;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
             }
 
-            .hero {
-                padding: 6rem 5% 4rem;
+            .sidebar.mobile-open {
+                transform: translateX(0);
             }
 
-            .hero h1 {
-                font-size: 2.5rem;
+            .main-content {
+                margin-left: 0;
             }
 
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             }
         }
 
-        /* Smooth scroll */
-        html {
-            scroll-behavior: smooth;
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.3s ease;
         }
 
-        /* Selection */
-        ::selection {
-            background: var(--bleu-roi);
-            color: var(--blanc-pur);
+        .slide-in {
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-primary);
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <div class="logo">CRG</div>
-            <ul class="nav-links">
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#expertise">Expertise</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">CRG Dashboard</div>
         </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section id="accueil" class="hero">
-        <div class="hero-content">
-            <div class="hero-subtitle">Agence de stratégie et développement digital</div>
-            <h1>L'excellence digitale au service de votre croissance</h1>
-            <p>Nous concevons des sites internet élégants, performants et stratégiques pour les entreprises exigeantes.</p>
-            <a href="#contact" class="cta-button"><span>Demander une consultation</span></a>
-        </div>
-    </section>
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <div class="nav-section-title">Principal</div>
+                <a href="#" class="nav-item active" data-page="overview">
+                    <span class="nav-icon">📊</span>
+                    <span>Overview</span>
+                </a>
+                <a href="#" class="nav-item" data-page="calendar">
+                    <span class="nav-icon">📅</span>
+                    <span>Calendrier</span>
+                </a>
+            </div>
 
-    <!-- Section Valeur -->
-    <section class="valeur">
-        <div class="valeur-content">
-            <div class="section-label">Notre philosophie</div>
-            <h2>Structurez votre image. Développez votre impact.</h2>
-            <p>Un site internet ne doit pas simplement exister. Il doit inspirer confiance, structurer votre image et convertir vos visiteurs en clients.</p>
-            <p>CRG Aide & Services accompagne les professionnels avec une approche rigoureuse, stratégique et orientée résultats.</p>
-        </div>
-    </section>
+            <div class="nav-section">
+                <div class="nav-section-title">Gestion</div>
+                <a href="#" class="nav-item" data-page="entreprises">
+                    <span class="nav-icon">🏢</span>
+                    <span>Entreprises</span>
+                </a>
+                <a href="#" class="nav-item" data-page="pipeline">
+                    <span class="nav-icon">🎯</span>
+                    <span>Pipeline</span>
+                </a>
+                <a href="#" class="nav-item" data-page="projets">
+                    <span class="nav-icon">📁</span>
+                    <span>Projets</span>
+                </a>
+            </div>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="services-container">
-            <div class="section-label" style="text-align: center;">Ce que nous créons</div>
-            <h2>Services</h2>
-            <p class="services-intro">Des solutions digitales pensées pour votre développement commercial et votre positionnement de marque.</p>
-            
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-number">01</div>
-                    <h3>Stratégie Digitale</h3>
-                    <p>Analyse approfondie de votre positionnement et conception d'une stratégie de présence en ligne cohérente avec vos objectifs commerciaux.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-number">02</div>
-                    <h3>Développement Web</h3>
-                    <p>Création de sites internet élégants, performants et optimisés pour la conversion. Design sur mesure et expérience utilisateur irréprochable.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-number">03</div>
-                    <h3>Identité Visuelle</h3>
-                    <p>Construction d'une image de marque cohérente et professionnelle qui reflète vos valeurs et inspire confiance à vos clients.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-number">04</div>
-                    <h3>Optimisation SEO</h3>
-                    <p>Amélioration de votre visibilité sur les moteurs de recherche et structuration stratégique de votre présence locale.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-number">05</div>
-                    <h3>Maintenance Premium</h3>
-                    <p>Accompagnement continu, mises à jour techniques et évolutions de votre plateforme pour garantir performance et sécurité.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-number">06</div>
-                    <h3>Consulting Digital</h3>
-                    <p>Conseils stratégiques personnalisés pour structurer et développer votre présence digitale de manière pérenne.</p>
+            <div class="nav-section">
+                <div class="nav-section-title">Administration</div>
+                <a href="#" class="nav-item" data-page="equipe">
+                    <span class="nav-icon">👥</span>
+                    <span>Équipe</span>
+                </a>
+                <a href="#" class="nav-item" data-page="stats">
+                    <span class="nav-icon">📈</span>
+                    <span>Statistiques</span>
+                </a>
+                <a href="#" class="nav-item" data-page="settings">
+                    <span class="nav-icon">⚙️</span>
+                    <span>Paramètres</span>
+                </a>
+                <a href="#" class="nav-item" data-page="logs">
+                    <span class="nav-icon">📝</span>
+                    <span>Logs</span>
+                </a>
+            </div>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="user-avatar">M</div>
+                <div class="user-info">
+                    <h4>Maholo</h4>
+                    <p>Admin</p>
                 </div>
             </div>
         </div>
-    </section>
+    </aside>
 
-    <!-- Expertise Section -->
-    <section id="expertise" class="expertise">
-        <div class="expertise-content">
-            <div class="section-label" style="color: rgba(255, 255, 255, 0.6);">Notre approche</div>
-            <h2>L'élégance digitale pour les entreprises exigeantes</h2>
-            <p>Nous ne sommes pas simplement des créateurs de sites. Nous sommes des architectes de présence en ligne, des consultants en stratégie digitale qui accompagnent les professionnels dans la structuration de leur image.</p>
-            
-            <div class="stats">
-                <div class="stat">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Sur mesure</div>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Topbar -->
+        <div class="topbar">
+            <div class="topbar-left">
+                <h1 id="page-title">Overview</h1>
+            </div>
+            <div class="topbar-right">
+                <div class="search-bar">
+                    <span>🔍</span>
+                    <input type="text" placeholder="Rechercher...">
                 </div>
-                <div class="stat">
-                    <div class="stat-number">24/7</div>
-                    <div class="stat-label">Support</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">∞</div>
-                    <div class="stat-label">Possibilités</div>
-                </div>
+                <button class="btn btn-primary" onclick="openModal('createFolder')">
+                    <span>➕</span>
+                    Créer un Dossier
+                </button>
             </div>
         </div>
-    </section>
 
-    <!-- Portfolio Section -->
-    <section class="portfolio">
-        <div class="portfolio-container">
-            <div class="section-label" style="text-align: center;">Réalisations</div>
-            <h2>Nos Créations</h2>
-            <p class="portfolio-intro">Chaque projet est une opportunité de créer quelque chose d'unique, d'élégant et de performant.</p>
-            
-            <div class="portfolio-grid">
-                <div class="portfolio-card">
-                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=500&fit=crop" alt="Projet 1" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <div class="portfolio-category">E-Commerce</div>
-                        <h3>Boutique Premium</h3>
-                        <p>Refonte complète d'une boutique en ligne avec augmentation de 180% du taux de conversion.</p>
+        <!-- Content Area -->
+        <div class="content-area" id="content-area">
+            <!-- Overview Page (Default) -->
+            <div id="overview-page">
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-label">Prospects Actifs</span>
+                            <div class="stat-icon blue">👥</div>
+                        </div>
+                        <div class="stat-value">24</div>
+                        <div class="stat-change positive">
+                            <span>↑</span> +12% ce mois
+                        </div>
                     </div>
-                </div>
-                
-                <div class="portfolio-card">
-                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=500&fit=crop" alt="Projet 2" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <div class="portfolio-category">Corporate</div>
-                        <h3>Cabinet d'Avocats</h3>
-                        <p>Site institutionnel avec système de prise de rendez-vous et blog juridique intégré.</p>
-                    </div>
-                </div>
-                
-                <div class="portfolio-card">
-                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&h=500&fit=crop" alt="Projet 3" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <div class="portfolio-category">Restaurant</div>
-                        <h3>Gastronomie Fine</h3>
-                        <p>Expérience digitale immersive avec réservations en ligne et carte interactive.</p>
-                    </div>
-                </div>
-                
-                <div class="portfolio-card">
-                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&h=500&fit=crop" alt="Projet 4" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <div class="portfolio-category">Artisanat</div>
-                        <h3>Atelier Créatif</h3>
-                        <p>Vitrine élégante pour artisan avec galerie de réalisations et formulaire devis.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials">
-        <div class="testimonials-container">
-            <div class="section-label" style="text-align: center;">Témoignages</div>
-            <h2>Ce que disent nos clients</h2>
-            
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <p class="testimonial-text">CRG a transformé notre présence en ligne. Le site est non seulement magnifique, mais il convertit remarquablement bien. Notre chiffre d'affaires digital a doublé en 6 mois.</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">ML</div>
-                        <div class="author-info">
-                            <h4>Marie Leblanc</h4>
-                            <p>Fondatrice, Atelier ML</p>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-label">RDV Aujourd'hui</span>
+                            <div class="stat-icon orange">📅</div>
+                        </div>
+                        <div class="stat-value">5</div>
+                        <div class="stat-change">
+                            <span>→</span> 2 en cours
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-label">Projets en Cours</span>
+                            <div class="stat-icon green">🚀</div>
+                        </div>
+                        <div class="stat-value">12</div>
+                        <div class="stat-change positive">
+                            <span>↑</span> +3 cette semaine
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-label">CA du Mois</span>
+                            <div class="stat-icon blue">💰</div>
+                        </div>
+                        <div class="stat-value">45K€</div>
+                        <div class="stat-change positive">
+                            <span>↑</span> +28% vs mois dernier
                         </div>
                     </div>
                 </div>
-                
-                <div class="testimonial-card">
-                    <p class="testimonial-text">Une approche professionnelle et stratégique. Maholo a su comprendre nos besoins et créer une solution parfaitement adaptée. Le résultat dépasse nos attentes.</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">JD</div>
-                        <div class="author-info">
-                            <h4>Jean Dupont</h4>
-                            <p>Directeur, Cabinet Dupont & Associés</p>
+
+                <!-- Recent Activity -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Activité Récente</h2>
+                        <div class="section-actions">
+                            <button class="btn btn-secondary">Tout voir</button>
+                        </div>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Entreprise</th>
+                                <th>Statut</th>
+                                <th>Conseiller</th>
+                                <th>Dernier Contact</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Boulangerie Martin</strong></td>
+                                <td><span class="badge status-new">Nouveau</span></td>
+                                <td>Maholo</td>
+                                <td>Il y a 2h</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn" title="Voir">👁️</button>
+                                        <button class="action-btn" title="Modifier">✏️</button>
+                                        <button class="action-btn" title="Supprimer">🗑️</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Garage Dupont</strong></td>
+                                <td><span class="badge status-contacted">Contacté</span></td>
+                                <td>Maholo</td>
+                                <td>Hier</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn" title="Voir">👁️</button>
+                                        <button class="action-btn" title="Modifier">✏️</button>
+                                        <button class="action-btn" title="Supprimer">🗑️</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Restaurant Le Gourmet</strong></td>
+                                <td><span class="badge status-meeting">RDV Prévu</span></td>
+                                <td>Maholo</td>
+                                <td>Il y a 3j</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn" title="Voir">👁️</button>
+                                        <button class="action-btn" title="Modifier">✏️</button>
+                                        <button class="action-btn" title="Supprimer">🗑️</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Coiffeur Style & Co</strong></td>
+                                <td><span class="badge status-proposal">Proposition</span></td>
+                                <td>Maholo</td>
+                                <td>Il y a 5j</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn" title="Voir">👁️</button>
+                                        <button class="action-btn" title="Modifier">✏️</button>
+                                        <button class="action-btn" title="Supprimer">🗑️</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Boutique Mode</strong></td>
+                                <td><span class="badge status-signed">Signé ✓</span></td>
+                                <td>Maholo</td>
+                                <td>Il y a 1 semaine</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn" title="Voir">👁️</button>
+                                        <button class="action-btn" title="Modifier">✏️</button>
+                                        <button class="action-btn" title="Supprimer">🗑️</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Rappels -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">⚡ Rappels Importants</h2>
+                    </div>
+                    <div style="padding: 2rem;">
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div style="padding: 1rem; background: rgba(245, 158, 11, 0.1); border-left: 3px solid var(--accent-warning); border-radius: 8px;">
+                                <strong>RDV dans 1h</strong> - Restaurant Le Gourmet
+                            </div>
+                            <div style="padding: 1rem; background: rgba(239, 68, 68, 0.1); border-left: 3px solid var(--accent-danger); border-radius: 8px;">
+                                <strong>Deadline proche</strong> - Site Boutique Mode (dans 2 jours)
+                            </div>
+                            <div style="padding: 1rem; background: rgba(59, 130, 246, 0.1); border-left: 3px solid var(--accent-primary); border-radius: 8px;">
+                                <strong>Paiement en attente</strong> - Garage Dupont (1500€)
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="testimonial-card">
-                    <p class="testimonial-text">Enfin un partenaire qui comprend les enjeux du digital pour un restaurant. Notre nouveau site nous a permis de tripler nos réservations en ligne.</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">SC</div>
-                        <div class="author-info">
-                            <h4>Sophie Chen</h4>
-                            <p>Chef & Propriétaire, Le Jardin Secret</p>
-                        </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Create Folder -->
+    <div class="modal" id="createFolderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Créer un Dossier Client</h2>
+                <button class="modal-close" onclick="closeModal('createFolder')">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="createFolderForm">
+                    <div class="form-group">
+                        <label class="form-label">Nom de l'Entreprise *</label>
+                        <input type="text" class="form-input" placeholder="Ex: Boulangerie Martin" required>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section id="contact" class="cta-section">
-        <h2>Prêt à structurer votre présence digitale ?</h2>
-        <p>Discutons de votre projet et découvrons comment nous pouvons développer votre impact en ligne.</p>
-        <a href="mailto:contact@crg-services.fr" class="cta-button"><span>Prendre rendez-vous</span></a>
-    </section>
+                    <div class="form-group">
+                        <label class="form-label">Type d'Entreprise</label>
+                        <select class="form-select">
+                            <option>Artisan</option>
+                            <option>Restaurant</option>
+                            <option>Commerce</option>
+                            <option>Service</option>
+                            <option>Cabinet</option>
+                            <option>Autre</option>
+                        </select>
+                    </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-about">
-                <h3>CRG Aide & Services</h3>
-                <p>Agence de stratégie et développement digital dédiée aux professionnels exigeants. Nous structurons votre image et développons votre impact en ligne avec élégance et précision.</p>
+                    <div class="form-group">
+                        <label class="form-label">Contact Principal</label>
+                        <input type="text" class="form-input" placeholder="Nom du contact">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" placeholder="contact@entreprise.fr">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Téléphone</label>
+                        <input type="tel" class="form-input" placeholder="06 00 00 00 00">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Ville</label>
+                        <input type="text" class="form-input" placeholder="Paris">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Statut Pipeline</label>
+                        <select class="form-select">
+                            <option>Nouveau</option>
+                            <option>Contacté</option>
+                            <option>RDV Prévu</option>
+                            <option>Proposition</option>
+                            <option>Signé</option>
+                            <option>Refusé</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Conseiller Assigné</label>
+                        <select class="form-select">
+                            <option>Maholo</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Notes Initiales</label>
+                        <textarea class="form-textarea" placeholder="Notes sur le premier contact, besoins exprimés, etc."></textarea>
+                    </div>
+                </form>
             </div>
-            
-            <div class="footer-section">
-                <h4>Navigation</h4>
-                <ul>
-                    <li><a href="#accueil">Accueil</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#expertise">Expertise</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h4>Contact</h4>
-                <ul>
-                    <li><a href="mailto:contact@crg-services.fr">contact@crg-services.fr</a></li>
-                    <li><a href="tel:+33000000000">+33 (0)0 00 00 00 00</a></li>
-                </ul>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('createFolder')">Annuler</button>
+                <button class="btn btn-primary" onclick="createFolder()">Créer le Dossier</button>
             </div>
         </div>
-        
-        <div class="footer-bottom">
-            <p class="signature">Fondé par Maholo</p>
-            <p>&copy; 2026 CRG Aide & Services. Tous droits réservés.</p>
-        </div>
-    </footer>
+    </div>
+
+    <script>
+        // Navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                
+                const page = this.dataset.page;
+                document.getElementById('page-title').textContent = this.textContent.trim();
+                
+                // Ici vous pouvez ajouter la logique pour charger différentes pages
+                console.log('Navigation vers:', page);
+            });
+        });
+
+        // Modal functions
+        function openModal(modalName) {
+            document.getElementById(modalName + 'Modal').classList.add('active');
+        }
+
+        function closeModal(modalName) {
+            document.getElementById(modalName + 'Modal').classList.remove('active');
+        }
+
+        // Create folder
+        function createFolder() {
+            alert('Dossier créé avec succès !');
+            closeModal('createFolder');
+            // Ici vous ajouteriez la logique pour sauvegarder les données
+        }
+
+        // Close modal on outside click
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                }
+            });
+        });
+
+        // Sample data for demonstration
+        console.log('CRG Dashboard Loaded - Ready for Production');
+    </script>
 </body>
 </html>
